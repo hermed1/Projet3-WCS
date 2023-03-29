@@ -1,7 +1,7 @@
 import React from "react";
 
-function Home(props) {
+function Footer(props) {
   return <div />;
 }
 
-export default Home;
+export default Footer;
