@@ -1,6 +1,6 @@
 import React from "react";
 
-function Enterprise(props) {
+function Enterprise() {
   return <div />;
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Connection(props) {
+function Connection() {
   return <div />;
 }
 

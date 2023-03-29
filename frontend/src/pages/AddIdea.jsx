@@ -1,6 +1,6 @@
 import React from "react";
 
-function AddIdea(props) {
+function AddIdea() {
   return <div />;
 }
 

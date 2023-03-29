@@ -1,6 +1,6 @@
 import React from "react";
 
-function Category(props) {
+function Category() {
   return <div />;
 }
 
