@@ -23,8 +23,9 @@ function NewIdea() {
           </button>
         </div>
       </div>
+
       <div className="idea-container">
-        <h4>Username</h4>
+        <h4>Nom de l'utilisateur</h4>
         <input
           className="content-idea"
           type="text"

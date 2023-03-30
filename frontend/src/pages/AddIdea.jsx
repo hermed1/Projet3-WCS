@@ -1,10 +1,12 @@
 import React from "react";
-import NewIdea from "../components/newIdea/NewIdea";
+// import NewIdea from "../components/newIdea/NewIdea";
+import IdeaContent from "../components/ideaContent/IdeaContent";
 
 function AddIdea() {
   return (
     <div>
-      <NewIdea />
+      {/* <NewIdea /> */}
+      <IdeaContent />
     </div>
   );
 }

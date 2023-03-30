@@ -12,5 +12,7 @@
 :root {
   --main-color: #07588f;
   --second-color: #0097fb;
-  --text-color: #e2efff;
+  --third-color: #afddfc;
+  --text-color-light: #e2efff;
+  --text-color-dark: #0d2d42;
 }
