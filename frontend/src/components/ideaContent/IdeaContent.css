@@ -82,11 +82,8 @@
 
 .comment-section {
   display: flex;
-  justify-content: flex-start;
-  margin: 15px 0;
-}
-
-@media screen and (min-width: 786px) {
+  flex-direction: column;
+  margin: 30px 0 0 12vw;
 }
 
 @media screen and (min-width: 1024px) {
@@ -100,5 +97,9 @@
   .idea-title {
     display: flex;
     flex-wrap: nowrap;
+  }
+
+  .comment-section {
+    margin-left: 28vw;
   }
 }

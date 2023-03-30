@@ -4,6 +4,7 @@ import "../newIdea/NewIdea.css";
 import likeBtn from "../../assets/like-btn.png";
 import speechBubble from "../../assets/speech-bubble.png";
 import editBtn from "../../assets/edit-button.png";
+import Comment from "./comment/Comment";
 
 function IdeaContent() {
   return (
@@ -32,7 +33,10 @@ function IdeaContent() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
           molestias nihil ab minima perspiciatis a, fugit dicta, incidunt harum
           quisquam dolores! Sint sit quibusdam accusamus reiciendis perspiciatis
-          consequatur. Sapiente, alias.
+          consequatur. Sapiente, alias. Lorem ipsum dolor sit amet consectetur,
+          adipisicing elit. Laboriosam, reprehenderit fuga. Reprehenderit omnis
+          ut, expedita quasi accusamus neque aliquam pariatur fugit, vero
+          tenetur ducimus eum ex saepe eveniet aut voluptas.
         </p>
 
         <div className="like-comment-div">
@@ -62,9 +66,13 @@ function IdeaContent() {
         </div>
       </div>
 
-      <div className="comment-section">
+      <section className="comment-section">
         <h3 className="comment-main-title">Commentaires :</h3>
-      </div>
+
+        <div className="comment-list">
+          <Comment />
+        </div>
+      </section>
     </section>
   );
 }
