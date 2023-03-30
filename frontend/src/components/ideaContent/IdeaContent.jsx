@@ -3,6 +3,7 @@ import "./IdeaContent.css";
 import "../newIdea/NewIdea.css";
 import likeBtn from "../../assets/like-btn.png";
 import speechBubble from "../../assets/speech-bubble.png";
+import editBtn from "../../assets/edit-button.png";
 
 function IdeaContent() {
   return (
@@ -20,7 +21,13 @@ function IdeaContent() {
       </div>
 
       <div className="idea-container">
-        <h4>Nom de l'utilisateur</h4>
+        <div className="head-title-content">
+          <h4>Nom de l'utilisateur</h4>
+          <button className="edit-btn" type="button">
+            <img src={editBtn} alt="Logo edit" className="edit-img" />
+          </button>
+        </div>
+
         <p className="text-idea">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
           molestias nihil ab minima perspiciatis a, fugit dicta, incidunt harum

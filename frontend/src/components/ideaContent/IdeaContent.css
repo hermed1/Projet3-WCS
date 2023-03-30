@@ -7,6 +7,23 @@
   border-radius: 8px;
 }
 
+.head-title-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.edit-btn {
+  border: none;
+  background-color: var(--third-color);
+  height: 40px;
+  border-radius: 5px;
+}
+
+.edit-img {
+  width: 40px;
+}
+
 .like-comment-div {
   display: flex;
   flex-direction: row;
