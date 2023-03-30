@@ -100,8 +100,7 @@
 
 @media screen and (min-width: 1024px) {
   .idea-section {
-    max-width: 40%;
-    margin: 40px 0 0 -10vw;
+    margin-top: 40px;
   }
 
   .idea-container {

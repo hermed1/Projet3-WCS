@@ -9,7 +9,7 @@ function IdeaContent() {
   return (
     <section className="new-idea-section">
       <div className="idea-section">
-        <h1>Nom de l'idée</h1>
+        <h1 className="idea-title">Nom de l'idée</h1>
         <div className="idea-section-btn-div">
           <button type="button" className="idea-section-btn">
             Catégories
