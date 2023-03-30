@@ -9,20 +9,26 @@ function NewIdea() {
         <h1>Nouvelle idée</h1>
       </div>
       <div className="idea-section">
-        <h3>Titre idée</h3>
-        <button type="button" className="idea-section-btn">
-          Catégories
-        </button>
-        <button type="button" className="idea-section-btn">
-          Sous-Catégories
-        </button>
+        <input
+          className="title-edit"
+          type="text"
+          placeholder="Donnez un titre à votre idée"
+        />
+        <div className="idea-section-btn-div">
+          <button type="button" className="idea-section-btn">
+            Catégories
+          </button>
+          <button type="button" className="idea-section-btn">
+            Sous-Catégories
+          </button>
+        </div>
       </div>
       <div className="idea-container">
         <h4>Username</h4>
         <input
           className="content-idea"
           type="text"
-          placeholder="Ecrivez votre idée ici..."
+          placeholder=" Ecrivez votre idée ici..."
         />
         <div className="add-file">
           <img src={fileIcon} alt="Logo fichier" className="img-add-file" />
