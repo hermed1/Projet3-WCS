@@ -1,55 +1,24 @@
 const models = require("../models");
 
-const browse = (req, res) => {
-  models.user
-    .findAll()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-const read = (req, res) => {
-  models.user
-    .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] == null) {
-        res.sendStatus(404);
-      } else {
-        res.send(rows[0]);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-const add = (req, res) => {
-  const user = req.body;
-
-  models.user
-    .insert(user)
+const findByEmailToNext = (req, res, next) => {
+  const { email } = req.body;
+  models.login
+    .findByEmail(email)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      if (result[0]) {
+        if (result[0] != null) {
+          return res.sendStatus(200);
+        }
+        next();
+      }
+      return res.sendStatus(401);
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send("Error retrieving data from database");
     });
 };
-
-/*const findByLogin = async (req,res) => {
-  const {email, password} = req.body;
-  const user = await model.user.findByLogin(email)
-  // si tableau vide 401 pas de droits de se connecter, sinon verifier mdp 401 si cest pas bon / preparer le token
-}*/
 
 module.exports = {
-  browse,
-  read,
-  add,
+  findByEmailToNext,
 };

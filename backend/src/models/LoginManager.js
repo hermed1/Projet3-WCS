@@ -4,12 +4,12 @@ class LoginManager extends AbstractManager {
   constructor() {
     super({ table: "user" });
   }
-  /*findByLogin(login){
-    return this.database.query (
-      `SELECT * FROM ${this.table} WHERE login = ?`,
-      [login]
-    );
-  }*/
+
+  findByEmail(email) {
+    return this.database.query(`SELECT * FROM ${this.table} WHERE email = ?`, [
+      email,
+    ]);
+  }
 
   insert(user) {
     return this.database.query(
