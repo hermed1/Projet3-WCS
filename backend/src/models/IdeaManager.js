@@ -16,10 +16,11 @@ class IdeaManager extends AbstractManager {
     );
   }
 
-  update(item) {
+  update(id, idee) {
     return this.database.query(
-      `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      `UPDATE ${this.table}
+      SET ? WHERE id = ?`,
+      [idee, id]
     );
   }
 }

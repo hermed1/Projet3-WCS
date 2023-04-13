@@ -5,6 +5,7 @@ const validate = (data, forCreation = true) => {
   const presence = forCreation ? "required" : "optional";
   return joi
     .object({
+      id: joi.number().min(0).presence("optional"),
       title: joi.string().max(120).presence(presence),
       text: joi.string().max(4000).presence(presence),
       createDate: joi.date().presence(presence),
@@ -43,14 +44,16 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const item = req.body;
+  const error = validate(req.body, false);
+  if (error) {
+    res.status(422).send({ error });
+    return;
+  }
 
-  // TODO validations (length, format...)
-
-  item.id = parseInt(req.params.id, 10);
+  const id = parseInt(req.params.id, 10);
 
   models.idea
-    .update(item)
+    .update(id, req.body)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -70,7 +73,7 @@ const add = (req, res) => {
   const error = validate(data);
 
   if (error) {
-    res.status(400).send({ error });
+    res.status(422).send({ error });
     return;
   }
 

@@ -19,7 +19,7 @@ router.delete("/user/:id", userControllers.destroy);
 const ideaControllers = require("./controllers/ideaControllers");
 
 router.get("/idea", ideaControllers.browse);
-router.get("/idea/:id", ideaControllers.browse);
+router.get("/idea/:id", ideaControllers.read);
 router.put("/idea/:id", ideaControllers.edit);
 router.post("/idea", ideaControllers.add);
 router.delete("/idea/:id", ideaControllers.destroy);
