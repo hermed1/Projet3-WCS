@@ -23,6 +23,10 @@ class IdeaManager extends AbstractManager {
       [idee, id]
     );
   }
+
+  delete(id) {
+    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
+  }
 }
 
 module.exports = IdeaManager;
