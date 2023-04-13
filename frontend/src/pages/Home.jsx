@@ -1,4 +1,4 @@
-import Counter from "../components/Counter";
+/* import Counter from "../components/Counter";
 import logo from "../assets/logo.svg";
 
 export default function Home() {
@@ -34,3 +34,4 @@ export default function Home() {
     </header>
   );
 }
+ */

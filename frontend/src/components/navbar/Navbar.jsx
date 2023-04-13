@@ -1,0 +1,44 @@
+import { useRef } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import "./Navbar.css";
+import "../../App.css";
+
+function Navbar() {
+  const navRef = useRef();
+
+  const showNavbar = () => {
+    navRef.current.classList.toggle("responsive_nav");
+  };
+
+  return (
+    <header>
+      <nav ref={navRef}>
+        <li>
+          <a href="/#">ENTREPRISE</a>
+        </li>
+        <li>
+          <a href="/#">IDEE</a>
+        </li>
+        <li>
+          <a href="/#">MY PROFIL</a>
+        </li>
+        <button
+          type="button"
+          className="nav-btn nav-close-btn"
+          onClick={showNavbar}
+        >
+          <FaTimes />
+        </button>
+      </nav>
+      <button type="button" className="nav-btn" onClick={showNavbar}>
+        <FaBars />
+      </button>
+      <div className="search-container">
+        <input type="search" placeholder="Recherche" className="search" />
+        <span className="BsSearch">R</span>
+      </div>
+    </header>
+  );
+}
+
+export default Navbar;
