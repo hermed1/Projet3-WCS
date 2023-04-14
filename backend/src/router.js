@@ -4,10 +4,6 @@ const router = express.Router();
 
 // const { hashPassword, verifyPassword } = require("./utils/auth");
 
-const loginControllers = require("./controllers/loginControllers");
-
-router.post("/login", loginControllers.findByEmailToNext);
-
 const userControllers = require("./controllers/userControllers");
 
 router.get("/user", userControllers.browse);
