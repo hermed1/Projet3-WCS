@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 * {
   padding: 0;
   margin: 0;
@@ -10,7 +12,9 @@
 :root {
   --main-color: #07588f;
   --second-color: #0097fb;
-  --text-color: #e2efff;
+  --third-color: #afddfc;
+  --text-color-light: #e2efff;
+  --text-color-dark: #0d2d42;
 }
 
 .AppHeaderNav {
@@ -23,37 +27,4 @@
   }
 }
 
-*/
-
-/* Css de base de page
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-.HeaderNavbar {
-  height: 50px;
-  background-color: linear-gradient(45deg, rgb(156, 14, 156), midnightblue);
-}
-
-.HeaderLinks {
-  list-style-type: none;
-  background-color: linear-gradient(45deg, rgb(156, 14, 156), midnightblue);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.li {
-  margin-right: 10px;
-  color: white;
-  cursor: pointer;
-}
-
-.btn {
-  display: none;
-}
 */

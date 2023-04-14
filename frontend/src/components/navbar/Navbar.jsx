@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
@@ -13,15 +14,11 @@ function Navbar() {
   return (
     <header>
       <nav ref={navRef}>
+        <li>ENTREPRISE</li>
         <li>
-          <a href="/#">ENTREPRISE</a>
+          <Link to="/">IDEE</Link>
         </li>
-        <li>
-          <a href="/#">IDEE</a>
-        </li>
-        <li>
-          <a href="/#">MY PROFIL</a>
-        </li>
+        <li>MON PROFIL</li>
         <button
           type="button"
           className="nav-btn nav-close-btn"
@@ -35,7 +32,6 @@ function Navbar() {
       </button>
       <div className="search-container">
         <input type="search" placeholder="Recherche" className="search" />
-        <span className="BsSearch">R</span>
       </div>
     </header>
   );
