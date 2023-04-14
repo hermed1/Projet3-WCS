@@ -16,3 +16,15 @@
   --text-color-light: #e2efff;
   --text-color-dark: #0d2d42;
 }
+
+.AppHeaderNav {
+  display: block;
+}
+
+/*@media screen and (max-width: 768px) {
+  .AppHeaderNav {
+    display: none;
+  }
+}
+
+*/
