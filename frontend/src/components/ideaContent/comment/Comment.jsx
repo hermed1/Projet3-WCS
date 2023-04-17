@@ -1,5 +1,4 @@
 import React from "react";
-import "./Comment.css";
 import likeBtn from "../../../assets/like-btn.png";
 import speechBubble from "../../../assets/speech-bubble.png";
 import editBtn from "../../../assets/edit-button.png";

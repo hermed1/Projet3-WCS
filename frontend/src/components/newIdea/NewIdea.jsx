@@ -1,5 +1,4 @@
 import React from "react";
-import "./NewIdea.css";
 import fileIcon from "../../assets/file-icon.png";
 
 function NewIdea() {
