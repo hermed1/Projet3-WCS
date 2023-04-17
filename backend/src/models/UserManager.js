@@ -55,7 +55,7 @@ class UserManager extends AbstractManager {
   }
 
   findAll() {
-    return this.database.query(`select firstname,
+    return this.database.query(`select id, firstname,
     lastname,
     email,
     dateOfBirth,
