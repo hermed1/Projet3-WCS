@@ -50,7 +50,7 @@ nav .nav-close-btn {
 nav a {
   font-size: 1.5rem;
   margin: 0 1rem;
-  color: var(--text-color);
+  color: var(--text-color-light);
   text-align: center;
   display: flex;
   justify-content: space-between;
@@ -67,19 +67,11 @@ nav a {
   height: 30px;
 }
 
-.header li:hover,
-.header li:focus {
-  background-color: #ff1818;
-  color: rgb(215, 34, 14);
-  cursor: default;
-}
-
 header li a {
   border-radius: 0.6rem;
   padding: 0.4rem 1.2rem;
   line-height: 1.8rem;
   z-index: 20;
-  box-shadow: 0 0.5rem 0.8rem rgba(12, 12, 216, 0.2);
 }
 
 header li a:hover {
