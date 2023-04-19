@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
 import fileIcon from "../../assets/file-icon.png";
+import useApi from "../../services/useApi";
 
 function NewIdea() {
-  const url = import.meta.env.VITE_BACKEND_URL;
+  const api = useApi();
 
   const [newIdea, setNewIdea] = useState("");
 
   const handleClickpostIdea = () => {
-    axios
-      .post(`${url}/idea`, { newIdea })
+    api
+      .post(`/idea`, { newIdea })
       .then((response) => {
         setNewIdea(response);
       })
