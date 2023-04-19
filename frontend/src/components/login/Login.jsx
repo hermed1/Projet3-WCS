@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
-import "./Login.css";
 
 function Login() {
   const api = useApi();
@@ -22,7 +21,7 @@ function Login() {
         console.warn(resp);
         const { token } = resp.data;
         api.defaults.headers.authorization = `Bearer ${token}`;
-        setUser(user);
+        setUser(resp.data.user);
       })
       .catch((err) => {
         console.warn(err);
