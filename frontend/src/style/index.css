@@ -207,7 +207,8 @@ header li a:hover {
     margin-top: 40px;
   }
   .title-edit {
-    min-width: 250px;
+    display: flex;
+    flex-direction: row;
   }
   .idea-section-btn-div {
     display: flex;

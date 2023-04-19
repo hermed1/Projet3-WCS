@@ -76,7 +76,7 @@ const add = (req, res) => {
     res.status(422).send({ error });
     return;
   }
-
+  console.warn(req.body);
   models.idea
     .insert(title, text, createDate, companyId, pictureId)
     .then(([result]) => {

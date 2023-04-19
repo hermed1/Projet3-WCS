@@ -14,10 +14,11 @@ const app = express();
 app.use(express.json());
 
 const cors = require("cors");
+// const corsOptions = require("./config/corsconfig");
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
+    origin: process.env.FRONTEND_URL ?? "http://localhost:8000",
     optionsSuccessStatus: 200,
   })
 );

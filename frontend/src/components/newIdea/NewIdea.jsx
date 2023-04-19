@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import fileIcon from "../../assets/file-icon.png";
 
 function NewIdea() {
+  const url = import.meta.env.VITE_BACKEND_URL;
+
+  const [newIdea, setNewIdea] = useState("");
+
+  const handleClickpostIdea = () => {
+    axios
+      .post(`${url}/idea`, { newIdea })
+      .then((response) => {
+        setNewIdea(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <section className="new-idea-section">
       <div className="new-idea-title-main">
         <h1>Nouvelle idée</h1>
       </div>
       <div className="idea-section">
-        <input
-          className="title-edit"
-          type="text"
-          placeholder="Donnez un titre à votre idée"
-        />
+        <label htmlFor="title-edit">
+          Titre : <input className="title-input" type="text" />
+        </label>
         <div className="idea-section-btn-div">
           <button type="button" className="idea-section-btn">
             Catégories
@@ -35,7 +49,11 @@ function NewIdea() {
           <p className="title-add-file">+ Ajouter un fichier</p>
         </div>
         <div className="post-idea">
-          <button type="button" className="post-idea-btn">
+          <button
+            type="button"
+            className="post-idea-btn"
+            onClick={handleClickpostIdea}
+          >
             Poster l'idée
           </button>
         </div>
