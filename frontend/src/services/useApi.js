@@ -5,7 +5,7 @@ let apiSingleton = null;
 const useApi = () => {
   if (!apiSingleton) {
     apiSingleton = axios.create({
-      baseURL: "http://localhost:8000",
+      baseURL: import.meta.env.VITE_BACKEND_URL,
     });
   }
   return apiSingleton;

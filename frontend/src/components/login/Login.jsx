@@ -1,5 +1,4 @@
 import { useRef } from "react";
-// import { useNavigate } from "react-dom";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
 import "./Login.css";
@@ -9,12 +8,10 @@ function Login() {
   const { setUser } = useUser();
   const refEmail = useRef();
   const refPass = useRef();
-  // const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const mail = refEmail.current.value;
     const pass = refPass.current.value;
-    // controle des valeurs.
     const user = {
       email: mail,
       password: pass,
@@ -23,11 +20,9 @@ function Login() {
       .post("/login", user)
       .then((resp) => {
         console.warn(resp);
-        // eslint-disable-next-line no-shadow
-        const { token, user } = resp.data;
+        const { token } = resp.data;
         api.defaults.headers.authorization = `Bearer ${token}`;
         setUser(user);
-        // navigate("/");
       })
       .catch((err) => {
         console.warn(err);
@@ -55,7 +50,7 @@ function Login() {
       <h2 className="login-title">Connexion</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <label htmlFor="login" className="login-label">
-          Login :
+          Email :
           <input type="text" className="input-login-form" ref={refEmail} />
         </label>
         <label htmlFor="password" className="login-label">
