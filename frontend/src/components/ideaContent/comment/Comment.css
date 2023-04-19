@@ -1,0 +1,26 @@
+.comment-container {
+  background-color: var(--main-color);
+  background: linear-gradient(210deg, #07588f 0%, #2680be 50%, #0180d4 90%);
+  color: var(--text-color-light);
+  box-shadow: 4px 7px 30px -5px rgba(0, 0, 0, 0.75);
+  border: #003c64 2px solid;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 85%;
+}
+
+.text-comment {
+  background-color: var(--third-color);
+  color: var(--text-color-dark);
+  min-height: 100px;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+@media screen and (min-width: 1024px) {
+  .comment-container {
+    width: 60%;
+  }
+}
