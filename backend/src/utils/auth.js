@@ -9,48 +9,46 @@ const hashingOptions = {
 };
 
 const hashPassword = (req, res, next) => {
-  argon2
-    .hash(req.body.hashedPassword, hashingOptions)
-    .then((hashedPassword) => {
-      req.body.hashedPassword = hashedPassword;
-      delete req.body.password;
+  if (req.body.password === "") {
+    res.status(422).send("Mot de passe non saisie");
+  } else {
+    argon2
+      .hash(req.body.password, hashingOptions)
+      .then((hashedPassword) => {
+        req.body.hashedPassword = hashedPassword;
+        delete req.body.password;
 
-      next();
+        next();
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
+};
+
+const verifyPassword = (req, res) => {
+  argon2
+    .verify(req.user.hashedPassword, req.body.password)
+    .then((isVerified) => {
+      if (isVerified) {
+        const payload = { sub: req.user.id };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+
+        delete req.user.hashedPassword;
+        res.send({ token, user: req.user });
+      } else {
+        res.sendStatus(401);
+      }
     })
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
     });
 };
-
-const verifyPassword = (req, res) => {
-  console.warn(req.user);
-  argon2
-    .verify(req.user.password, req.body.password)
-    // eslint-disable-next-line consistent-return
-    .then((isVerified) => {
-      if (isVerified) {
-        const payload = {
-          sub: {
-            id: req.user.id,
-            email: req.user.email,
-          },
-        };
-        const token = jwt.sign(payload, process.env.JWT_SECRET, {
-          expiresIn: "2h",
-        });
-        delete req.user.password;
-        res.send({ token, user: req.user });
-      } else {
-        return res.sendStatus(401);
-      }
-    })
-    .catch((err) => {
-      console.warn(err);
-      return res.sendStatus(500);
-    });
-};
-
 // eslint-disable-next-line consistent-return
 const verifyToken = (req, res, next) => {
   try {
@@ -60,8 +58,7 @@ const verifyToken = (req, res, next) => {
     }
     const [type, token] = authorizationHeader.split(" ");
     if (type !== "Bearer") {
-      // eslint-disable-next-line no-undef
-      throw newError("Authorization header has not the bearer type");
+      throw new Error("Authorization header has not the bearer type");
     }
     req.payload = jwt.verify(token, process.env.JWT_SECRET);
     next();
