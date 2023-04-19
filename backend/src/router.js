@@ -16,12 +16,12 @@ router.post("/login", userControllers.findByEmailToNext, verifyPassword);
 
 router.delete("/user/:id", userControllers.destroy);
 
-const itemControllers = require("./controllers/itemControllers");
+const ideaControllers = require("./controllers/ideaControllers");
 
-router.get("/items", itemControllers.browse);
-router.get("/items/:id", itemControllers.read);
-router.put("/items/:id", itemControllers.edit);
-router.post("/items", itemControllers.add);
-router.delete("/items/:id", itemControllers.destroy);
+router.get("/idea", ideaControllers.browse);
+router.get("/idea/:id", ideaControllers.read);
+router.put("/idea/:id", ideaControllers.edit);
+router.post("/idea", ideaControllers.add);
+router.delete("/idea/:id", ideaControllers.destroy);
 
 module.exports = router;
