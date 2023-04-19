@@ -41,10 +41,10 @@ class UserManager extends AbstractManager {
     );
   }
 
-  update(item) {
+  update(company) {
     return this.database.query(
       `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      [company.title, company.id]
     );
   }
 }

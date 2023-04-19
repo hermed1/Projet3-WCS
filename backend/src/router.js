@@ -1,10 +1,13 @@
 const express = require("express");
 
 const router = express.Router();
+// const multer = require("multer");
+// const path = require("path");
 
-// const { hashPassword, verifyPassword, verifyToken } = require("./utils/auth");
+// const uploadFolder = path.join(__dirname, "public", "assets");
+// const upload = multer({ dest: uploadFolder });
 
-const { hashPassword, verifyPassword } = require("./utils/auth");
+const { hashPassword } = require("./utils/auth");
 
 const loginControllers = require("./controllers/loginControllers");
 
@@ -25,5 +28,13 @@ router.delete("/user/:id", userControllers.destroy);
 // router.put("/items/:id", itemControllers.edit);
 // router.post("/items", itemControllers.add);
 // router.delete("/items/:id", itemControllers.destroy);
+
+const companyControllers = require("./controllers/companyControllers");
+
+router.get("/company", companyControllers.browse);
+router.get("/company/:id", companyControllers.read);
+router.put("/company/:id", companyControllers.edit);
+router.post("/company", companyControllers.add);
+router.delete("/company/:id", companyControllers.destroy);
 
 module.exports = router;

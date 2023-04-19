@@ -1,24 +1,24 @@
-const joi = require("joi");
+// const joi = require("joi");
 const models = require("../models");
-const { hashPassword } = require("../utils/auth");
+// const { hashPassword } = require("../utils/auth");
 
-const validate = (data, forCreation = true) => {
-  const presence = forCreation ? "required" : "optional";
-  return joi
-    .object({
-      firstname: joi.string().max(45).presence(presence),
-      lastname: joi.string().max(45).presence(presence),
-      email: joi.string().max(45).presence(presence),
-      dateOfBirth: joi.date().presence(presence),
-      hashedPassword: joi.string().max(50).presence(presence),
-      liked: joi.string().max().presence("optional"),
-      profilePicture: joi.string().max(255).presence("optional"),
-      creationDate: joi.date().presence(presence),
-      roleId: joi.number().integer().min(0).presence(presence),
-      teamId: joi.number().integer().min(0).presence(presence),
-    })
-    .validate(data, { abortEarly: false }).error;
-};
+// const validate = (data, forCreation = true) => {
+//   const presence = forCreation ? "required" : "optional";
+//   return joi
+//     .object({
+//       firstname: joi.string().max(45).presence(presence),
+//       lastname: joi.string().max(45).presence(presence),
+//       email: joi.string().max(45).presence(presence),
+//       dateOfBirth: joi.date().presence(presence),
+//       hashedPassword: joi.string().max(50).presence(presence),
+//       liked: joi.string().max().presence("optional"),
+//       profilePicture: joi.string().max(255).presence("optional"),
+//       creationDate: joi.date().presence(presence),
+//       roleId: joi.number().integer().min(0).presence(presence),
+//       teamId: joi.number().integer().min(0).presence(presence),
+//     })
+//     .validate(data, { abortEarly: false }).error;
+// };
 
 const browse = (req, res) => {
   models.user

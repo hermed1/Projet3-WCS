@@ -27,6 +27,7 @@ const verifyPassword = (req, res) => {
   console.warn(req.user);
   argon2
     .verify(req.user.password, req.body.password)
+    // eslint-disable-next-line consistent-return
     .then((isVerified) => {
       if (isVerified) {
         const payload = {
@@ -50,6 +51,7 @@ const verifyPassword = (req, res) => {
     });
 };
 
+// eslint-disable-next-line consistent-return
 const verifyToken = (req, res, next) => {
   try {
     const authorizationHeader = req.get("Authorization");
@@ -58,6 +60,7 @@ const verifyToken = (req, res, next) => {
     }
     const [type, token] = authorizationHeader.split(" ");
     if (type !== "Bearer") {
+      // eslint-disable-next-line no-undef
       throw newError("Authorization header has not the bearer type");
     }
     req.payload = jwt.verify(token, process.env.JWT_SECRET);
