@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap%22");
 
 * {
   padding: 0;
@@ -15,16 +15,14 @@
   --third-color: #afddfc;
   --text-color-light: #e2efff;
   --text-color-dark: #0d2d42;
+  --btn-background-color: linear-gradient(
+    210deg,
+    #07588f 0%,
+    #2680be 50%,
+    #0180d4 90%
+  );
 }
 
 .AppHeaderNav {
   display: block;
 }
-
-/*@media screen and (max-width: 768px) {
-  .AppHeaderNav {
-    display: none;
-  }
-}
-
-*/

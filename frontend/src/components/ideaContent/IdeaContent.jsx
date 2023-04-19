@@ -1,6 +1,4 @@
 import React from "react";
-import "./IdeaContent.css";
-import "../newIdea/NewIdea.css";
 import likeBtn from "../../assets/like-btn.png";
 import speechBubble from "../../assets/speech-bubble.png";
 import editBtn from "../../assets/edit-button.png";
@@ -69,7 +67,7 @@ function IdeaContent() {
       <section className="comment-section">
         <h3 className="comment-main-title">Commentaires :</h3>
 
-        <div className="comment-list">
+        <div className="comment__list">
           <Comment />
         </div>
       </section>

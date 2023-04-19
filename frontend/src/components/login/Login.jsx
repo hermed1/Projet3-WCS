@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
-import "./Login.css";
 
 function Login() {
   const api = useApi();
