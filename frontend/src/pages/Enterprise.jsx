@@ -1,10 +1,12 @@
 import React from "react";
 import "./Enterprise.css";
+// import useApi from "@services/useApi";
 
 function Enterprise() {
+  // const api = useApi();
   // const [raisonSociale, setRaisonSociale] = useState("");
   // const [siret, setSiret] = useState("");
-  // // const [companyLogo, setCompanyLogo] = useState("");
+  // const [companyLogo, setCompanyLogo] = useState("");
   // const [phone, setPhone] = useState("");
   // const [dirigeant, setdirigeant] = useState("");
 
@@ -16,8 +18,8 @@ function Enterprise() {
   //     dirigeant,
   //   };
   //   e.preventdefault();
-  //   axios
-  //     .post("http://localhost:8000/Company", newCompany)
+  //   api
+  //     .post("/company", newCompany)
   //     .then((response) =>)
   //     .catch();
   // };
