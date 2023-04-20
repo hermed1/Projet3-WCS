@@ -1,23 +1,39 @@
-// import Home from "./pages/Home";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import Entreprise from "./pages/Entreprise";
 import Idea from "./pages/Idea";
-import "./App.css";
-import "./style/index.scss";
+import Profile from "./pages/Profile";
+import Navbar from "./components/navbar/Navbar";
 import UserProvider from "./contexts/UserContext";
 import Login from "./components/login/Login";
-import Navbar from "./components/navbar/Navbar";
+import "./App.css";
+import "./style/index.scss";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
   return (
     <div className="App">
-      <Navbar />
-      <UserProvider>
-        <Login />
-        <Routes>
-          <Route path="/Idea" element={<Idea />} />
-          <Route path="/" element={<Idea />} />
-        </Routes>
-      </UserProvider>
+      <div>
+        <UserProvider>
+          {loggedIn ? (
+            <div className="App">
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Entreprise />} />
+                <Route path="/Idea" element={<Idea />} />
+                <Route path="/Profil" element={<Profile />} />
+              </Routes>
+            </div>
+          ) : (
+            <Login handleLogin={handleLogin} />
+          )}
+        </UserProvider>
+      </div>
     </div>
   );
 }

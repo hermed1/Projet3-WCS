@@ -1,13 +1,16 @@
 import React from "react";
+// import { useUser } from "../../../contexts/UserContext";
 import likeBtn from "../../../assets/like-btn.png";
 import speechBubble from "../../../assets/speech-bubble.png";
 import editBtn from "../../../assets/edit-button.png";
 
 function Comment() {
+  // const { user } = useUser();
+
   return (
     <div className="comment-container">
       <div className="head-title-content">
-        <h4>Nom de l'utilisateur</h4>
+        <h4>{/* {user.firstname} {user.lastname} */}</h4>
         <button className="edit-btn" type="button">
           <img src={editBtn} alt="Logo edit" className="edit-img" />
         </button>

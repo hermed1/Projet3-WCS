@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useUser } from "../../contexts/UserContext";
 import fileIcon from "../../assets/file-icon.png";
 import useApi from "../../services/useApi";
 
@@ -6,6 +7,8 @@ function NewIdea() {
   const api = useApi();
 
   const [newIdea, setNewIdea] = useState("");
+  const { user } = useUser();
+  console.warn("coucou", user);
 
   const handleClickpostIdea = () => {
     api
@@ -38,7 +41,9 @@ function NewIdea() {
       </div>
 
       <div className="idea-container">
-        <h4>Nom de l'utilisateur</h4>
+        <h4>
+          {user && user.firstname} {user && user.lastname}
+        </h4>
         <input
           className="content-idea"
           type="text"
