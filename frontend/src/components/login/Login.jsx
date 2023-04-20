@@ -1,10 +1,13 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
 
-function Login() {
+function Login({ handleLogin }) {
   const api = useApi();
   const { setUser } = useUser();
+  const navigate = useNavigate();
   const refEmail = useRef();
   const refPass = useRef();
   const handleSubmit = (e) => {
@@ -22,6 +25,8 @@ function Login() {
         const { token } = resp.data;
         api.defaults.headers.authorization = `Bearer ${token}`;
         setUser(resp.data.user);
+        handleLogin();
+        navigate("/");
       })
       .catch((err) => {
         console.warn(err);
@@ -56,10 +61,14 @@ function Login() {
           Password :
           <input type="password" className="input-login-form" ref={refPass} />
         </label>
-        <button type="submit"> Connexion </button>
+        <button type="submit">Connexion</button>
       </form>
     </div>
   );
 }
+
+Login.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+};
 
 export default Login;

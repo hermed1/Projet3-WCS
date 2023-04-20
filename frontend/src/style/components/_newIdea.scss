@@ -3,106 +3,117 @@
   align-items: center;
   flex-direction: column;
   margin-top: 40px;
-}
 
-.idea-section {
-  text-align: center;
-  padding: 15px;
-}
-
-.title-edit {
-  border: none;
-  width: 85%;
-}
-
-.idea-section-btn {
-  background: linear-gradient(180deg, #07588f 20%, #0180d4 95%);
-  color: var(--text-color-light);
-  padding: 5px;
-  margin: 10px 2px;
-  border-radius: 5px;
-}
-
-.idea-container {
-  background: linear-gradient(210deg, #07588f 0%, #2680be 50%, #0180d4 90%);
-  color: var(--text-color-light);
-  box-shadow: 4px 7px 30px -5px rgba(0, 0, 0, 0.75);
-  border: #003c64 2px solid;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 10px;
-  width: 80%;
-}
-
-.content-idea {
-  width: 100%;
-  min-height: 200px;
-  outline: none;
-  border-radius: 7px;
-  margin-top: 10px;
-  padding: 5px;
-  text-align: top;
-}
-
-.add-file {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 10px 0;
-}
-
-.img-add-file {
-  width: 30px;
-}
-
-.post-idea {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.post-idea-btn {
-  color: var(--text-color-light);
-  padding: 5px;
-  border-radius: 5px;
-  max-width: 25vw;
-  background: linear-gradient(180deg, #07588f 20%, #0180d4 95%);
-}
-
-@media screen and (min-width: 786px) {
   .idea-section {
+    text-align: center;
+    padding: 15px;
+
+    .title-edit {
+      border: none;
+      width: 85%;
+    }
+
+    .idea-section-btn {
+      background: linear-gradient(180deg, #07588f 20%, #0180d4 95%);
+      color: var(--text-color-light);
+      padding: 5px;
+      margin: 10px 2px;
+      border-radius: 5px;
+    }
+  }
+
+  .form-newIdea {
     display: flex;
     align-items: center;
-    flex-direction: row;
-    margin-top: 40px;
-  }
-
-  .title-edit {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .idea-section-btn-div {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .idea-section-btn {
-    margin-left: 20px;
-    min-width: 130px;
-  }
-
-  .add-file {
-    margin-left: 20px;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .idea-section {
-    margin-top: 40px;
+    flex-direction: column;
+    width: 80%;
   }
 
   .idea-container {
-    max-width: 50%;
+    background: linear-gradient(210deg, #07588f 0%, #2680be 50%, #0180d4 90%);
+    color: var(--text-color-light);
+    box-shadow: 4px 7px 30px -5px rgba(0, 0, 0, 0.75);
+    border: #003c64 2px solid;
+    padding: 20px;
     margin-top: 20px;
+    border-radius: 10px;
+    width: 100%;
+
+    .content-idea {
+      width: 100%;
+      min-height: 200px;
+      outline: none;
+      border-radius: 7px;
+      margin-top: 10px;
+      padding: 5px;
+      text-align: top;
+    }
+
+    .add-file {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 10px 0;
+
+      .img-add-file {
+        width: 30px;
+      }
+
+      .title-add-file {
+        margin-left: 10px;
+      }
+    }
+
+    .post-idea {
+      display: flex;
+      justify-content: flex-end;
+
+      .post-idea-btn {
+        color: var(--text-color-light);
+        padding: 5px;
+        border-radius: 5px;
+        max-width: 25vw;
+        background: linear-gradient(180deg, #07588f 20%, #0180d4 95%);
+      }
+    }
+  }
+
+  @media screen and (min-width: 786px) {
+    .idea-section {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      margin-top: 40px;
+
+      .title-edit {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .idea-section-btn-div {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .idea-section-btn {
+        margin-left: 20px;
+        min-width: 130px;
+      }
+
+      .add-file {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .idea-section {
+      margin-top: 40px;
+    }
+
+    .idea-container {
+      max-width: 50%;
+      margin-top: 20px;
+    }
   }
 }

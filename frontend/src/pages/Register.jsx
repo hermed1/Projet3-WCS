@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Enterprise.css";
 import { useNavigate } from "react-router-dom";
 import useApi from "../services/useApi";
 
-function Enterprise() {
+function Register() {
   const api = useApi();
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState("");
@@ -19,7 +18,7 @@ function Enterprise() {
     }
   }, [redirection]);
 
-  const handleSubmit = (e) => {
+  const handleSubmitRegisterCompany = (e) => {
     e.preventDefault();
     const newCompany = {
       companyName,
@@ -36,7 +35,7 @@ function Enterprise() {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
+    <form method="post" onSubmit={handleSubmitRegisterCompany}>
       <fieldset className="form">
         <legend className="form__legend">Informations entreprise : </legend>
         <label htmlFor="name" className="form__label">
@@ -105,4 +104,4 @@ function Enterprise() {
   );
 }
 
-export default Enterprise;
+export default Register;

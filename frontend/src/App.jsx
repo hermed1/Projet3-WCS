@@ -1,25 +1,39 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Enterprise from "./pages/Enterprise";
-// import Home from "./pages/Home";
+import Entreprise from "./pages/Entreprise";
+import Register from "./pages/Register";
 import Idea from "./pages/Idea";
-import "./App.css";
-import "./style/index.scss";
+import Profile from "./pages/Profile";
+import Navbar from "./components/navbar/Navbar";
 import UserProvider from "./contexts/UserContext";
 import Login from "./components/login/Login";
-import Navbar from "./components/navbar/Navbar";
+import "./App.css";
+import "./style/index.scss";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
   return (
     <div className="App">
-      <Navbar />
       <UserProvider>
-        {/* <Enterprise /> */}
-
-        <Routes>
-          <Route path="/" element={<Idea />} />
-          <Route path="/register" element={<Enterprise />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        {loggedIn ? (
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Entreprise />} />
+              <Route path="/Idea" element={<Idea />} />
+              <Route path="/Profil" element={<Profile />} />
+              <Route path="/Register" element={<Register />} />
+            </Routes>
+          </div>
+        ) : (
+          <Login handleLogin={handleLogin} />
+        )}
+        <Register />
       </UserProvider>
     </div>
   );
