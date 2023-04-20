@@ -17,7 +17,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Idea />} />
-          <Route path="/company" element={<Enterprise />} />
+          <Route path="/register" element={<Enterprise />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </UserProvider>

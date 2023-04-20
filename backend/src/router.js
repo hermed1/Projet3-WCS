@@ -31,10 +31,10 @@ router.delete("/idea/:id", ideaControllers.destroy);
 
 const companyControllers = require("./controllers/companyControllers");
 
-router.get("/company", companyControllers.browse);
-router.get("/company/:id", companyControllers.read);
-router.put("/company/:id", companyControllers.edit);
-router.post("/company", companyControllers.add);
-router.delete("/company/:id", companyControllers.destroy);
+router.get("/register", companyControllers.browse);
+router.get("/register/:id", companyControllers.read);
+router.put("/register/:id", companyControllers.edit);
+router.post("/register", companyControllers.add);
+router.delete("/register/:id", companyControllers.destroy);
 
 module.exports = router;

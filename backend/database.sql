@@ -31,10 +31,14 @@ DROP TABLE IF EXISTS `salesforce`.`company` ;
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(150) NOT NULL,
+  `companyName` VARCHAR(150) NOT NULL,
   `nSiret` VARCHAR(45) NOT NULL,
-  `creationDate` DATE NOT NULL,
-  `companyLogo` VARCHAR(255) NOT NULL,
+  -- `creationDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `creationDate` DATE NOW,
+  `companyLogo` VARCHAR(255) DEFAULT NULL,
+  `contactPerson` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `phone` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2

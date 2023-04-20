@@ -5,10 +5,11 @@ const validate = (data, forCreation = true) => {
   const presence = forCreation ? "required" : "optional";
   return joi
     .object({
-      name: joi.string().max(150).presence(presence),
+      companyName: joi.string().max(150).presence(presence),
       nSiret: joi.string().max(45).presence(presence),
-      creationDate: joi.date.presence(presence),
-      companyLogo: joi.string.max(255).presence(presence),
+      contactPerson: joi.string().max(45).presence(presence),
+      email: joi.string().max(45).presence(presence),
+      phone: joi.string().max(45).presence(presence),
     })
     .validate(data, { abortEarly: false }).error;
 };

@@ -1,68 +1,107 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Enterprise.css";
+import { useNavigate } from "react-router-dom";
 import useApi from "../services/useApi";
 
 function Enterprise() {
   const api = useApi();
-  const [name, setName] = useState("");
+  const navigate = useNavigate();
+  const [companyName, setCompanyName] = useState("");
   const [nSiret, setNSiret] = useState("");
-  const [companyLogo, setCompanyLogo] = useState("");
-  const [creationDate, setCreationDate] = useState(null);
+  const [contactPerson, setContactPerson] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [redirection, setRedirection] = useState(false);
+
+  useEffect(() => {
+    if (redirection) {
+      navigate("/");
+    }
+  }, [redirection]);
 
   const handleSubmit = (e) => {
-    e.preventdefault();
+    e.preventDefault();
     const newCompany = {
-      name,
+      companyName,
       nSiret,
-      creationDate,
-      companyLogo,
+      contactPerson,
+      email,
+      phone,
     };
-    e.preventdefault();
-    api.post("/company", newCompany).then().catch();
+    api
+      .post("/register", newCompany)
+      .then((resp) => console.warn(resp))
+      .catch((err) => console.warn(err));
+    setRedirection(true);
   };
+
   return (
-    <div>
-      <form method="post" className="form" onSubmit={handleSubmit}>
+    <form method="post" onSubmit={handleSubmit}>
+      <fieldset className="form">
+        <legend className="form__legend">Informations entreprise : </legend>
         <label htmlFor="name" className="form__label">
-          Name
+          Nom entreprise
         </label>
         <input
           type="text"
-          placeholder="Your company name"
-          name="name"
-          id="name"
+          placeholder=" Nom entreprise"
+          name="companyName"
+          id="companyName"
           className="form__input"
-          onChange={(e) => setName(e.target.value)}
+          required
+          onChange={(e) => setCompanyName(e.target.value)}
         />
         <label htmlFor="siret" className="form__label">
-          Votre SIRET
+          SIRET
         </label>
         <input
           type="text"
           name="nSiret"
           id="nSiret"
-          placeholder="Your SIRET number"
+          required
+          placeholder=" SIRET"
           className="form__input"
           onChange={(e) => setNSiret(e.target.value)}
         />
-        <label htmlFor="creationDate">Company creation date</label>
-        <input
-          type="date"
-          name="creationDate"
-          id="creationDate"
-          className="form__input"
-          onChange={(e) => setCreationDate(e.target.value)}
-        />
-        <label htmlFor="companyLogo">Your company logo</label>
+        <label htmlFor="contactPerson" className="form__label">
+          Personne de contact
+        </label>
         <input
           type="text"
-          id="companyLogo"
-          name="companyLogo"
-          onChange={(e) => setCompanyLogo(e.target.value)}
+          name="contactPerson"
+          id="contactPerson"
+          required
+          className="form__input"
+          placeholder="Nom de la personne de contact"
+          onChange={(e) => setContactPerson(e.target.value)}
         />
-        <input type="submit" value="Valider" />
-      </form>
-    </div>
+        <label htmlFor="companyLogo" className="form__label">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          placeholder="Email"
+          className="form__input"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label htmlFor="companyLogo" className="form__label">
+          Téléphone
+        </label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          name="companyLogo"
+          placeholder="Téléphone"
+          required
+          className="form__input"
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <input type="submit" value="Envoyer" className="form__submit" />
+      </fieldset>
+    </form>
   );
 }
 
