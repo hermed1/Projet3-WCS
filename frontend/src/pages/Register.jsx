@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../services/useApi";
 
@@ -12,12 +12,6 @@ function Register() {
   const [phone, setPhone] = useState("");
   const [redirection, setRedirection] = useState(false);
 
-  useEffect(() => {
-    if (redirection) {
-      navigate("/");
-    }
-  }, [redirection]);
-
   const handleSubmitRegisterCompany = (e) => {
     e.preventDefault();
     const newCompany = {
@@ -29,7 +23,12 @@ function Register() {
     };
     api
       .post("/register", newCompany)
-      .then((resp) => console.warn(resp))
+      .then((resp) => {
+        console.warn(resp);
+        if (redirection) {
+          navigate("/");
+        }
+      })
       .catch((err) => console.warn(err));
     setRedirection(true);
   };

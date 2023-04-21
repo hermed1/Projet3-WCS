@@ -1,11 +1,6 @@
 const express = require("express");
 
 const router = express.Router();
-// const multer = require("multer");
-// const path = require("path");
-
-// const uploadFolder = path.join(__dirname, "public", "assets");
-// const upload = multer({ dest: uploadFolder });
 
 const { hashPassword, verifyPassword } = require("./utils/auth");
 

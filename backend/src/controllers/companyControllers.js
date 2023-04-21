@@ -46,7 +46,10 @@ const edit = (req, res) => {
   const company = req.body;
 
   // TODO validations (length, format...)
-
+  const errors = validate(req.body);
+  if (errors) {
+    res.sendStatus(422);
+  }
   company.id = parseInt(req.params.id, 10);
 
   models.company
