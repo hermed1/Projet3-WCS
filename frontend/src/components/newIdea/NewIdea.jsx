@@ -6,26 +6,23 @@ import useApi from "../../services/useApi";
 function NewIdea() {
   const api = useApi();
 
-  const [newIdea, setNewIdea] = useState("");
   const [titleIdea, setTitleIdea] = useState("");
+  const [textIdea, setTextIdea] = useState("");
   const { user } = useUser();
   console.warn("coucou", user);
 
-  const handleSubmitPostIdea = (event) => {
-    event.preventDefault();
+  const handleSubmitNewIdea = (e) => {
+    e.preventDefault();
+    const newIdea = {
+      title: titleIdea,
+      text: textIdea,
+    };
     api
-      .post(`/idea`, { titleIdea, newIdea })
-      .then((response) => {
-        setTitleIdea(response);
-        setNewIdea(response);
+      .post("/idea", newIdea)
+      .then((resp) => {
+        console.warn(resp);
       })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const handleChangeTitle = (event) => {
-    setTitleIdea(event.target.value);
+      .catch((err) => console.warn(err));
   };
 
   return (
@@ -33,15 +30,15 @@ function NewIdea() {
       <div className="new-idea-title-main">
         <h1>Nouvelle idée</h1>
       </div>
-      <form onSubmit={handleSubmitPostIdea} className="form-newIdea">
+      <form onSubmit={handleSubmitNewIdea} className="form-newIdea">
         <div className="idea-section">
           <label htmlFor="title-edit">
-            Titre :{" "}
+            Titre :
             <input
               className="title-input"
               type="text"
               value={titleIdea}
-              onChange={handleChangeTitle}
+              onChange={(e) => setTitleIdea(e.target.value)}
             />
           </label>
           <div className="idea-section-btn-div">
@@ -62,6 +59,8 @@ function NewIdea() {
             className="content-idea"
             type="text"
             placeholder=" Ecrivez votre idée ici..."
+            value={textIdea}
+            onChange={(e) => setTextIdea(e.target.value)}
           />
           <div className="add-file">
             <img src={fileIcon} alt="Logo fichier" className="img-add-file" />
