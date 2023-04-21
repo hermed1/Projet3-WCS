@@ -10,7 +10,6 @@ function Register() {
   const [contactPerson, setContactPerson] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [redirection, setRedirection] = useState(false);
 
   const handleSubmitRegisterCompany = (e) => {
     e.preventDefault();
@@ -25,12 +24,9 @@ function Register() {
       .post("/register", newCompany)
       .then((resp) => {
         console.warn(resp);
-        if (redirection) {
-          navigate("/");
-        }
+        navigate("/");
       })
       .catch((err) => console.warn(err));
-    setRedirection(true);
   };
 
   return (
