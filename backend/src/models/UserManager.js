@@ -41,11 +41,11 @@ class UserManager extends AbstractManager {
     );
   }
 
-  update(item) {
-    return this.database.query(
-      `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
-    );
+  update(id, user) {
+    return this.database.query(`UPDATE ${this.table} SET ? WHERE id = ?`, [
+      user,
+      id,
+    ]);
   }
 
   findByEmail(email) {

@@ -24,4 +24,12 @@ router.put("/idea/:id", ideaControllers.edit);
 router.post("/idea", ideaControllers.add);
 router.delete("/idea/:id", ideaControllers.destroy);
 
+const companyControllers = require("./controllers/companyControllers");
+
+router.get("/register", companyControllers.browse);
+router.get("/register/:id", companyControllers.read);
+router.put("/register/:id", companyControllers.edit);
+router.post("/register", companyControllers.add);
+router.delete("/register/:id", companyControllers.destroy);
+
 module.exports = router;
