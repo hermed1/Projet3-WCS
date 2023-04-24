@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Entreprise from "./pages/Entreprise";
-import Register from "./pages/Register";
+import AddCompany from "./pages/AddCompany";
 import Idea from "./pages/Idea";
 import Profile from "./pages/Profile";
 import Navbar from "./components/navbar/Navbar";
@@ -27,13 +27,12 @@ function App() {
               <Route path="/" element={<Entreprise />} />
               <Route path="/Idea" element={<Idea />} />
               <Route path="/Profil" element={<Profile />} />
-              <Route path="/Register" element={<Register />} />
+              <Route path="/AddCompany" element={<AddCompany />} />
             </Routes>
           </div>
         ) : (
           <Login handleLogin={handleLogin} />
         )}
-        <Register />
       </UserProvider>
     </div>
   );

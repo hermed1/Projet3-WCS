@@ -8,9 +8,8 @@ const validate = (data, forCreation = true) => {
       id: joi.number().min(0).presence("optional"),
       title: joi.string().max(120).presence(presence),
       text: joi.string().max(4000).presence(presence),
-      createDate: joi.date().presence(presence),
-      companyId: joi.number().min(0).presence(presence),
-      pictureId: joi.number().min(0).presence(presence),
+      companyId: joi.number().min(0).presence("optional"),
+      pictureId: joi.number().min(0).presence("optional"),
     })
     .validate(data, { abortEarly: false }).error;
 };
@@ -68,21 +67,21 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  console.warn(req.body);
+  console.warn("date 1", req.body);
 
-  const { title, text, createDate, companyId, pictureId } = req.body;
-  const data = { title, text, createDate, companyId, pictureId };
+  const { title, text, companyId, pictureId } = req.body;
+  const data = { title, text, companyId, pictureId };
   const error = validate(data);
-  console.warn(error);
+
   if (error) {
     res.status(422).send({ error });
     return;
   }
 
   models.idea
-    .insert(title, text, createDate, companyId, pictureId)
-    .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+    .insert(title, text, companyId, pictureId)
+    .then(() => {
+      res.sendStatus(201);
     })
     .catch((err) => {
       console.error(err);

@@ -5,14 +5,13 @@ class IdeaManager extends AbstractManager {
     super({ table: "idea" });
   }
 
-  insert(title, text, createDate, companyId, pictureId) {
+  insert(title, text, companyId, pictureId) {
     return this.database.query(
       `insert into ${this.table} (title,
         text,
-        createDate,
         companyId,
-        pictureId) VALUES (?, ?, ?, (SELECT id FROM company WHERE id = ?), (SELECT id FROM picturestorage WHERE id = ?))`,
-      [title, text, createDate, companyId, pictureId]
+        pictureId) VALUES (?, ?, (SELECT id FROM company WHERE id = ?), (SELECT id FROM picturestorage WHERE id = ?))`,
+      [title, text, companyId, pictureId]
     );
   }
 
