@@ -24,7 +24,6 @@ function App() {
       <UserProvider>
         {loggedIn && <Navbar />}
         <Routes>
-          {loggedIn && <Route path="/" element={<Entreprise />} />}
           {loggedIn && <Route path="/Idea" element={<Idea />} />}
           {loggedIn && <Route path="/Profil" element={<Profile />} />}
           <Route path="/Login" element={<Login handleLogin={handleLogin} />} />

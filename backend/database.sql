@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
   `contactPerson` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(45) NULL DEFAULT NULL,
-  `companyLogo` VARCHAR(255) NULL DEFAULT NULL,
+  `companyLogo` VARCHAR(255) DEFAULT NULL,
   
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -224,11 +224,19 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
   `firstname` VARCHAR(45) NOT NULL,
   `lastname` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
+<<<<<<< HEAD
   `dateOfBirth` DATE NOT NULL,
   `hashedPassword` VARCHAR(255) NOT NULL,
   `liked` TINYINT NULL DEFAULT NULL,
   `profilePicture` VARCHAR(255) NULL DEFAULT NULL,
   `creationDate` TIMESTAMP NOT NULL,
+=======
+  `dateOfBirth` DATE NULL DEFAULT NULL,
+  `hashedPassword` VARCHAR(255) NOT NULL,
+  `liked` TINYINT NULL DEFAULT NULL,
+  `profilePicture` VARCHAR(255) NULL DEFAULT NULL,
+  `creationDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+>>>>>>> 95b83004ac47a294be301beda826a6dbc43c7f62
   `roleId` INT NOT NULL DEFAULT '1',
   `teamId` INT NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),

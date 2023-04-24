@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useApi from "../services/useApi";
+import AddUser from "../components/addUser/AddUser";
+import UserList from "../components/userList/UserList";
 
 function Entreprise() {
   const api = useApi();
@@ -33,6 +35,8 @@ function Entreprise() {
         </p>
         {company.companyLogo ? <p>Logo: company.companyLogo </p> : null}
       </section>
+      <AddUser />
+      <UserList />
     </div>
   );
 }
