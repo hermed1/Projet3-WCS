@@ -14,8 +14,8 @@ const validate = (data, forCreation = true) => {
       liked: joi.string().max(255).presence("optional"),
       profilePicture: joi.string().max(255).presence("optional"),
       creationDate: joi.date().presence(presence),
-      roleId: joi.number().integer().min(0).presence(presence),
-      teamId: joi.number().integer().min(0).presence(presence),
+      roleId: joi.number().integer().min(1).presence(presence),
+      teamId: joi.number().integer().min(1).presence(presence),
     })
     .validate(data, { abortEarly: false }).error;
 };
@@ -78,17 +78,18 @@ const edit = async (req, res) => {
 
 // eslint-disable-next-line consistent-return
 const add = (req, res) => {
-  const errors = validate(req.body);
-  if (errors) return res.sendStatus(422);
+  // const errors = validate(req.body);
+  // if (errors) return res.sendStatus(422);
+  // console.warn(errors);
   const {
     firstname,
     lastname,
     email,
     dateOfBirth,
     hashedPassword,
-    liked,
+    // liked,
     profilePicture,
-    creationDate,
+    // creationDate,
     roleId,
     teamId,
   } = req.body;
@@ -99,14 +100,15 @@ const add = (req, res) => {
       email,
       dateOfBirth,
       hashedPassword,
-      liked,
+      // liked,
       profilePicture,
-      creationDate,
+      // creationDate,
       roleId,
       teamId
     )
-    .then(([result]) => {
-      res.location(`/users/${result.insertId}`).sendStatus(201);
+    .then(() => {
+      // res.location(`/user/${result.insertId}`).sendStatus(201);
+      res.sendStatus(201);
     })
     .catch((err) => {
       if (err.errno === 1062) {

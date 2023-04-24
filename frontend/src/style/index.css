@@ -184,26 +184,28 @@ header li a:hover {
   flex-direction: column;
   margin-top: 40px;
 }
-
-.idea-section {
+.new-idea-section .idea-section {
   text-align: center;
   padding: 15px;
 }
-
-.title-edit {
+.new-idea-section .idea-section .title-edit {
   border: none;
   width: 85%;
 }
-
-.idea-section-btn {
+.new-idea-section .idea-section .idea-section-btn {
   background: linear-gradient(180deg, #07588f 20%, #0180d4 95%);
   color: var(--text-color-light);
   padding: 5px;
   margin: 10px 2px;
   border-radius: 5px;
 }
-
-.idea-container {
+.new-idea-section .form-newIdea {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+}
+.new-idea-section .idea-container {
   background: linear-gradient(210deg, #07588f 0%, #2680be 50%, #0180d4 90%);
   color: var(--text-color-light);
   box-shadow: 4px 7px 30px -5px rgba(0, 0, 0, 0.75);
@@ -211,10 +213,9 @@ header li a:hover {
   padding: 20px;
   margin-top: 20px;
   border-radius: 10px;
-  width: 80%;
+  width: 100%;
 }
-
-.content-idea {
+.new-idea-section .idea-container .content-idea {
   width: 100%;
   min-height: 200px;
   outline: none;
@@ -223,63 +224,62 @@ header li a:hover {
   padding: 5px;
   text-align: top;
 }
-
-.add-file {
+.new-idea-section .idea-container .add-file {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 10px 0;
 }
-
-.img-add-file {
+.new-idea-section .idea-container .add-file .img-add-file {
   width: 30px;
 }
-
-.post-idea {
+.new-idea-section .idea-container .add-file .title-add-file {
+  margin-left: 10px;
+}
+.new-idea-section .idea-container .post-idea {
   display: flex;
   justify-content: flex-end;
 }
-
-.post-idea-btn {
+.new-idea-section .idea-container .post-idea .post-idea-btn {
   color: var(--text-color-light);
   padding: 5px;
   border-radius: 5px;
   max-width: 25vw;
   background: linear-gradient(180deg, #07588f 20%, #0180d4 95%);
 }
-
 @media screen and (min-width: 786px) {
-  .idea-section {
+  .new-idea-section .idea-section {
     display: flex;
     align-items: center;
     flex-direction: row;
     margin-top: 40px;
   }
-  .title-edit {
+  .new-idea-section .idea-section .title-edit {
     display: flex;
     flex-direction: row;
   }
-  .idea-section-btn-div {
+  .new-idea-section .idea-section .idea-section-btn-div {
     display: flex;
     flex-direction: row;
   }
-  .idea-section-btn {
+  .new-idea-section .idea-section .idea-section-btn {
     margin-left: 20px;
     min-width: 130px;
   }
-  .add-file {
+  .new-idea-section .idea-section .add-file {
     margin-left: 20px;
   }
 }
 @media screen and (min-width: 1024px) {
-  .idea-section {
+  .new-idea-section .idea-section {
     margin-top: 40px;
   }
-  .idea-container {
+  .new-idea-section .idea-container {
     max-width: 50%;
     margin-top: 20px;
   }
 }
+
 .text-idea {
   background-color: var(--third-color);
   color: var(--text-color-dark);
@@ -526,4 +526,63 @@ header li a:hover {
     font-size: 18px;
     padding: 5px;
   }
+}
+
+.form-signup {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-signup-label {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.form-signup-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.signup-invalid {
+  display: block;
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.signup-hide {
+  display: none;
+}
+
+.form-signup-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #008cba;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.form-signup-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+section {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
 }/*# sourceMappingURL=index.css.map */

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import useApi from "../../services/useApi";
-import "./Register.css";
 
-function Register() {
+function AddUser() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  const [creationDate, setCreationDate] = useState("");
+  // const [creationDate, setCreationDate] = useState("");
   const [role, setRole] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [team, setTeam] = useState("");
   const [pass1, setPass1] = useState("");
   const [pass2, setPass2] = useState("");
@@ -40,7 +40,7 @@ function Register() {
       email,
       dateOfBirth,
       password: pass1,
-      creationDate,
+      // creationDate,
       role,
       team,
     };
@@ -58,7 +58,7 @@ function Register() {
   return (
     <div>
       {success ? (
-        <section>OK, vous pouvez vous connecter</section>
+        <section>Utilisateur crée </section>
       ) : (
         <form onSubmit={handleSubmit} className="form-signup">
           <label htmlFor="firstname" className="form-signup-label">
@@ -131,6 +131,16 @@ function Register() {
             >
               Les mots de passes ne correspondent pas
             </span>
+            <label htmlFor="profilePicture" className="form-signup-label">
+              profilePicture :
+              <input
+                type="text"
+                className="form-signup-input"
+                id="profilePicture"
+                value={profilePicture}
+                onChange={(e) => setProfilePicture(e.target.value)}
+              />
+            </label>
             <label htmlFor="dateOfBirth" className="form-signup-label">
               Date de naissance:
               <input
@@ -162,7 +172,7 @@ function Register() {
               onChange={(e) => setTeam(e.target.value)}
             />
           </label>
-          <label htmlFor="creationDate" className="form-signup-label">
+          {/* <label htmlFor="creationDate" className="form-signup-label">
             Date d'inscription:
             <input
               type="date"
@@ -173,7 +183,7 @@ function Register() {
               }
               onChange={(e) => setCreationDate(e.target.value)}
             />
-          </label>
+          </label> */}
           <button
             type="submit"
             className="form-signup-btn"
@@ -200,4 +210,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default AddUser;
