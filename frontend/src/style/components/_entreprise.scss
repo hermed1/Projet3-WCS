@@ -1,0 +1,19 @@
+.company {
+  border: green solid;
+  &__pageTitle {
+    background-color: #0097fb;
+    font-size: 25px;
+    padding: 10px 25px;
+    text-align: center;
+  }
+  &__infos {
+    border: pink solid;
+  }
+  &__item {
+    padding: 5px;
+  }
+  &__span {
+    text-decoration: underline;
+    margin-right: 15px;
+  }
+}

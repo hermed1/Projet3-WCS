@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Entreprise from "./pages/Entreprise";
-import Register from "./pages/Register";
+import AddCompany from "./pages/AddCompany";
 import Idea from "./pages/Idea";
 import Profile from "./pages/Profile";
 import Navbar from "./components/navbar/Navbar";
@@ -17,23 +17,20 @@ function App() {
     setLoggedIn(true);
   };
 
+  //
+
   return (
     <div className="App">
       <UserProvider>
-        {loggedIn ? (
-          <div className="App">
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Entreprise />} />
-              <Route path="/Idea" element={<Idea />} />
-              <Route path="/Profil" element={<Profile />} />
-              <Route path="/Register" element={<Register />} />
-            </Routes>
-          </div>
-        ) : (
-          <Login handleLogin={handleLogin} />
-        )}
-        <Register />
+        {loggedIn && <Navbar />}
+        <Routes>
+          {loggedIn && <Route path="/" element={<Entreprise />} />}
+          {loggedIn && <Route path="/Idea" element={<Idea />} />}
+          {loggedIn && <Route path="/Profil" element={<Profile />} />}
+          <Route path="/Login" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/register" element={<AddCompany />} />
+          <Route path="/register/:id" element={<Entreprise />} />
+        </Routes>
       </UserProvider>
     </div>
   );

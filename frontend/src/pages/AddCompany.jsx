@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../services/useApi";
 
-function Register() {
+function AddCompany() {
   const api = useApi();
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState("");
@@ -30,7 +30,11 @@ function Register() {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmitRegisterCompany}>
+    <form
+      method="post"
+      onSubmit={handleSubmitRegisterCompany}
+      name="add-company-form"
+    >
       <fieldset className="form">
         <legend className="form__legend">Informations entreprise : </legend>
         <label htmlFor="name" className="form__label">
@@ -99,4 +103,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default AddCompany;
