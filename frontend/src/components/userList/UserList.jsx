@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import useApi from "../../services/useApi";
-import "./UserList.css";
 
 function UserList() {
   const api = useApi();
