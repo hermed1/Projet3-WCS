@@ -1,5 +1,7 @@
-import React from "react";
+import { useEffect } from "react";
+import { useIdea } from "../../contexts/IdeaContext";
 import { useUser } from "../../contexts/UserContext";
+import useApi from "../../services/useApi";
 import likeBtn from "../../assets/like-btn.png";
 import speechBubble from "../../assets/speech-bubble.png";
 import editBtn from "../../assets/edit-button.png";
@@ -7,11 +9,24 @@ import Comment from "./comment/Comment";
 
 function IdeaContent() {
   const { user } = useUser();
+  const { idea, setIdea } = useIdea();
+  const api = useApi();
+
+  useEffect(() => {
+    api
+      .get(`/idea/${idea.id}`)
+      .then((resp) => {
+        setIdea(resp.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <section className="new-idea-section">
       <div className="idea-section">
-        <h1 className="idea-title">Nom de l'idée</h1>
+        <h1 className="idea-title">{idea.title}</h1>
         <div className="idea-section-btn-div">
           <button type="button" className="idea-section-btn">
             Catégories
@@ -33,13 +48,9 @@ function IdeaContent() {
         </div>
 
         <p className="text-idea">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-          molestias nihil ab minima perspiciatis a, fugit dicta, incidunt harum
-          quisquam dolores! Sint sit quibusdam accusamus reiciendis perspiciatis
-          consequatur. Sapiente, alias. Lorem ipsum dolor sit amet consectetur,
-          adipisicing elit. Laboriosam, reprehenderit fuga. Reprehenderit omnis
-          ut, expedita quasi accusamus neque aliquam pariatur fugit, vero
-          tenetur ducimus eum ex saepe eveniet aut voluptas.
+          {idea.text}
+          <br />
+          Date de création : {idea.createDate}
         </p>
 
         <div className="like-comment-div">

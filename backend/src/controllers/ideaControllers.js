@@ -80,8 +80,8 @@ const add = (req, res) => {
 
   models.idea
     .insert(title, text, companyId, pictureId)
-    .then(() => {
-      res.sendStatus(201);
+    .then(([result]) => {
+      res.status(201).json({ id: result.insertId });
     })
     .catch((err) => {
       console.error(err);

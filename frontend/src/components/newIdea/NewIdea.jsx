@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
+import { useIdea } from "../../contexts/IdeaContext";
 import fileIcon from "../../assets/file-icon.png";
 import useApi from "../../services/useApi";
 
@@ -9,7 +11,8 @@ function NewIdea() {
   const [titleIdea, setTitleIdea] = useState("");
   const [textIdea, setTextIdea] = useState("");
   const { user } = useUser();
-  console.warn("coucou", user);
+  const { setIdea } = useIdea();
+  const navigate = useNavigate();
 
   const handleSubmitNewIdea = (e) => {
     e.preventDefault();
@@ -20,7 +23,8 @@ function NewIdea() {
     api
       .post("/idea", newIdea)
       .then((resp) => {
-        console.warn(resp);
+        setIdea({ id: resp.data.id });
+        navigate(`/idea/${resp.data.id}`);
       })
       .catch((err) => console.warn(err));
   };
