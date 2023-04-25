@@ -11,9 +11,8 @@ class UserManager extends AbstractManager {
     email,
     dateOfBirth,
     hashedPassword,
-    // liked,
+    liked,
     profilePicture,
-    // creationDate,
     roleId,
     teamId
   ) {
@@ -23,8 +22,9 @@ class UserManager extends AbstractManager {
       email,
       dateOfBirth,
       hashedPassword,
+      liked,
       profilePicture,
-      roleId, teamId) VALUES (?, ?,
+      roleId, teamId) VALUES (?, ?, ?,
         ?,
         ?,
         ?,
@@ -37,9 +37,8 @@ class UserManager extends AbstractManager {
         email,
         dateOfBirth,
         hashedPassword,
-        // liked,
+        liked,
         profilePicture,
-        // creationDate,
         roleId,
         teamId,
       ]

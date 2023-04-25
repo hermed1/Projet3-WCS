@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `companyName` VARCHAR(150) NOT NULL,
   `nSiret` VARCHAR(45) NOT NULL,
-  `creationDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `companyLogo` VARCHAR(255) NOT NULL,
+  `creationDate` DATE NULL DEFAULT NULL,
+  `companyLogo` VARCHAR(255) NULL DEFAULT NULL,
   `contactPerson` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(45) NULL DEFAULT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`role` (
   `name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -208,13 +208,13 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
   `firstname` VARCHAR(45) NOT NULL,
   `lastname` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `dateOfBirth` DATE NULL DEFAULT NULL,
+  `dateOfBirth` VARCHAR(10) NOT NULL,
   `hashedPassword` VARCHAR(255) NOT NULL,
   `liked` TINYINT NULL DEFAULT NULL,
   `profilePicture` VARCHAR(255) NULL DEFAULT NULL,
-  `creationDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `roleId` INT NOT NULL DEFAULT '1',
-  `teamId` INT NOT NULL DEFAULT '1',
+  `creationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `roleId` INT NULL DEFAULT NULL,
+  `teamId` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   INDEX `role_id_idx` (`roleId` ASC) VISIBLE,
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
     FOREIGN KEY (`roleId`)
     REFERENCES `salesforce`.`role` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
