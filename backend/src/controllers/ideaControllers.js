@@ -67,8 +67,6 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  console.warn("date 1", req.body);
-
   const { title, text, companyId, pictureId } = req.body;
   const data = { title, text, companyId, pictureId };
   const error = validate(data);

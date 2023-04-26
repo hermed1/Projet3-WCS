@@ -105,9 +105,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 DROP TABLE IF EXISTS `salesforce`.`commentary` ;
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`commentary` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `text` VARCHAR(2000) NOT NULL,
-  `createDate` DATE NOT NULL,
+  `createDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `ideaCommentaryId` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `idea_commentary_id_idx` (`ideaCommentaryId` ASC) VISIBLE,

@@ -2,24 +2,27 @@ const AbstractManager = require("./AbstractManager");
 
 class CommentManager extends AbstractManager {
   constructor() {
-    super({ table: "comment" });
+    super({ table: "commentary" });
   }
 
-  insert(title, text, companyId, pictureId) {
+  insert(text, ideaCommentId) {
     return this.database.query(
-      `insert into ${this.table} (title,
+      `insert into ${this.table} ( 
         text,
-        companyId,
-        pictureId) VALUES (?, ?, (SELECT id FROM company WHERE id = ?), (SELECT id FROM picturestorage WHERE id = ?))`,
-      [title, text, companyId, pictureId]
+        ideaCommentaryId) VALUES (?, ?)`,
+      [text, ideaCommentId]
     );
   }
 
-  update(id, idee) {
+  // {
+  //   "text": "zfa",
+  //   "ideaCommentaryId": 1
+  // }
+  update(id, comment) {
     return this.database.query(
       `UPDATE ${this.table}
       SET ? WHERE id = ?`,
-      [idee, id]
+      [comment, id]
     );
   }
 
