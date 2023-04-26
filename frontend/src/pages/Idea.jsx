@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useApi from "../services/useApi";
 import IdeaList from "../components/ideaContent/IdeaList";
-// import NewIdea from "../components/newIdea/NewIdea";
 import HeaderNavbar from "../components/headernav/HeaderNavbar";
 import { useIdea } from "../contexts/IdeaContext";
 
@@ -26,7 +25,6 @@ function Idea() {
     <div>
       <HeaderNavbar />
       <IdeaList ideas={idea} setIdeas={setIdea} valide={valide} />
-      {/* <NewIdea /> */}
     </div>
   );
 }
