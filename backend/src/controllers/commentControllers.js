@@ -7,6 +7,7 @@ const validate = (data, forCreation = true) => {
     .object({
       id: joi.number().min(0).presence("optional"),
       text: joi.string().max(2000).presence(presence),
+      createDate: joi.date().presence(presence),
       ideaCommentaryId: joi.number().min(0).presence("optional"),
     })
     .validate(data, { abortEarly: false }).error;

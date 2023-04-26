@@ -8,6 +8,7 @@ const validate = (data, forCreation = true) => {
       id: joi.number().min(0).presence("optional"),
       title: joi.string().max(120).presence(presence),
       text: joi.string().max(4000).presence(presence),
+      createDate: joi.date().presence(presence),
       companyId: joi.number().min(0).presence("optional"),
       pictureId: joi.number().min(0).presence("optional"),
     })
