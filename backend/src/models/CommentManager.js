@@ -14,10 +14,6 @@ class CommentManager extends AbstractManager {
     );
   }
 
-  // {
-  //   "text": "zfa",
-  //   "ideaCommentaryId": 1
-  // }
   update(id, comment) {
     return this.database.query(
       `UPDATE ${this.table}
