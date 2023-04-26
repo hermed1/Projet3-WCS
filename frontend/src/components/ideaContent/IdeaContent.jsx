@@ -22,6 +22,7 @@ function IdeaContent() {
         console.error(err);
       });
   }, []);
+  console.warn("get idea", idea);
 
   return (
     <section className="new-idea-section">
