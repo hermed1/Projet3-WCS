@@ -24,6 +24,14 @@ router.put("/idea/:id", ideaControllers.edit);
 router.post("/idea", ideaControllers.add);
 router.delete("/idea/:id", ideaControllers.destroy);
 
+const commentControllers = require("./controllers/commentControllers");
+
+router.get("/comment", commentControllers.browse);
+router.get("/comment/:id", commentControllers.read);
+router.put("/comment/:id", commentControllers.edit);
+router.post("/comment", commentControllers.add);
+router.delete("/comment/:id", commentControllers.destroy);
+
 const companyControllers = require("./controllers/companyControllers");
 
 router.get("/register", companyControllers.browse);

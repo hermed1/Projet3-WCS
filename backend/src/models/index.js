@@ -12,6 +12,7 @@ const pool = mysql.createPool({
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
+  timezone: "Z",
 });
 
 // try a connection
@@ -38,10 +39,16 @@ const CompanyManager = require("./CompanyManager");
 
 models.company = new CompanyManager();
 models.company.setDatabase(pool);
+
 const IdeaManager = require("./IdeaManager");
 
 models.idea = new IdeaManager();
 models.idea.setDatabase(pool);
+
+const CommentManager = require("./CommentManager");
+
+models.comment = new CommentManager();
+models.comment.setDatabase(pool);
 
 const ItemManager = require("./ItemManager");
 
