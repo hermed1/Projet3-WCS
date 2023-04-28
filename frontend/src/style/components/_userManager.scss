@@ -1,9 +1,15 @@
+// List user
+
 .user-list-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-}
+  padding: 10px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-items: center;
+  }
 
 .user-list-success {
   background-color: green;
@@ -82,6 +88,11 @@
 }
 
 // Add user 
+
+.add-user-container {
+  display: flex;
+
+}
 
 .form-signup {
   display: flex;

@@ -10,6 +10,7 @@ import Login from "./components/login/Login";
 import "./App.css";
 import "./style/index.scss";
 import UserEditPage from "./pages/UserEditPage";
+import UserAddPage from "./pages/UserAddPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,7 +30,8 @@ function App() {
               <Route path="/Idea" element={<Idea />} />
               <Route path="/Profil" element={<Profile />} />
               <Route path="/Register" element={<Register />} />
-              <Route path="/user/:id" element={<UserEditPage />} />
+              <Route path="/User/:id" element={<UserEditPage />} />
+              <Route path="/User/Add" element={<UserAddPage />} />
             </Routes>
           </div>
         ) : (

@@ -46,7 +46,8 @@ function AddUser() {
   };
 
   return (
-    <div>
+    <div className="add-user-container">
+      <h2>Ajouter un utilisateur</h2>
       {success ? (
         <section className="section-add-user">Utilisateur crée </section>
       ) : (
