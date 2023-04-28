@@ -1,23 +1,25 @@
 const joi = require("joi");
 const models = require("../models");
-const { hashPassword } = require("../utils/auth");
+// const { hashPassword } = require("../utils/auth");
 
 const validate = (data, forCreation = true) => {
   const presence = forCreation ? "required" : "optional";
   return joi
     .object({
+      id: joi.number().integer().presence("optional"),
       firstname: joi.string().max(45).presence(presence),
       lastname: joi.string().max(45).presence(presence),
       email: joi.string().max(45).presence(presence),
       dateOfBirth: joi.date().presence(presence),
       hashedPassword: joi.string().max(255).presence(presence),
-      liked: joi.string().max(255).allow(null).allow("").presence("optional"),
+      liked: joi.number().integer().allow(null).allow("").presence("optional"),
       profilePicture: joi
         .string()
         .max(255)
         .allow(null)
         .allow("")
         .presence("optional"),
+      creationDate: joi.date().presence("optional").allow(null).allow(""),
       roleId: joi.number().integer().presence(presence),
       teamId: joi.number().integer().presence(presence),
     })
@@ -53,20 +55,40 @@ const read = (req, res) => {
 };
 
 const edit = async (req, res) => {
+  console.warn(req.body);
   const errors = validate(req.body, false);
   if (errors) {
+    console.warn(errors);
     res.status(422).send({ errors });
     return;
   }
   const id = parseInt(req.params.id, 10);
-  const { password } = req.body;
-  let hashedPassword = null;
-  if (password) {
-    hashedPassword = await hashPassword(password);
-    req.body.password = hashedPassword;
-  }
+  const {
+    firstname,
+    lastname,
+    email,
+    dateOfBirth,
+    profilePicture,
+    roleId,
+    teamId,
+  } = req.body;
+  // const { password } = req.body;
+  // let hashedPassword = null;
+  // if (password) {
+  //   hashedPassword = await hashPassword(password);
+  //   req.body.password = hashedPassword;
+  // }
   models.user
-    .update(id, req.body)
+    .update(
+      id,
+      firstname,
+      lastname,
+      email,
+      dateOfBirth,
+      profilePicture,
+      roleId,
+      teamId
+    )
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

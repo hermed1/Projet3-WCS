@@ -7,8 +7,6 @@ function AddUser() {
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [roleId, setRoleId] = useState("");
-  // const [liked, setLiked] = useState("");
-  // const [profilePicture, setProfilePicture] = useState("");
   const [teamId, setTeamId] = useState("");
   const [pass1, setPass1] = useState("");
   const [pass2, setPass2] = useState("");
@@ -33,8 +31,6 @@ function AddUser() {
       email,
       dateOfBirth,
       password: pass1,
-      // profilePicture,
-      // liked,
       roleId,
       teamId,
     };
@@ -52,7 +48,7 @@ function AddUser() {
   return (
     <div>
       {success ? (
-        <section>Utilisateur crée </section>
+        <section className="section-add-user">Utilisateur crée </section>
       ) : (
         <form onSubmit={handleSubmit} className="form-signup">
           <label htmlFor="firstname" className="form-signup-label">
@@ -118,26 +114,6 @@ function AddUser() {
             >
               Les mots de passes ne correspondent pas
             </span>
-            {/* <label htmlFor="liked" className="form-signup-label">
-              Liked :
-              <input
-                type="text"
-                className="form-signup-input"
-                id="profilePicture"
-                value={liked}
-                onChange={(e) => setLiked(e.target.value)}
-              />
-            </label> */}
-            {/* <label htmlFor="profilePicture" className="form-signup-label">
-              Profile Picture :
-              <input
-                type="text"
-                className="form-signup-input"
-                id="profilePicture"
-                value={profilePicture}
-                onChange={(e) => setProfilePicture(e.target.value)}
-              />
-            </label> */}
             <label htmlFor="dateOfBirth" className="form-signup-label">
               Date de naissance:
               <input

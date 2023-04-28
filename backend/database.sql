@@ -22,18 +22,19 @@ USE `salesforce` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `salesforce`.`company` ;
 
-CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `companyName` VARCHAR(150) NOT NULL,
-  `nSiret` VARCHAR(45) NOT NULL,
-  `creationDate` DATE NULL DEFAULT NULL,
-  `companyLogo` VARCHAR(255) NULL DEFAULT NULL,
-  `contactPerson` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `phone` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+CREATE TABLE IF NOT EXISTS salesforce.company (
+  id INT NOT NULL AUTO_INCREMENT,
+  companyName VARCHAR(150) NOT NULL,
+  nSiret VARCHAR(45) NOT NULL,
+  creationDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+  contactPerson VARCHAR(45) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  phone VARCHAR(45) NULL DEFAULT NULL,
+  companyLogo VARCHAR(255) DEFAULT NULL,
+
+  PRIMARY KEY (id))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 

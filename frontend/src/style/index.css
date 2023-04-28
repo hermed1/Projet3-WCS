@@ -528,6 +528,90 @@ header li a:hover {
   }
 }
 
+.user-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.user-list-success {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.user-list-cards {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user-list-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.user-list-card {
+  width: 300px;
+  margin: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card-image-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+.user-list-card-image {
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.user-list-card-details {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-list-card-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.user-list-card-email {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.user-list-card-dob {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.user-list-card-link {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .form-signup {
   display: flex;
   flex-direction: column;
@@ -578,7 +662,7 @@ header li a:hover {
   cursor: not-allowed;
 }
 
-section {
+.section-add-user {
   width: 400px;
   margin: auto;
   padding: 20px;
@@ -587,35 +671,36 @@ section {
   text-align: center;
 }
 
-.userListContainer {
+.update-user-form {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 90%;
+  flex-direction: column;
+  align-items: center;
 }
 
-.userListItem {
-  width: 30%;
-  margin-bottom: 20px;
-}
-
-.userDetails {
-  background-color: #f8f8f8;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.userDetails img {
-  width: 100%;
-  border-radius: 50%;
-}
-
-.userDetails .name {
+label {
+  margin: 10px;
   font-weight: bold;
-  margin-top: 10px;
 }
 
-.userDetails .email,
-.userDetails .dateOfBirth {
-  margin-top: 5px;
+input {
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-size: 1rem;
+}
+
+button {
+  margin: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0062cc;
 }/*# sourceMappingURL=index.css.map */
