@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
+import backgroundImage from "../../assets/salesforce.jpeg";
 
 function Login({ handleLogin }) {
   const api = useApi();
@@ -48,9 +49,20 @@ function Login({ handleLogin }) {
         alert(errorMsg);
       });
   };
+  const style = {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    filter: "brightness 60%",
+  };
 
   return (
-    <div className="loginContainer">
+    <div style={style}>
       <h2 className="loginTitle">Connexion</h2>
       <form onSubmit={handleSubmit} className="loginForm">
         <label htmlFor="login" className="loginLabel">
@@ -66,6 +78,24 @@ function Login({ handleLogin }) {
     </div>
   );
 }
+
+//   return (
+//     <div className="loginContainer">
+//       <h2 className="loginTitle">Connexion</h2>
+//       <form onSubmit={handleSubmit} className="loginForm">
+//         <label htmlFor="login" className="loginLabel">
+//           Email :
+//           <input type="text" className="inputLoginForm" ref={refEmail} />
+//         </label>
+//         <label htmlFor="password" className="loginLabel">
+//           Password :
+//           <input type="password" className="inputLoginForm" ref={refPass} />
+//         </label>
+//         <button type="submit">Connexion</button>
+//       </form>
+//     </div>
+//   );
+// }
 
 Login.propTypes = {
   handleLogin: PropTypes.func.isRequired,

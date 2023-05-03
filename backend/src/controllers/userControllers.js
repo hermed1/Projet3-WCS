@@ -54,7 +54,6 @@ const read = (req, res) => {
 };
 
 const edit = async (req, res) => {
-  console.warn(req.body);
   const errors = validate(req.body, false);
   if (errors) {
     console.warn(errors);
