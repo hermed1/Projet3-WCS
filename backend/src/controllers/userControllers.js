@@ -11,11 +11,15 @@ const validate = (data, forCreation = true) => {
       email: joi.string().max(45).presence(presence),
       dateOfBirth: joi.date().presence(presence),
       hashedPassword: joi.string().max(255).presence(presence),
-      liked: joi.string().max(255).presence("optional"),
-      profilePicture: joi.string().max(255).presence("optional"),
-      creationDate: joi.date().presence(presence),
-      roleId: joi.number().integer().min(1).presence(presence),
-      teamId: joi.number().integer().min(1).presence(presence),
+      liked: joi.string().max(255).allow(null).allow("").presence("optional"),
+      profilePicture: joi
+        .string()
+        .max(255)
+        .allow(null)
+        .allow("")
+        .presence("optional"),
+      roleId: joi.number().integer().presence(presence),
+      teamId: joi.number().integer().presence(presence),
     })
     .validate(data, { abortEarly: false }).error;
 };
@@ -78,18 +82,17 @@ const edit = async (req, res) => {
 
 // eslint-disable-next-line consistent-return
 const add = (req, res) => {
-  // const errors = validate(req.body);
-  // if (errors) return res.sendStatus(422);
-  // console.warn(errors);
+  const errors = validate(req.body);
+  if (errors) return res.sendStatus(422);
+  console.warn(errors);
   const {
     firstname,
     lastname,
     email,
     dateOfBirth,
     hashedPassword,
-    // liked,
+    liked,
     profilePicture,
-    // creationDate,
     roleId,
     teamId,
   } = req.body;
@@ -100,14 +103,12 @@ const add = (req, res) => {
       email,
       dateOfBirth,
       hashedPassword,
-      // liked,
+      liked,
       profilePicture,
-      // creationDate,
       roleId,
       teamId
     )
     .then(() => {
-      // res.location(`/user/${result.insertId}`).sendStatus(201);
       res.sendStatus(201);
     })
     .catch((err) => {
@@ -135,7 +136,6 @@ const destroy = (req, res) => {
       res.sendStatus(500);
     });
 };
-
 const findByEmailToNext = (req, res, next) => {
   const { email } = req.body;
   models.user

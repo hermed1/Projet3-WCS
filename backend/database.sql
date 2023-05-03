@@ -22,20 +22,7 @@ USE `salesforce` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `salesforce`.`company` ;
 
--- CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
---   `id` INT NOT NULL AUTO_INCREMENT,
---   `companyName` VARCHAR(150) NOT NULL,
---   `nSiret` VARCHAR(45) NOT NULL,
---   `creationDate` DATE NOT NULL,
---   `companyLogo` VARCHAR(255) NOT NULL,
---   `contactPerson` VARCHAR(45) NOT NULL,
---   `email` VARCHAR(45) NOT NULL,
---   `phone` VARCHAR(45) NULL DEFAULT NULL,
---   PRIMARY KEY (`id`))
--- ENGINE = InnoDB
--- AUTO_INCREMENT = 2
--- DEFAULT CHARACTER SET = utf8mb4
--- COLLATE = utf8mb4_0900_ai_ci;
+
 CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `companyName` VARCHAR(150) NOT NULL,
@@ -48,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
   
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -121,7 +108,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 DROP TABLE IF EXISTS `salesforce`.`commentary` ;
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`commentary` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO INCREMENT,
   `text` VARCHAR(2000) NOT NULL,
   `createDate` DATE NOT NULL,
   `ideaCommentaryId` INT NOT NULL,
@@ -145,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`role` (
   `name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -209,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`team` (
     FOREIGN KEY (`companyId`)
     REFERENCES `salesforce`.`company` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -219,33 +206,33 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `salesforce`.`user` ;
 
+
 CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `firstname` VARCHAR(45) NOT NULL,
-  `lastname` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `dateOfBirth` DATE NULL DEFAULT NULL,
-  `hashedPassword` VARCHAR(255) NOT NULL,
-  `liked` TINYINT NULL DEFAULT NULL,
-  `profilePicture` VARCHAR(255) NULL DEFAULT NULL,
-  `creationDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `roleId` INT NOT NULL DEFAULT '1',
-  `teamId` INT NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  INDEX `role_id_idx` (`roleId` ASC) VISIBLE,
-  INDEX `user_team_id_idx` (`teamId` ASC) VISIBLE,
-  CONSTRAINT `teamUserId`
-    FOREIGN KEY (`teamId`)
-    REFERENCES `salesforce`.`team` (`id`),
-  CONSTRAINT `userRoleId`
-    FOREIGN KEY (`roleId`)
-    REFERENCES `salesforce`.`role` (`id`))
+ `id` INT NOT NULL AUTO_INCREMENT,
+ `firstname` VARCHAR(45) NOT NULL,
+ `lastname` VARCHAR(45) NOT NULL,
+ `email` VARCHAR(45) NOT NULL,
+ `dateOfBirth` VARCHAR(10) NOT NULL,
+ `hashedPassword` VARCHAR(255) NOT NULL,
+ `liked` TINYINT NULL DEFAULT NULL,
+ `profilePicture` VARCHAR(255) NULL DEFAULT NULL,
+ `creationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ `roleId` INT NULL DEFAULT NULL,
+ `teamId` INT NULL DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+ INDEX `role_id_idx` (`roleId` ASC) VISIBLE,
+ INDEX `user_team_id_idx` (`teamId` ASC) VISIBLE,
+CONSTRAINT `teamUserId`
+   FOREIGN KEY (`teamId`)
+   REFERENCES `salesforce`.`team` (`id`),
+ CONSTRAINT `userRoleId`
+   FOREIGN KEY (`roleId`)
+   REFERENCES `salesforce`.`role` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 31
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `salesforce`.`userCommentary`
@@ -300,3 +287,16 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO role (name)
+VALUES ('1');
+
+INSERT INTO company (companyName, nSiret, creationDate, contactPerson, email, phone)
+VALUES ('10', '10', '2019-12-31', '', '', null);
+
+INSERT INTO `salesforce`.`team` (`name`, `companyId`)
+VALUES ('1', 1);
+
+INSERT INTO user (firstname, lastname, email, dateOfBirth, hashedPassword, liked, profilePicture, creationDate, roleId, teamId)
+VALUES ('test10', 'test10', 'test10', '2020-01-01', 'test10', '10', '10', '2020-01-01', '1', '1');

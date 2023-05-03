@@ -11,35 +11,34 @@ class UserManager extends AbstractManager {
     email,
     dateOfBirth,
     hashedPassword,
-    // liked,
+    liked,
     profilePicture,
-    // creationDate,
     roleId,
     teamId
   ) {
     return this.database.query(
       `insert into ${this.table} (firstname,
-      lastname,
-      email,
-      dateOfBirth,
-      hashedPassword,
-      profilePicture,
-      roleId, teamId) VALUES (?, ?,
-        ?,
-        ?,
-        ?,
-        ?,
-        ?,
-        ?)`,
+     lastname,
+     email,
+     dateOfBirth,
+     hashedPassword,
+     liked,
+     profilePicture,
+     roleId, teamId) VALUES (?, ?, ?,
+       ?,
+       ?,
+       ?,
+       ?,
+       ?,
+       ?)`,
       [
         firstname,
         lastname,
         email,
         dateOfBirth,
         hashedPassword,
-        // liked,
+        liked,
         profilePicture,
-        // creationDate,
         roleId,
         teamId,
       ]
@@ -61,14 +60,14 @@ class UserManager extends AbstractManager {
 
   findAll() {
     return this.database.query(`select id, firstname,
-    lastname,
-    email,
-    dateOfBirth,
-    liked,
-    profilePicture,
-    creationDate,
-    roleId,
-    teamId FROM  ${this.table}`);
+  lastname,
+  email,
+  dateOfBirth,
+  liked,
+  profilePicture,
+  creationDate,
+  roleId,
+  teamId FROM  ${this.table}`);
   }
 }
 

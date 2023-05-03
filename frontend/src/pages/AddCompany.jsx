@@ -91,7 +91,7 @@ function AddCompany() {
         <input
           type="tel"
           id="phoneNumber"
-          name="companyLogo"
+          name="phone"
           placeholder="Téléphone"
           required
           className="form__input"

@@ -528,9 +528,6 @@ header li a:hover {
   }
 }
 
-.company {
-  border: green solid;
-}
 .company__pageTitle {
   background-color: #0097fb;
   font-size: 25px;
@@ -538,14 +535,85 @@ header li a:hover {
   text-align: center;
 }
 .company__infos {
-  border: pink solid;
+  padding: 20px;
+  background-color: #afddfc;
 }
 .company__item {
   padding: 5px;
+  text-overflow: ellipsis;
+}
+.company__item--underline {
+  text-decoration: underline;
+  margin-right: 5px;
 }
 .company__span {
   text-decoration: underline;
   margin-right: 15px;
+}
+.company__global-container {
+  display: flex;
+  flex-direction: column;
+}
+.company__update {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  border-radius: 28px;
+  background: linear-gradient(210deg, #07588f 0%, #2680be 50%, #0180d4 90%);
+  border: 2px solid #07588f;
+  cursor: pointer;
+  color: #e2efff;
+  font-size: 15px;
+  padding: 5px;
+  text-shadow: 1px -1px 2px #0097fb;
+  width: 150px;
+  transition: all 300ms ease-in;
+}
+.company__update-icon {
+  color: #07588f;
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.buttons-container-item {
+  margin-bottom: 10px;
+  border-radius: 28px;
+  background: linear-gradient(210deg, #07588f 0%, #2680be 50%, #0180d4 90%);
+  border: 2px solid #07588f;
+  cursor: pointer;
+  color: #e2efff;
+  font-size: 17px;
+  padding: 10px 5px;
+  text-shadow: 1px -1px 2px #0097fb;
+  width: 250px;
+  transition: all 300ms ease-in;
+}
+.buttons-container-item:active {
+  transform: scale(1.05);
+  font-weight: 500;
+  border: none;
+  color: white;
+}
+
+.confirmation-message {
+  background-color: #1cc56e;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  color: #e2efff;
+  font-size: 18px;
+  position: fixed;
+  top: 130px;
+  left: 40%;
 }
 
 .form-signup {
@@ -598,7 +666,7 @@ header li a:hover {
   cursor: not-allowed;
 }
 
-section {
+.section-add-user {
   width: 400px;
   margin: auto;
   padding: 20px;

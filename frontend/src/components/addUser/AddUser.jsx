@@ -6,24 +6,17 @@ function AddUser() {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  // const [creationDate, setCreationDate] = useState("");
-  const [role, setRole] = useState("");
-  const [profilePicture, setProfilePicture] = useState("");
-  const [team, setTeam] = useState("");
+  const [roleId, setRoleId] = useState("");
+  // const [liked, setLiked] = useState("");
+  // const [profilePicture, setProfilePicture] = useState("");
+  const [teamId, setTeamId] = useState("");
   const [pass1, setPass1] = useState("");
   const [pass2, setPass2] = useState("");
   const [validPwd, setValidPwd] = useState(false);
   const [validMatch, setValidMatch] = useState(false);
-  // const [validEmail, setValidEmail] = useState(false);
   const [success, setSuccess] = useState(false);
   const api = useApi();
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-  // const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-
-  // useEffect(() => {
-  //   const result = USER_REGEX.test(email);
-  //   setValidEmail(result);
-  // }, [email]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(pass1);
@@ -40,9 +33,10 @@ function AddUser() {
       email,
       dateOfBirth,
       password: pass1,
-      // creationDate,
-      role,
-      team,
+      // profilePicture,
+      // liked,
+      roleId,
+      teamId,
     };
     api
       .post("/user", newUser)
@@ -58,7 +52,7 @@ function AddUser() {
   return (
     <div>
       {success ? (
-        <section>Utilisateur crée </section>
+        <section className="section-add-user">Utilisateur cré" </section>
       ) : (
         <form onSubmit={handleSubmit} className="form-signup">
           <label htmlFor="firstname" className="form-signup-label">
@@ -88,18 +82,11 @@ function AddUser() {
               autoComplete="off"
               className="form-signup-input"
               id="email"
-              // aria-invalid={validEmail ? "false" : "true"}
               aria-describedby="uidnote"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          {/* <p
-            id="uidnote"
-            className={email && !validEmail ? "signup-invalid" : "signup-hide"}
-          >
-            Doit être entre 4 et 24 caractères et commencer par une lettre
-          </p> */}
           <label htmlFor="pass1" className="form-signup-label">
             Mot de passe :
             <input
@@ -131,16 +118,26 @@ function AddUser() {
             >
               Les mots de passes ne correspondent pas
             </span>
-            <label htmlFor="profilePicture" className="form-signup-label">
-              profilePicture :
+            {/* <label htmlFor="liked" className="form-signup-label">
+              Liked :
               <input
                 type="text"
-                className="form-signup-input"
-                id="profilePicture"
-                value={profilePicture}
-                onChange={(e) => setProfilePicture(e.target.value)}
-              />
-            </label>
+              className="form-signup-input"
+               id="profilePicture"
+               value={liked}
+               onChange={(e) => setLiked(e.target.value)}
+             />
+           </label> */}
+            {/* <label htmlFor="profilePicture" className="form-signup-label">
+             Profile Picture :
+             <input
+               type="text"
+               className="form-signup-input"
+               id="profilePicture"
+               value={profilePicture}
+               onChange={(e) => setProfilePicture(e.target.value)}
+             />
+           </label> */}
             <label htmlFor="dateOfBirth" className="form-signup-label">
               Date de naissance:
               <input
@@ -157,9 +154,9 @@ function AddUser() {
             <input
               type="text"
               className="form-signup-input"
-              id="role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
+              id="roleId"
+              value={roleId}
+              onChange={(e) => setRoleId(e.target.value)}
             />
           </label>
           <label htmlFor="team" className="form-signup-label">
@@ -167,41 +164,12 @@ function AddUser() {
             <input
               type="text"
               className="form-signup-input"
-              id="team"
-              value={team}
-              onChange={(e) => setTeam(e.target.value)}
+              id="teamId"
+              value={teamId}
+              onChange={(e) => setTeamId(e.target.value)}
             />
           </label>
-          {/* <label htmlFor="creationDate" className="form-signup-label">
-            Date d'inscription:
-            <input
-              type="date"
-              className="form-signup-input"
-              id="creationDate"
-              value={
-                creationDate ? creationDate.split("-").reverse().join("-") : ""
-              }
-              onChange={(e) => setCreationDate(e.target.value)}
-            />
-          </label> */}
-          <button
-            type="submit"
-            className="form-signup-btn"
-            // disabled={
-            //   !!(
-            //     // !validEmail ||
-            //     (
-            //       !validPwd ||
-            //       !validMatch ||
-            //       firstname === "" ||
-            //       lastname === "" ||
-            //       email === "" ||
-            //       password == "" ||
-
-            //     )
-            //   )
-            // }
-          >
+          <button type="submit" className="form-signup-btn">
             Ajouter
           </button>
         </form>
