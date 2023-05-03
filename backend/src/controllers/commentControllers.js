@@ -6,17 +6,15 @@ const validate = (data, forCreation = true) => {
   return joi
     .object({
       id: joi.number().min(0).presence("optional"),
-      title: joi.string().max(120).presence(presence),
-      text: joi.string().max(4000).presence(presence),
-      createDate: joi.date().presence("optional"),
-      companyId: joi.number().min(0).presence("optional"),
-      pictureId: joi.number().min(0).presence("optional"),
+      text: joi.string().max(2000).presence(presence),
+      createDate: joi.date().presence(presence),
+      ideaCommentaryId: joi.number().min(0).presence("optional"),
     })
     .validate(data, { abortEarly: false }).error;
 };
 
 const browse = (req, res) => {
-  models.idea
+  models.comment
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -28,7 +26,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.idea
+  models.comment
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -52,7 +50,7 @@ const edit = (req, res) => {
 
   const id = parseInt(req.params.id, 10);
 
-  models.idea
+  models.comment
     .update(id, req.body)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -68,8 +66,8 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const { title, text, companyId, pictureId } = req.body;
-  const data = { title, text, companyId, pictureId };
+  const { text, ideaCommentaryId } = req.body;
+  const data = { text, ideaCommentaryId };
   const error = validate(data);
 
   if (error) {
@@ -77,10 +75,10 @@ const add = (req, res) => {
     return;
   }
 
-  models.idea
-    .insert(title, text, companyId, pictureId)
+  models.comment
+    .insert(text, ideaCommentaryId)
     .then(([result]) => {
-      res.status(201).json({ id: result.insertId });
+      res.location(`/items/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -91,7 +89,7 @@ const add = (req, res) => {
 const destroy = (req, res) => {
   const id = parseInt(req.params.id, 10);
 
-  models.idea
+  models.comment
     .delete(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../services/useApi";
 
-function Register() {
+function AddCompany() {
   const api = useApi();
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState("");
@@ -24,7 +24,7 @@ function Register() {
       .post("/register", newCompany)
       .then((resp) => {
         console.warn(resp);
-        navigate("/");
+        navigate("/Register");
       })
       .catch((err) => console.warn(err));
   };
@@ -99,4 +99,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default AddCompany;

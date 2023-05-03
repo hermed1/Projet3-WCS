@@ -22,17 +22,16 @@ USE `salesforce` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `salesforce`.`company` ;
 
-CREATE TABLE IF NOT EXISTS salesforce.company (
-  id INT NOT NULL AUTO_INCREMENT,
-  companyName VARCHAR(150) NOT NULL,
-  nSiret VARCHAR(45) NOT NULL,
-  creationDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-  contactPerson VARCHAR(45) NOT NULL,
-  email VARCHAR(45) NOT NULL,
-  phone VARCHAR(45) NULL DEFAULT NULL,
-  companyLogo VARCHAR(255) DEFAULT NULL,
-
-  PRIMARY KEY (id))
+CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `companyName` VARCHAR(150) NOT NULL,
+  `nSiret` VARCHAR(45) NOT NULL,
+  `creationDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `companyLogo` VARCHAR(255),
+  `contactPerson` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `phone` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
@@ -86,9 +85,9 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`idea` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(120) NOT NULL,
   `text` VARCHAR(4000) NOT NULL,
-  `createDate` DATE NOT NULL,
-  `companyId` INT NOT NULL,
-  `pictureId` INT NOT NULL,
+  `createDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `companyId` INT,
+  `pictureId` INT,
   PRIMARY KEY (`id`),
   INDEX `picture_id_idx` (`pictureId` ASC) VISIBLE,
   INDEX `company_idea_id_idx` (`companyId` ASC, `pictureId` ASC) VISIBLE,
@@ -106,9 +105,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 DROP TABLE IF EXISTS `salesforce`.`commentary` ;
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`commentary` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `text` VARCHAR(2000) NOT NULL,
-  `createDate` DATE NOT NULL,
+  `createDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `ideaCommentaryId` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `idea_commentary_id_idx` (`ideaCommentaryId` ASC) VISIBLE,
@@ -130,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`role` (
   `name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -227,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
     FOREIGN KEY (`roleId`)
     REFERENCES `salesforce`.`role` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
