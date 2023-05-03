@@ -9,7 +9,7 @@ import Comment from "./comment/Comment";
 
 function IdeaContent() {
   const { user } = useUser();
-  const { idea, setIdea } = useIdea();
+  const { idea, setIdea, comment, setComment } = useIdea();
   const api = useApi();
 
   useEffect(() => {
@@ -22,7 +22,18 @@ function IdeaContent() {
         console.error(err);
       });
   }, []);
-  console.warn("get idea", idea);
+
+  useEffect(() => {
+    api
+      .get(`/idea/${idea.id}/comment`)
+      .then((resp) => {
+        setComment(resp.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+  console.warn("get idea", comment);
 
   return (
     <section className="new-idea-section">
@@ -85,7 +96,13 @@ function IdeaContent() {
         <h3 className="comment-main-title">Commentaires :</h3>
 
         <div className="comment__list">
-          <Comment />
+          {comment.map((item) => (
+            <Comment
+              key={item.id}
+              text={item.text}
+              createDate={item.createDate}
+            />
+          ))}
         </div>
       </section>
     </section>

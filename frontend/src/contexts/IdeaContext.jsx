@@ -5,7 +5,11 @@ const IdeaContext = createContext(null);
 
 function IdeaProvider({ children }) {
   const [idea, setIdea] = useState();
-  const value = useMemo(() => ({ idea, setIdea }), [idea, setIdea]);
+  const [comment, setComment] = useState();
+  const value = useMemo(
+    () => ({ idea, setIdea, comment, setComment }),
+    [idea, setIdea, comment, setComment]
+  );
 
   return <IdeaContext.Provider value={value}>{children}</IdeaContext.Provider>;
 }
