@@ -50,16 +50,16 @@ function Login({ handleLogin }) {
   };
 
   return (
-    <div className="login-container">
-      <h2 className="login-title">Connexion</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label htmlFor="login" className="login-label">
+    <div className="loginContainer">
+      <h2 className="loginTitle">Connexion</h2>
+      <form onSubmit={handleSubmit} className="loginForm">
+        <label htmlFor="login" className="loginLabel">
           Email :
-          <input type="text" className="input-login-form" ref={refEmail} />
+          <input type="text" className="inputLoginForm" ref={refEmail} />
         </label>
-        <label htmlFor="password" className="login-label">
+        <label htmlFor="password" className="loginLabel">
           Password :
-          <input type="password" className="input-login-form" ref={refPass} />
+          <input type="password" className="inputLoginForm" ref={refPass} />
         </label>
         <button type="submit">Connexion</button>
       </form>

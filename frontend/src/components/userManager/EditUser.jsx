@@ -6,13 +6,14 @@ function UserEdit() {
   const [updatedUser, setUpdatedUser] = useState([]);
   const api = useApi();
   const { id } = useParams();
+  const [success, setSuccess] = useState(false);
   const handleUpdate = (e) => {
     e.preventDefault();
     api
       .put(`/user/${updatedUser.id}`, updatedUser)
       .then((res) => {
         console.warn(res);
-        // setSuccess(true);
+        setSuccess(true);
       })
       .catch((err) => {
         console.warn(err);
@@ -41,58 +42,91 @@ function UserEdit() {
   }, [api]);
 
   return (
-    <div>
-      <form className="update-user-form" onSubmit={handleUpdate}>
-        <label htmlFor="firstname">Prénom:</label>
-        <input
-          type="text"
-          name="firstname"
-          value={updatedUser.firstname}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="lastname">Nom:</label>
-        <input
-          type="text"
-          name="lastname"
-          value={updatedUser.lastname}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          name="email"
-          value={updatedUser.email}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="dateOfBirth">Date de naissance:</label>
-        <input
-          type="date"
-          name="dateOfBirth"
-          value={updatedUser.dateOfBirth}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="roleId">Rôle:</label>
-        <input
-          type="text"
-          name="roleId"
-          value={updatedUser.roleId}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="teamId">Équipe:</label>
-        <input
-          type="text"
-          name="teamId"
-          value={updatedUser.teamId}
-          onChange={handleInputChange}
-        />
-        <button
-          className="update-user-button"
-          type="submit"
-          onClick={() => handleUpdate(updatedUser)}
-        >
-          Modifier
-        </button>
-      </form>
+    <div className="editUserContainer">
+      <h1>MODIFIER UTILISATEUR</h1>
+      {success ? (
+        <section className="editUserSection successMessage">
+          Utilisateur mis à jour
+        </section>
+      ) : (
+        <form className="editUserForm" onSubmit={handleUpdate}>
+          <label htmlFor="firstname" className="editUserFormLabel">
+            Prénom:
+            <input
+              type="text"
+              className="editUserFormInput"
+              name="firstname"
+              value={updatedUser.firstname}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label htmlFor="lastname" className="editUserFormLabel">
+            Nom:
+            <input
+              type="text"
+              className="editUserFormInput"
+              name="lastname"
+              value={updatedUser.lastname}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label htmlFor="email" className="editUserFormLabel">
+            Email:
+            <input
+              type="text"
+              className="editUserFormInput"
+              name="email"
+              value={updatedUser.email}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label htmlFor="dateOfBirth" className="editUserFormLabel">
+            Date de naissance:
+            <input
+              type="date"
+              className="editUserFormInput"
+              name="dateOfBirth"
+              value={updatedUser.dateOfBirth}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label htmlFor="roleId" className="editFormLabel">
+            Rôle:
+            <select
+              type="text"
+              className="editUserFormInput"
+              name="roleId"
+              value={updatedUser.roleId}
+              onChange={handleInputChange}
+            >
+              <option value="">--Choisir un rôle--</option>
+              <option value="1">Administrateur</option>
+              <option value="2">Utilisateur</option>
+            </select>
+          </label>
+          <label htmlFor="teamId" className="editFormLabel">
+            Équipe:
+            <select
+              type="text"
+              className="editUserFormInput"
+              name="teamId"
+              value={updatedUser.teamId}
+              onChange={handleInputChange}
+            >
+              <option value="">--Choisir une équipe--</option>
+              <option value="1">Dev</option>
+              <option value="2">Compabilité</option>
+            </select>
+          </label>
+          <button
+            className="editUserButton"
+            type="submit"
+            onClick={() => handleUpdate(updatedUser)}
+          >
+            Modifier
+          </button>
+        </form>
+      )}
     </div>
   );
 }

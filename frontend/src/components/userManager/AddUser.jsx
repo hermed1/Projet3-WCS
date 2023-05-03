@@ -46,49 +46,51 @@ function AddUser() {
   };
 
   return (
-    <div className="add-user-container">
-      <h2>Ajouter un utilisateur</h2>
+    <div className="addUserContainer">
+      <h1>AJOUTER UN UTILISATEUR</h1>
       {success ? (
-        <section className="section-add-user">Utilisateur crée </section>
+        <section className="addUserSection successMessage">
+          Utilisateur crée
+        </section>
       ) : (
-        <form onSubmit={handleSubmit} className="form-signup">
-          <label htmlFor="firstname" className="form-signup-label">
+        <form onSubmit={handleSubmit} className="addUserForm">
+          <label htmlFor="firstname" className="addUserFormLAbel">
             Prénom :
             <input
               type="text"
-              className="form-signup-input"
+              className="addUserFormInput"
               id="firstname"
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
             />
           </label>
-          <label htmlFor="name" className="form-signup-label">
+          <label htmlFor="name" className="addUserFormLAbel">
             Nom :
             <input
               type="text"
-              className="form-signup-input"
+              className="addUserFormInput"
               id="lastname"
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
             />
           </label>
-          <label htmlFor="email" className="form-signup-label">
+          <label htmlFor="email" className="addUserFormLAbel">
             Email :
             <input
               type="text"
               autoComplete="off"
-              className="form-signup-input"
+              className="addUserFormInput"
               id="email"
               aria-describedby="uidnote"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <label htmlFor="pass1" className="form-signup-label">
+          <label htmlFor="pass1" className="addUserFormLAbel">
             Mot de passe :
             <input
               type="text"
-              className="form-signup-input"
+              className="addUserFormInput"
               id="pass1"
               value={pass1}
               onChange={(e) => setPass1(e.target.value)}
@@ -99,11 +101,11 @@ function AddUser() {
               Mot de passe invalide
             </span>
           </label>
-          <label htmlFor="pass2" className="form-signup-label">
+          <label htmlFor="pass2" className="addUserFormLAbel">
             Confirmer le mot de passe :
             <input
               type="password"
-              className="form-signup-input"
+              className="addUserFormInput"
               id="pass2"
               value={pass2}
               onChange={(e) => setPass2(e.target.value)}
@@ -115,38 +117,44 @@ function AddUser() {
             >
               Les mots de passes ne correspondent pas
             </span>
-            <label htmlFor="dateOfBirth" className="form-signup-label">
+            <label htmlFor="dateOfBirth" className="addUserFormLAbel">
               Date de naissance:
               <input
                 type="date"
-                className="form-signup-input"
+                className="addUserFormInput"
                 id="dateOfBirth"
                 value={dateOfBirth}
                 onChange={(e) => setDateOfBirth(e.target.value)}
               />
             </label>
           </label>
-          <label htmlFor="role" className="form-signup-label">
+          <label htmlFor="role" className="addUserFormLAbel">
             Rôle :
-            <input
-              type="text"
-              className="form-signup-input"
+            <select
               id="roleId"
+              className="addUserFormInput"
               value={roleId}
               onChange={(e) => setRoleId(e.target.value)}
-            />
+            >
+              <option value="">--Choisir un rôle--</option>
+              <option value="1">Administrateur</option>
+              <option value="2">Utilisateur</option>
+            </select>
           </label>
-          <label htmlFor="team" className="form-signup-label">
+          <label htmlFor="teamId" className="addUserFormLAbel">
             Équipe :
-            <input
-              type="text"
-              className="form-signup-input"
+            <select
               id="teamId"
+              className="addUserFormInput"
               value={teamId}
               onChange={(e) => setTeamId(e.target.value)}
-            />
+            >
+              <option value="">--Choisir une équipe--</option>
+              <option value="1">Dev</option>
+              <option value="2">Compabilité</option>
+            </select>
           </label>
-          <button type="submit" className="form-signup-btn">
+          <button type="submit" className="addUserFormButton">
             Ajouter
           </button>
         </form>

@@ -1,6 +1,5 @@
 const joi = require("joi");
 const models = require("../models");
-// const { hashPassword } = require("../utils/auth");
 
 const validate = (data, forCreation = true) => {
   const presence = forCreation ? "required" : "optional";
@@ -72,12 +71,6 @@ const edit = async (req, res) => {
     roleId,
     teamId,
   } = req.body;
-  // const { password } = req.body;
-  // let hashedPassword = null;
-  // if (password) {
-  //   hashedPassword = await hashPassword(password);
-  //   req.body.password = hashedPassword;
-  // }
   models.user
     .update(
       id,

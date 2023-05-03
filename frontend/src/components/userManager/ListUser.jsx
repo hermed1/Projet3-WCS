@@ -19,28 +19,25 @@ function ListUser() {
   }, [api]);
 
   return (
-    <div className="user-list-container">
+    <div className="listUserContainer">
       <h2>Liste d'utilisateurs</h2>
-      <div className="user-list-cards">
-        <Link to="/User/Add">Ajouter utilisateur</Link>
-        <div className="user-list-row">
+      <Link to="/User/Add" className="addUserButton">
+        Ajouter un utilisateur
+      </Link>
+      <div className="listUserCards">
+        <div className="listUserRow">
           {users.map((user) => (
-            <div key={user.id} className="user-list-card">
-              <div className="user-card-image-container">
+            <div key={user.id} className="listUserCards">
+              <div className="listUserCardImageContainer">
                 <img
-                  className="user-list-card-image"
+                  className="listUserCardImage"
                   src={user.profilePicture}
                   alt="ProfilePic"
                 />
               </div>
-              <div className="user-list-card-details">
-                <div className="user-list-card-name">
+              <div className="listUserCardDetails">
+                <div className="listUserCardName">
                   {user.firstname} {user.lastname}
-                </div>
-                <div className="user-list-card-email">{user.email}</div>
-                <div className="user-list-card-dob">
-                  Date de naissance:{" "}
-                  {new Date(user.dateOfBirth).toLocaleDateString("fr-FR")}
                 </div>
                 <Link to={`/User/${user.id}`}>Modifier</Link>
               </div>

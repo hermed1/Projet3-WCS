@@ -37,7 +37,7 @@ function App() {
         ) : (
           <Login handleLogin={handleLogin} />
         )}
-        {/* <Register /> */}
+        <Register />
       </UserProvider>
     </div>
   );

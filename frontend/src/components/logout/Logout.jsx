@@ -12,7 +12,7 @@ function Logout() {
   };
 
   return (
-    <div className="logout-button">
+    <div className="logoutButton">
       <button type="submit" onClick={handleLogout}>
         Déconnection
       </button>

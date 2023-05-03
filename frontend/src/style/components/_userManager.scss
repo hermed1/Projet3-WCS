@@ -1,125 +1,145 @@
 // List user
 
-.user-list-container {
+.listUserContainer {
   display: flex;
+  margin-left: 200px;
+  margin-right: 200px;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
-  margin: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  align-items: center;
-  }
+}
 
-.user-list-success {
-  background-color: green;
+.listUserCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.addUserButton {
+  margin: 10px;
+  padding: 8px 12px;
+  margin-right: 80%;
+  background-color: #007bff;
   color: white;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-.user-list-cards {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.user-list-row {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.user-list-card {
-  width: 300px;
-  margin: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  overflow: hidden;
+  text-decoration: none;
+}
+
+.listUserCards a {
+  margin: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.listUserCards a:hover {
+  background-color: #0062cc;
+}
+
+.listUserCards .listUserRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.listUserCards .listUserCards {
   display: flex;
   flex-direction: column;
+  margin: 10px;
+  width: 230px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
-.user-card-image-container {
-  height: 200px;
-  overflow: hidden;
+.listUserCards .listUserCardImageContainer {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
 }
 
-.user-list-card-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+.listUserCards .listUserCardImage {
+  width: 150px;
+  height: 50px;
+  border-radius: 50%;
 }
 
-.user-list-card-details {
-  padding: 20px;
-  flex: 1;
+.listUserCards .listUserCardDetails {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 20px;
 }
 
-.user-list-card-name {
-  font-size: 20px;
+.listUserCards .listUserCardName {
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
-.user-list-card-email {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.user-list-card-dob {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.user-list-card-link {
+.listUserCards .listUserCardDetails a {
   margin-top: 10px;
-  padding: 10px;
-  background-color: blue;
+  padding: 8px 12px;
+  background-color: #007bff;
   color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.listUserCards .listUserCardDetails a:hover {
+  background-color: #0062cc;
+}
+
+// Add user
+
+.addUserContainer {
+  display: flex;
+  height: auto;
+}
+
+.addUserSection {
+  margin-top: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 20%;
   text-align: center;
   border-radius: 5px;
-  cursor: pointer;
 }
 
-// Add user 
-
-.add-user-container {
-  display: flex;
-
+.successMessage {
+  background-color: rgb(105, 179, 86);
+  color: white;
 }
 
-.form-signup {
+.addUserForm {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  margin: auto;
+  margin-top: 60px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.form-signup-label {
+.addUserFormLAbel {
   margin-bottom: 5px;
   font-size: 1.2rem;
 }
 
-.form-signup-input {
+.addUserFormInput {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 3px;
 }
 
 .signup-invalid {
   display: block;
-  color: red;
+  color: rgb(218, 11, 11);
   font-size: 0.9rem;
   margin-top: 5px;
 }
@@ -128,65 +148,62 @@
   display: none;
 }
 
-.form-signup-btn {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: #008cba;
+.addUserFormButton {
+  margin-left: 300px;
+  margin-right: 300px;
   color: #fff;
   border: none;
   border-radius: 3px;
   cursor: pointer;
 }
 
-.form-signup-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+// Edit user
+
+.editUserContainer {
+  display: flex;
+  height: auto;
 }
 
-.section-add-user {
-  width: 400px;
-  margin: auto;
+.editUserSection {
+  margin-top: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 20%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.editUserForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  text-align: center;
 }
 
-// Edit user
-
-.update-user-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.editUserFormLabel {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
 }
 
-label {
-  margin: 10px;
-  font-weight: bold;
-}
-
-input {
-  padding: 5px;
-  margin: 10px;
-  border-radius: 5px;
-  border: 1px solid gray;
-  font-size: 1rem;
-}
-
-button {
-  margin: 20px;
+.editUserFormInput {
+  width: 100%;
   padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+
+.editUserButton {
+  margin-left: 300px;
+  margin-right: 300px;
+  color: #fff;
   border: none;
-  font-size: 1rem;
+  border-radius: 3px;
   cursor: pointer;
 }
 
-button:hover {
+.editUserButton:hover {
   background-color: #0062cc;
 }
-
-
