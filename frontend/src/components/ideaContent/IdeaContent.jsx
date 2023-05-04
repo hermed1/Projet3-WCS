@@ -25,16 +25,17 @@ function IdeaContent() {
 
   useEffect(() => {
     api
-      .get(`/idea/${idea.id}/comment`)
+      .get(`/comment`)
       .then((resp) => {
         setComment(resp.data);
+        console.warn("get comment", comment);
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
-  console.warn("get idea", comment);
 
+  console.warn("get idea", comment);
   return (
     <section className="new-idea-section">
       <div className="idea-section">
@@ -95,7 +96,7 @@ function IdeaContent() {
       <section className="comment-section">
         <h3 className="comment-main-title">Commentaires :</h3>
 
-        <div className="comment__list">
+        <div className="comment-list">
           {comment.map((item) => (
             <Comment
               key={item.id}

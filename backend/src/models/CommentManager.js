@@ -5,6 +5,13 @@ class CommentManager extends AbstractManager {
     super({ table: "commentary" });
   }
 
+  // findAll() {
+  //   return this.database.query(`
+  //   SELECT * FROM ${this.table}
+  //   INNER JOIN idea
+  //   ON idea.id = ${this.table}.id`);
+  // }
+
   insert(text, ideaCommentId) {
     return this.database.query(
       `insert into ${this.table} ( 
