@@ -1,3 +1,4 @@
+// listuser
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApi from "../../services/useApi";
@@ -21,7 +22,7 @@ function ListUser() {
   return (
     <div className="listUserContainer">
       <h2>Liste d'utilisateurs</h2>
-      <Link to="/User/Add" className="addUserButton">
+      <Link to="/user/add" className="addUserButton">
         Ajouter un utilisateur
       </Link>
       <div className="listUserCards">
@@ -39,7 +40,7 @@ function ListUser() {
                 <div className="listUserCardName">
                   {user.firstname} {user.lastname}
                 </div>
-                <Link to={`/User/${user.id}`}>Modifier</Link>
+                <Link to={`/user/${user.id}`}>Modifier</Link>
               </div>
             </div>
           ))}
