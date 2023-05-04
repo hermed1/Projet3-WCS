@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 
 import { IoMdOpen } from "react-icons/io";
 import useApi from "../services/useApi";
-import AddUser from "../components/addUser/AddUser";
-import UserList from "../components/userList/UserList";
 
 function Entreprise() {
   const api = useApi();
@@ -186,7 +184,7 @@ function Entreprise() {
               <span className="company__item--underline">
                 Personne de contact :
               </span>
-              :{company.contactPerson}
+              {company.contactPerson}
             </p>
             <p className="company__item">
               <span className="company__item--underline">
@@ -223,7 +221,6 @@ function Entreprise() {
               </button>
             </div>
           </section>
-          {/* <AddUser /> */}
           <div className="company__users">
             <h2>Employés inscrits</h2>
           </div>
