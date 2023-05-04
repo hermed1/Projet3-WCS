@@ -1,4 +1,4 @@
-.login-container {
+.loginContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,12 +6,13 @@
   height: 100vh;
 }
 
-.login-title {
+
+.loginTitle {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
 
-.login-form {
+.loginForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,14 +20,14 @@
   width: 300px;
 }
 
-.login-label {
+.loginLabel {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   font-size: 1.2rem;
 }
 
-.input-login-form {
+.inputLoginForm {
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 0.25rem;

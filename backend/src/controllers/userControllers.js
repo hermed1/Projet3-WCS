@@ -5,16 +5,22 @@ const validate = (data, forCreation = true) => {
   const presence = forCreation ? "required" : "optional";
   return joi
     .object({
+      id: joi.number().integer().presence("optional"),
       firstname: joi.string().max(45).presence(presence),
       lastname: joi.string().max(45).presence(presence),
       email: joi.string().max(45).presence(presence),
       dateOfBirth: joi.date().presence(presence),
       hashedPassword: joi.string().max(255).presence(presence),
-      liked: joi.string().max(255).presence("optional"),
-      profilePicture: joi.string().max(255).presence("optional"),
-      creationDate: joi.date().presence(presence),
-      roleId: joi.number().integer().min(0).presence(presence),
-      teamId: joi.number().integer().min(0).presence(presence),
+      liked: joi.number().integer().allow(null).allow("").presence("optional"),
+      profilePicture: joi
+        .string()
+        .max(255)
+        .allow(null)
+        .allow("")
+        .presence("optional"),
+      creationDate: joi.date().presence("optional").allow(null).allow(""),
+      roleId: joi.number().integer().presence(presence),
+      teamId: joi.number().integer().presence(presence),
     })
     .validate(data, { abortEarly: false }).error;
 };
@@ -47,15 +53,34 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
-  const item = req.body;
-
-  // TODO validations (length, format...)
-
-  item.id = parseInt(req.params.id, 10);
-
+const edit = async (req, res) => {
+  const errors = validate(req.body, false);
+  if (errors) {
+    console.warn(errors);
+    res.status(422).send({ errors });
+    return;
+  }
+  const id = parseInt(req.params.id, 10);
+  const {
+    firstname,
+    lastname,
+    email,
+    dateOfBirth,
+    profilePicture,
+    roleId,
+    teamId,
+  } = req.body;
   models.user
-    .update(item)
+    .update(
+      id,
+      firstname,
+      lastname,
+      email,
+      dateOfBirth,
+      profilePicture,
+      roleId,
+      teamId
+    )
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -73,6 +98,7 @@ const edit = (req, res) => {
 const add = (req, res) => {
   const errors = validate(req.body);
   if (errors) return res.sendStatus(422);
+  console.warn(errors);
   const {
     firstname,
     lastname,
@@ -81,7 +107,6 @@ const add = (req, res) => {
     hashedPassword,
     liked,
     profilePicture,
-    creationDate,
     roleId,
     teamId,
   } = req.body;
@@ -94,12 +119,11 @@ const add = (req, res) => {
       hashedPassword,
       liked,
       profilePicture,
-      creationDate,
       roleId,
       teamId
     )
-    .then(([result]) => {
-      res.location(`/users/${result.insertId}`).sendStatus(201);
+    .then(() => {
+      res.sendStatus(201);
     })
     .catch((err) => {
       if (err.errno === 1062) {

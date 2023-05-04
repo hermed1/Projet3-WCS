@@ -9,7 +9,7 @@ const userControllers = require("./controllers/userControllers");
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
 
-router.put("/user/:id", hashPassword, userControllers.edit);
+router.put("/user/:id", userControllers.edit);
 
 router.post("/user", hashPassword, userControllers.add);
 router.post("/login", userControllers.findByEmailToNext, verifyPassword);

@@ -25,10 +25,9 @@ function IdeaContent() {
 
   useEffect(() => {
     api
-      .get(`/comment`)
+      .get(`/idea/${idea.id}/comment`)
       .then((resp) => {
         setComment(resp.data);
-        console.warn("get comment", comment);
       })
       .catch((err) => {
         console.error(err);
@@ -63,7 +62,8 @@ function IdeaContent() {
         <p className="text-idea">
           {idea.text}
           <br />
-          Date de création : {idea.createDate}
+          Date de création :
+          {new Date(idea.dateOfBirth).toLocaleDateString("fr-FR")}
         </p>
 
         <div className="like-comment-div">

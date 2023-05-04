@@ -21,7 +21,8 @@ function Comment({ text, createDate }) {
 
       <p className="text-comment">
         {text}
-        <br /> {createDate}
+        <br />
+        {new Date(createDate.dateOfBirth).toLocaleDateString("fr-FR")}
       </p>
 
       <div className="like-comment-div">

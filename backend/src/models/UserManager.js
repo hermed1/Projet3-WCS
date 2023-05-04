@@ -13,7 +13,6 @@ class UserManager extends AbstractManager {
     hashedPassword,
     liked,
     profilePicture,
-    creationDate,
     roleId,
     teamId
   ) {
@@ -25,7 +24,13 @@ class UserManager extends AbstractManager {
       hashedPassword,
       liked,
       profilePicture,
-      creationDate, roleId, teamId) VALUES (?,?,?,?,?,?,?,?,?,?)`,
+      roleId, teamId) VALUES (?, ?, ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?)`,
       [
         firstname,
         lastname,
@@ -34,18 +39,43 @@ class UserManager extends AbstractManager {
         hashedPassword,
         liked,
         profilePicture,
-        creationDate,
         roleId,
         teamId,
       ]
     );
   }
 
-  update(id, user) {
-    return this.database.query(`UPDATE ${this.table} SET ? WHERE id = ?`, [
-      user,
-      id,
-    ]);
+  update(
+    id,
+    firstname,
+    lastname,
+    email,
+    dateOfBirth,
+    profilePicture,
+    roleId,
+    teamId
+  ) {
+    return this.database.query(
+      `UPDATE user SET 
+    firstname = ?,
+    lastname = ?,
+    email = ?,
+    dateOfBirth = ?,
+    profilePicture = ?,
+    roleId = ?,
+    teamId = ?
+    WHERE id = ?`,
+      [
+        firstname,
+        lastname,
+        email,
+        dateOfBirth,
+        profilePicture,
+        roleId,
+        teamId,
+        id,
+      ]
+    );
   }
 
   findByEmail(email) {

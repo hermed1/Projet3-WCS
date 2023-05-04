@@ -1,4 +1,4 @@
-.login-container {
+.loginContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,12 +6,12 @@
   height: 100vh;
 }
 
-.login-title {
+.loginTitle {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
 
-.login-form {
+.loginForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,14 +19,14 @@
   width: 300px;
 }
 
-.login-label {
+.loginLabel {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   font-size: 1.2rem;
 }
 
-.input-login-form {
+.inputLoginForm {
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 0.25rem;
@@ -466,6 +466,218 @@ header li a:hover {
     visibility: hidden;
   }
 }
+.listUserContainer {
+  display: flex;
+  margin-left: 200px;
+  margin-right: 200px;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+}
+
+.listUserCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.addUserButton {
+  margin: 10px;
+  padding: 8px 12px;
+  margin-right: 80%;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.listUserCards a {
+  margin: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.listUserCards a:hover {
+  background-color: #0062cc;
+}
+
+.listUserCards .listUserRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.listUserCards .listUserCards {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 230px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.listUserCards .listUserCardImageContainer {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+
+.listUserCards .listUserCardImage {
+  width: 150px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.listUserCards .listUserCardDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.listUserCards .listUserCardName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.listUserCards .listUserCardDetails a {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.listUserCards .listUserCardDetails a:hover {
+  background-color: #0062cc;
+}
+
+.addUserContainer {
+  display: flex;
+  height: auto;
+}
+
+.addUserSection {
+  margin-top: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 20%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.successMessage {
+  background-color: rgb(105, 179, 86);
+  color: white;
+}
+
+.addUserForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.addUserFormLAbel {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.addUserFormInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+
+.signup-invalid {
+  display: block;
+  color: rgb(218, 11, 11);
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.signup-hide {
+  display: none;
+}
+
+.addUserFormButton {
+  margin-left: 300px;
+  margin-right: 300px;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.editUserContainer {
+  display: flex;
+  height: auto;
+}
+
+.editUserSection {
+  margin-top: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 20%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.editUserForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.editUserFormLabel {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.editUserFormInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+
+.editUserButton {
+  margin-left: 300px;
+  margin-right: 300px;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.editUserButton:hover {
+  background-color: #0062cc;
+}
+
+.logoutButton {
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s;
+}
+
 .form {
   display: flex;
   flex-direction: column;
