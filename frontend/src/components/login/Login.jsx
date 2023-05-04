@@ -79,24 +79,6 @@ function Login({ handleLogin }) {
   );
 }
 
-//   return (
-//     <div className="loginContainer">
-//       <h2 className="loginTitle">Connexion</h2>
-//       <form onSubmit={handleSubmit} className="loginForm">
-//         <label htmlFor="login" className="loginLabel">
-//           Email :
-//           <input type="text" className="inputLoginForm" ref={refEmail} />
-//         </label>
-//         <label htmlFor="password" className="loginLabel">
-//           Password :
-//           <input type="password" className="inputLoginForm" ref={refPass} />
-//         </label>
-//         <button type="submit">Connexion</button>
-//       </form>
-//     </div>
-//   );
-// }
-
 Login.propTypes = {
   handleLogin: PropTypes.func.isRequired,
 };
