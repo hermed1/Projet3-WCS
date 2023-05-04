@@ -39,10 +39,16 @@ const CompanyManager = require("./CompanyManager");
 
 models.company = new CompanyManager();
 models.company.setDatabase(pool);
+
 const IdeaManager = require("./IdeaManager");
 
 models.idea = new IdeaManager();
 models.idea.setDatabase(pool);
+
+const CommentManager = require("./CommentManager");
+
+models.comment = new CommentManager();
+models.comment.setDatabase(pool);
 
 const ItemManager = require("./ItemManager");
 

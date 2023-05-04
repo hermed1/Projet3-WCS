@@ -9,7 +9,7 @@ const userControllers = require("./controllers/userControllers");
 router.get("/user", userControllers.browse);
 router.get("/user/:id", userControllers.read);
 
-router.put("/user/:id", hashPassword, userControllers.edit);
+router.put("/user/:id", userControllers.edit);
 
 router.post("/user", hashPassword, userControllers.add);
 router.post("/login", userControllers.findByEmailToNext, verifyPassword);
@@ -23,6 +23,14 @@ router.get("/idea/:id", ideaControllers.read);
 router.put("/idea/:id", ideaControllers.edit);
 router.post("/idea", ideaControllers.add);
 router.delete("/idea/:id", ideaControllers.destroy);
+
+const commentControllers = require("./controllers/commentControllers");
+
+router.get("/comment", commentControllers.browse);
+router.get("/comment/:id", commentControllers.read);
+router.put("/comment/:id", commentControllers.edit);
+router.post("/comment", commentControllers.add);
+router.delete("/comment/:id", commentControllers.destroy);
 
 const companyControllers = require("./controllers/companyControllers");
 

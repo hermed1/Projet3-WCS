@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "../../App.css";
+import Logout from "../logout/Logout";
 
 function Navbar() {
   const navRef = useRef();
@@ -36,6 +37,7 @@ function Navbar() {
       <div className="search-container">
         <input type="search" placeholder="Recherche" className="search" />
       </div>
+      <Logout />
     </header>
   );
 }

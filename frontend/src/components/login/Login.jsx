@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
+import backgroundImage from "../../assets/salesforce.jpeg";
 
 function Login({ handleLogin }) {
   const api = useApi();
@@ -48,18 +49,29 @@ function Login({ handleLogin }) {
         alert(errorMsg);
       });
   };
+  const style = {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    opacity: "0.8",
+  };
 
   return (
-    <div className="login-container">
-      <h2 className="login-title">Connexion</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label htmlFor="login" className="login-label">
+    <div style={style}>
+      <h2 className="loginTitle">Connexion</h2>
+      <form onSubmit={handleSubmit} className="loginForm">
+        <label htmlFor="login" className="loginLabel">
           Email :
-          <input type="text" className="input-login-form" ref={refEmail} />
+          <input type="text" className="inputLoginForm" ref={refEmail} />
         </label>
-        <label htmlFor="password" className="login-label">
+        <label htmlFor="password" className="loginLabel">
           Password :
-          <input type="password" className="input-login-form" ref={refPass} />
+          <input type="password" className="inputLoginForm" ref={refPass} />
         </label>
         <button type="submit">Connexion</button>
       </form>

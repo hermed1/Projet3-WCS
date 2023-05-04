@@ -24,7 +24,7 @@ function AddCompany() {
       .post("/register", newCompany)
       .then((resp) => {
         console.warn(resp);
-        navigate("/");
+        navigate("/Register");
       })
       .catch((err) => console.warn(err));
   };

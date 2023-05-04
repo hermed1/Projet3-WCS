@@ -7,8 +7,13 @@ import Profile from "./pages/Profile";
 import Navbar from "./components/navbar/Navbar";
 import UserProvider from "./contexts/UserContext";
 import Login from "./components/login/Login";
+import IdeaContent from "./components/ideaContent/IdeaContent";
+import IdeaProvider from "./contexts/IdeaContext";
+
 import "./App.css";
 import "./style/index.scss";
+import UserEditPage from "./pages/UserEditPage";
+import UserAddPage from "./pages/UserAddPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,14 +27,26 @@ function App() {
   return (
     <div className="App">
       <UserProvider>
-        {loggedIn && <Navbar />}
-        <Routes>
-          {loggedIn && <Route path="/Idea" element={<Idea />} />}
-          {loggedIn && <Route path="/Profil" element={<Profile />} />}
-          <Route path="/Login" element={<Login handleLogin={handleLogin} />} />
-          <Route path="/register" element={<AddCompany />} />
-          <Route path="/register/:id" element={<Entreprise />} />
-        </Routes>
+        <IdeaProvider>
+          {loggedIn ? (
+            <div className="App">
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Entreprise />} />
+                <Route path="/idea" element={<Idea />} />
+                <Route path="/idea/:id" element={<IdeaContent />} />
+                <Route path="/profil" element={<Profile />} />
+                <Route path="/User/:id" element={<UserEditPage />} />
+                <Route path="/User/Add" element={<UserAddPage />} />
+                <Route path="/addCompany" element={<AddCompany />} />
+                <Route path="/register" element={<AddCompany />} />
+                <Route path="/register/:id" element={<Entreprise />} />
+              </Routes>
+            </div>
+          ) : (
+            <Login handleLogin={handleLogin} />
+          )}
+        </IdeaProvider>
       </UserProvider>
     </div>
   );

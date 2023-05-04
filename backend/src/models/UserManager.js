@@ -18,19 +18,19 @@ class UserManager extends AbstractManager {
   ) {
     return this.database.query(
       `insert into ${this.table} (firstname,
-     lastname,
-     email,
-     dateOfBirth,
-     hashedPassword,
-     liked,
-     profilePicture,
-     roleId, teamId) VALUES (?, ?, ?,
-       ?,
-       ?,
-       ?,
-       ?,
-       ?,
-       ?)`,
+      lastname,
+      email,
+      dateOfBirth,
+      hashedPassword,
+      liked,
+      profilePicture,
+      roleId, teamId) VALUES (?, ?, ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?)`,
       [
         firstname,
         lastname,
@@ -45,11 +45,37 @@ class UserManager extends AbstractManager {
     );
   }
 
-  update(id, user) {
-    return this.database.query(`UPDATE ${this.table} SET ? WHERE id = ?`, [
-      user,
-      id,
-    ]);
+  update(
+    id,
+    firstname,
+    lastname,
+    email,
+    dateOfBirth,
+    profilePicture,
+    roleId,
+    teamId
+  ) {
+    return this.database.query(
+      `UPDATE user SET 
+    firstname = ?,
+    lastname = ?,
+    email = ?,
+    dateOfBirth = ?,
+    profilePicture = ?,
+    roleId = ?,
+    teamId = ?
+    WHERE id = ?`,
+      [
+        firstname,
+        lastname,
+        email,
+        dateOfBirth,
+        profilePicture,
+        roleId,
+        teamId,
+        id,
+      ]
+    );
   }
 
   findByEmail(email) {

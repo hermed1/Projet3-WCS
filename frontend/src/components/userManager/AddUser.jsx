@@ -1,0 +1,166 @@
+import { useEffect, useState } from "react";
+import useApi from "../../services/useApi";
+
+function AddUser() {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [roleId, setRoleId] = useState("");
+  const [teamId, setTeamId] = useState("");
+  const [pass1, setPass1] = useState("");
+  const [pass2, setPass2] = useState("");
+  const [validPwd, setValidPwd] = useState(false);
+  const [validMatch, setValidMatch] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const api = useApi();
+  const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
+  useEffect(() => {
+    const result = PWD_REGEX.test(pass1);
+    setValidPwd(result);
+    const match = pass1 === pass2;
+    setValidMatch(match);
+  }, [pass1, pass2]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      firstname,
+      lastname,
+      email,
+      dateOfBirth,
+      password: pass1,
+      roleId,
+      teamId,
+    };
+    api
+      .post("/user", newUser)
+      .then((res) => {
+        console.warn(res);
+        setSuccess(true);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
+
+  return (
+    <div className="addUserContainer">
+      <h1>AJOUTER UN UTILISATEUR</h1>
+      {success ? (
+        <section className="addUserSection successMessage">
+          Utilisateur crée
+        </section>
+      ) : (
+        <form onSubmit={handleSubmit} className="addUserForm">
+          <label htmlFor="firstname" className="addUserFormLAbel">
+            Prénom :
+            <input
+              type="text"
+              className="addUserFormInput"
+              id="firstname"
+              value={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
+            />
+          </label>
+          <label htmlFor="name" className="addUserFormLAbel">
+            Nom :
+            <input
+              type="text"
+              className="addUserFormInput"
+              id="lastname"
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
+            />
+          </label>
+          <label htmlFor="email" className="addUserFormLAbel">
+            Email :
+            <input
+              type="text"
+              autoComplete="off"
+              className="addUserFormInput"
+              id="email"
+              aria-describedby="uidnote"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label htmlFor="pass1" className="addUserFormLAbel">
+            Mot de passe :
+            <input
+              type="text"
+              className="addUserFormInput"
+              id="pass1"
+              value={pass1}
+              onChange={(e) => setPass1(e.target.value)}
+            />
+            <span
+              className={validPwd || !pass1 ? "signup-hide" : "signup-invalid"}
+            >
+              Mot de passe invalide
+            </span>
+          </label>
+          <label htmlFor="pass2" className="addUserFormLAbel">
+            Confirmer le mot de passe :
+            <input
+              type="password"
+              className="addUserFormInput"
+              id="pass2"
+              value={pass2}
+              onChange={(e) => setPass2(e.target.value)}
+            />
+            <span
+              className={
+                validMatch || !pass2 ? "signup-hide" : "signup-invalid"
+              }
+            >
+              Les mots de passes ne correspondent pas
+            </span>
+            <label htmlFor="dateOfBirth" className="addUserFormLAbel">
+              Date de naissance:
+              <input
+                type="date"
+                className="addUserFormInput"
+                id="dateOfBirth"
+                value={dateOfBirth}
+                onChange={(e) => setDateOfBirth(e.target.value)}
+              />
+            </label>
+          </label>
+          <label htmlFor="role" className="addUserFormLAbel">
+            Rôle :
+            <select
+              id="roleId"
+              className="addUserFormInput"
+              value={roleId}
+              onChange={(e) => setRoleId(e.target.value)}
+            >
+              <option value="">--Choisir un rôle--</option>
+              <option value="1">Administrateur</option>
+              <option value="2">Utilisateur</option>
+            </select>
+          </label>
+          <label htmlFor="teamId" className="addUserFormLAbel">
+            Équipe :
+            <select
+              id="teamId"
+              className="addUserFormInput"
+              value={teamId}
+              onChange={(e) => setTeamId(e.target.value)}
+            >
+              <option value="">--Choisir une équipe--</option>
+              <option value="1">Dev</option>
+              <option value="2">Compabilité</option>
+            </select>
+          </label>
+          <button type="submit" className="addUserFormButton">
+            Ajouter
+          </button>
+        </form>
+      )}
+    </div>
+  );
+}
+
+export default AddUser;

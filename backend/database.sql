@@ -88,9 +88,9 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`idea` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(120) NOT NULL,
   `text` VARCHAR(4000) NOT NULL,
-  `createDate` DATE NOT NULL,
-  `companyId` INT NOT NULL,
-  `pictureId` INT NOT NULL,
+  `createDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `companyId` INT,
+  `pictureId` INT,
   PRIMARY KEY (`id`),
   INDEX `picture_id_idx` (`pictureId` ASC) VISIBLE,
   INDEX `company_idea_id_idx` (`companyId` ASC, `pictureId` ASC) VISIBLE,
@@ -108,9 +108,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 DROP TABLE IF EXISTS `salesforce`.`commentary` ;
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`commentary` (
-  `id` INT NOT NULL AUTO INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `text` VARCHAR(2000) NOT NULL,
-  `createDate` DATE NOT NULL,
+  `createDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `ideaCommentaryId` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `idea_commentary_id_idx` (`ideaCommentaryId` ASC) VISIBLE,
@@ -208,27 +208,27 @@ DROP TABLE IF EXISTS `salesforce`.`user` ;
 
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
- `id` INT NOT NULL AUTO_INCREMENT,
- `firstname` VARCHAR(45) NOT NULL,
- `lastname` VARCHAR(45) NOT NULL,
- `email` VARCHAR(45) NOT NULL,
- `dateOfBirth` VARCHAR(10) NOT NULL,
- `hashedPassword` VARCHAR(255) NOT NULL,
- `liked` TINYINT NULL DEFAULT NULL,
- `profilePicture` VARCHAR(255) NULL DEFAULT NULL,
- `creationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
- `roleId` INT NULL DEFAULT NULL,
- `teamId` INT NULL DEFAULT NULL,
- PRIMARY KEY (`id`),
- UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
- INDEX `role_id_idx` (`roleId` ASC) VISIBLE,
- INDEX `user_team_id_idx` (`teamId` ASC) VISIBLE,
-CONSTRAINT `teamUserId`
-   FOREIGN KEY (`teamId`)
-   REFERENCES `salesforce`.`team` (`id`),
- CONSTRAINT `userRoleId`
-   FOREIGN KEY (`roleId`)
-   REFERENCES `salesforce`.`role` (`id`))
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `firstname` VARCHAR(45) NOT NULL,
+  `lastname` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `dateOfBirth` VARCHAR(10) NOT NULL,
+  `hashedPassword` VARCHAR(255) NOT NULL,
+  `liked` TINYINT NULL DEFAULT NULL,
+  `profilePicture` VARCHAR(255) NULL DEFAULT NULL,
+  `creationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `roleId` INT NULL DEFAULT NULL,
+  `teamId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  INDEX `role_id_idx` (`roleId` ASC) VISIBLE,
+  INDEX `user_team_id_idx` (`teamId` ASC) VISIBLE,
+  CONSTRAINT `teamUserId`
+    FOREIGN KEY (`teamId`)
+    REFERENCES `salesforce`.`team` (`id`),
+  CONSTRAINT `userRoleId`
+    FOREIGN KEY (`roleId`)
+    REFERENCES `salesforce`.`role` (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 31
 DEFAULT CHARACTER SET = utf8mb4
