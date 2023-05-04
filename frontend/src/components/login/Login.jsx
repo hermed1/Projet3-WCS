@@ -58,7 +58,7 @@ function Login({ handleLogin }) {
     alignItems: "center",
     justifyContent: "center",
     height: "100vh",
-    filter: "brightness 60%",
+    opacity: "0.8",
   };
 
   return (
