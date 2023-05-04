@@ -12,6 +12,8 @@ import IdeaProvider from "./contexts/IdeaContext";
 
 import "./App.css";
 import "./style/index.scss";
+import UserEditPage from "./pages/UserEditPage";
+import UserAddPage from "./pages/UserAddPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -32,6 +34,8 @@ function App() {
                 <Route path="/idea" element={<Idea />} />
                 <Route path="/idea/:id" element={<IdeaContent />} />
                 <Route path="/profil" element={<Profile />} />
+                <Route path="/User/:id" element={<UserEditPage />} />
+                <Route path="/User/Add" element={<UserAddPage />} />
                 <Route path="/addCompany" element={<AddCompany />} />
               </Routes>
             </div>

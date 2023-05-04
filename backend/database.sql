@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
   `phone` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -208,13 +208,13 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
   `firstname` VARCHAR(45) NOT NULL,
   `lastname` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `dateOfBirth` DATE NOT NULL,
+  `dateOfBirth` VARCHAR(10) NOT NULL,
   `hashedPassword` VARCHAR(255) NOT NULL,
   `liked` TINYINT NULL DEFAULT NULL,
   `profilePicture` VARCHAR(255) NULL DEFAULT NULL,
-  `creationDate` TIMESTAMP NOT NULL,
-  `roleId` INT NOT NULL DEFAULT '1',
-  `teamId` INT NOT NULL DEFAULT '1',
+  `creationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `roleId` INT NULL DEFAULT NULL,
+  `teamId` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   INDEX `role_id_idx` (`roleId` ASC) VISIBLE,
