@@ -22,6 +22,8 @@ function App() {
     setLoggedIn(true);
   };
 
+  //
+
   return (
     <div className="App">
       <UserProvider>
@@ -37,6 +39,8 @@ function App() {
                 <Route path="/User/:id" element={<UserEditPage />} />
                 <Route path="/User/Add" element={<UserAddPage />} />
                 <Route path="/addCompany" element={<AddCompany />} />
+                <Route path="/register" element={<AddCompany />} />
+                <Route path="/register/:id" element={<Entreprise />} />
               </Routes>
             </div>
           ) : (

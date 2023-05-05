@@ -22,20 +22,23 @@ USE `salesforce` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `salesforce`.`company` ;
 
+
 CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `companyName` VARCHAR(150) NOT NULL,
   `nSiret` VARCHAR(45) NOT NULL,
   `creationDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  `companyLogo` VARCHAR(255),
   `contactPerson` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(45) NULL DEFAULT NULL,
+  `companyLogo` VARCHAR(255) DEFAULT NULL,
+  
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
+
 
 
 -- -----------------------------------------------------
@@ -129,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`role` (
   `name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -193,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`team` (
     FOREIGN KEY (`companyId`)
     REFERENCES `salesforce`.`company` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -202,6 +205,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `salesforce`.`user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `salesforce`.`user` ;
+
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -226,10 +230,9 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
     FOREIGN KEY (`roleId`)
     REFERENCES `salesforce`.`role` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 31
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `salesforce`.`userCommentary`
@@ -284,3 +287,16 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO role (name)
+VALUES ('1');
+
+INSERT INTO company (companyName, nSiret, creationDate, contactPerson, email, phone)
+VALUES ('10', '10', '2019-12-31', '', '', null);
+
+INSERT INTO `salesforce`.`team` (`name`, `companyId`)
+VALUES ('1', 1);
+
+INSERT INTO user (firstname, lastname, email, dateOfBirth, hashedPassword, liked, profilePicture, creationDate, roleId, teamId)
+VALUES ('test10', 'test10', 'test10', '2020-01-01', 'test10', '10', '10', '2020-01-01', '1', '1');

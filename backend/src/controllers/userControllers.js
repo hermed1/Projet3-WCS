@@ -150,7 +150,6 @@ const destroy = (req, res) => {
       res.sendStatus(500);
     });
 };
-
 const findByEmailToNext = (req, res, next) => {
   const { email } = req.body;
   models.user

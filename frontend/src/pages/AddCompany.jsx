@@ -30,7 +30,11 @@ function AddCompany() {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmitRegisterCompany}>
+    <form
+      method="post"
+      onSubmit={handleSubmitRegisterCompany}
+      name="add-company-form"
+    >
       <fieldset className="form">
         <legend className="form__legend">Informations entreprise : </legend>
         <label htmlFor="name" className="form__label">
@@ -87,7 +91,7 @@ function AddCompany() {
         <input
           type="tel"
           id="phoneNumber"
-          name="companyLogo"
+          name="phone"
           placeholder="Téléphone"
           required
           className="form__input"
