@@ -21,10 +21,11 @@ class CompanyManager extends AbstractManager {
   update(company) {
     return this.database.query(`update ${this.table} set ? where id = ?`, [
       {
-        name: company.name,
+        companyName: company.companyName,
         nSiret: company.nSiret,
-        creationDate: company.creationDate,
-        companyLogo: company.companyLogo,
+        contactPerson: company.contactPerson,
+        email: company.email,
+        phone: company.phone,
       },
       company.id,
     ]);

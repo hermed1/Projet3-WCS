@@ -86,14 +86,14 @@ class UserManager extends AbstractManager {
 
   findAll() {
     return this.database.query(`select id, firstname,
-    lastname,
-    email,
-    dateOfBirth,
-    liked,
-    profilePicture,
-    creationDate,
-    roleId,
-    teamId FROM  ${this.table}`);
+  lastname,
+  email,
+  dateOfBirth,
+  liked,
+  profilePicture,
+  creationDate,
+  roleId,
+  teamId FROM  ${this.table}`);
   }
 }
 
