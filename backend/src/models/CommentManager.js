@@ -5,12 +5,19 @@ class CommentManager extends AbstractManager {
     super({ table: "commentary" });
   }
 
-  // findAll() {
-  //   return this.database.query(`
-  //   SELECT * FROM ${this.table}
-  //   INNER JOIN idea
-  //   ON idea.id = ${this.table}.id`);
-  // }
+  findAllbyIdea(id) {
+    return this.database.query(
+      `
+    SELECT c.*, u.lastname, u.firstname FROM ${this.table} c
+    INNER JOIN usercommentary uc 
+    ON c.id = uc.commmentaryId
+    INNER JOIN user u 
+    ON uc.userId = u.id
+    WHERE ideaCommentaryId = ?
+    AND postCreator = 1`,
+      [id]
+    );
+  }
 
   insert(text, ideaCommentId) {
     return this.database.query(
@@ -21,16 +28,29 @@ class CommentManager extends AbstractManager {
     );
   }
 
+  insertUserAutor(userId, idComment) {
+    return this.database.query(
+      `INSERT INTO usercommentary (
+          postCreator, commmentaryId, userId
+        ) VALUES (1, ?, ?)`,
+      [idComment, userId]
+    );
+  }
+
   update(id, comment) {
     return this.database.query(
       `UPDATE ${this.table}
-      SET ? WHERE id = ?`,
+          SET ? WHERE id = ?`,
       [comment, id]
     );
   }
 
   delete(id) {
-    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
+    return this.database.query(
+      `DELETE FROM ${this.table} 
+    WHERE id = ?`,
+      [id]
+    );
   }
 }
 

@@ -14,8 +14,10 @@ const validate = (data, forCreation = true) => {
 };
 
 const browse = (req, res) => {
+  const ideaId = req.params.id;
+
   models.comment
-    .findAll()
+    .findAllbyIdea(ideaId)
     .then(([rows]) => {
       res.send(rows);
     })
@@ -66,7 +68,7 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const { text, ideaCommentaryId } = req.body;
+  const { text, ideaCommentaryId, userId } = req.body;
   const data = { text, ideaCommentaryId };
   const error = validate(data);
 
@@ -78,7 +80,17 @@ const add = (req, res) => {
   models.comment
     .insert(text, ideaCommentaryId)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      // Recupérer le last insert idea, user id
+      // enregistrer ces infos dans usercommentary
+      models.comment
+        .insertUserAutor(userId, result.insertId)
+        .then(() => {
+          res.location(`/items/${result.insertId}`).sendStatus(201);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.sendStatus(500);
+        });
     })
     .catch((err) => {
       console.error(err);

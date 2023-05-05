@@ -239,7 +239,7 @@ DROP TABLE IF EXISTS `salesforce`.`userCommentary` ;
 CREATE TABLE IF NOT EXISTS `salesforce`.`userCommentary` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `like` TINYINT NULL DEFAULT NULL,
-  `postCreator` VARCHAR(100) NOT NULL,
+  `postCreator` TINYINT NULL DEFAULT NULL,
   `commmentaryId` INT NOT NULL,
   `userId` INT NOT NULL,
   PRIMARY KEY (`id`),

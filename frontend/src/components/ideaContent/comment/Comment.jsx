@@ -22,7 +22,10 @@ function Comment({ text, createDate }) {
       <p className="text-comment">
         {text}
         <br />
-        {new Date(createDate.dateOfBirth).toLocaleDateString("fr-FR")}
+        Date de création :{" "}
+        {new Date(createDate).toLocaleString("fr-FR", {
+          timeZone: "UTC",
+        })}
       </p>
 
       <div className="like-comment-div">
