@@ -39,13 +39,21 @@ function App() {
                 <Route path="/User/:id" element={<UserEditPage />} />
                 <Route path="/User/Add" element={<UserAddPage />} />
                 <Route path="/addCompany" element={<AddCompany />} />
-                <Route path="/register" element={<AddCompany />} />
+                {/* <Route path="/register" element={<AddCompany />} /> */}
                 <Route path="/register/:id" element={<Entreprise />} />
               </Routes>
             </div>
           ) : (
-            <Login handleLogin={handleLogin} />
+            <div>
+              <Login handleLogin={handleLogin} />
+              {/* <Entreprise /> */}
+              {/* <AddCompany /> */}
+            </div>
           )}
+          <Routes>
+            {/* <Route path="/register" element={<AddCompany />} /> */}
+            <Route path="/register/:id" element={<Entreprise />} />
+          </Routes>
         </IdeaProvider>
       </UserProvider>
     </div>
