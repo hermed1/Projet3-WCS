@@ -1,0 +1,24 @@
+.new-idea {
+  background: var(--btn-background-color);
+  color: var(--text-color-light);
+  font-size: 1.5rem;
+  padding: 50px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.idea-list-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.idea-btn {
+  background: var(--btn-background-color);
+  color: var(--text-color-light);
+  font-size: 1.5rem;
+  padding: 50px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 20px;
+}

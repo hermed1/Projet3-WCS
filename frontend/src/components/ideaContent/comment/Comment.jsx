@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useUser } from "../../../contexts/UserContext";
 import likeBtn from "../../../assets/like-btn.png";
 import speechBubble from "../../../assets/speech-bubble.png";
 import editBtn from "../../../assets/edit-button.png";
 
-function Comment() {
+function Comment({ text, createDate }) {
   const { user } = useUser();
 
   return (
@@ -19,10 +20,12 @@ function Comment() {
       </div>
 
       <p className="text-comment">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-        molestias nihil ab minima perspiciatis a, fugit dicta, incidunt harum
-        quisquam dolores! Sint sit quibusdam accusamus reiciendis perspiciatis
-        consequatur. Sapiente, alias.
+        {text}
+        <br />
+        Date de création :{" "}
+        {new Date(createDate).toLocaleString("fr-FR", {
+          timeZone: "UTC",
+        })}
       </p>
 
       <div className="like-comment-div">
@@ -47,5 +50,10 @@ function Comment() {
     </div>
   );
 }
+
+Comment.propTypes = {
+  text: PropTypes.string.isRequired,
+  createDate: PropTypes.string.isRequired,
+};
 
 export default Comment;

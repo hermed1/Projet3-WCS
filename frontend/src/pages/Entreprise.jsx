@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { IoMdOpen } from "react-icons/io";
+import ListUser from "../components/userManager/ListUser";
+import AddCompany from "./AddCompany";
 import useApi from "../services/useApi";
 
 function Entreprise() {
@@ -223,7 +225,9 @@ function Entreprise() {
           </section>
           <div className="company__users">
             <h2>Employés inscrits</h2>
+            <ListUser />
           </div>
+          <AddCompany />
         </div>
       )}
     </div>
