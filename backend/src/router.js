@@ -17,14 +17,15 @@ router.post("/login", userControllers.findByEmailToNext, verifyPassword);
 router.delete("/user/:id", userControllers.destroy);
 
 const ideaControllers = require("./controllers/ideaControllers");
+const commentControllers = require("./controllers/commentControllers");
 
 router.get("/idea", ideaControllers.browse);
-router.get("/idea/:id", ideaControllers.read);
+router.get("/idea/:id/", ideaControllers.read);
 router.put("/idea/:id", ideaControllers.edit);
 router.post("/idea", ideaControllers.add);
 router.delete("/idea/:id", ideaControllers.destroy);
 
-const commentControllers = require("./controllers/commentControllers");
+router.get("/idea/:id/comment/", commentControllers.browse);
 
 router.get("/comment", commentControllers.browse);
 router.get("/comment/:id", commentControllers.read);
