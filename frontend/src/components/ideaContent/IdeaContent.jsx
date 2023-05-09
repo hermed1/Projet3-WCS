@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useIdea } from "../../contexts/IdeaContext";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
@@ -8,9 +8,10 @@ import editBtn from "../../assets/edit-button.png";
 import Comment from "./comment/Comment";
 
 function IdeaContent() {
-  const { user } = useUser();
-  const { idea, setIdea } = useIdea();
   const api = useApi();
+  const { user } = useUser();
+  const { idea, setIdea, comment, setComment } = useIdea();
+  const [textComment, setTextComment] = useState("");
 
   useEffect(() => {
     api
@@ -22,7 +23,33 @@ function IdeaContent() {
         console.error(err);
       });
   }, []);
-  console.warn("get idea", idea);
+
+  useEffect(() => {
+    api
+      .get(`/idea/${idea.id}/comment`)
+      .then((resp) => {
+        setComment(resp.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [comment]);
+
+  const handleSubmitNewComment = (e) => {
+    e.preventDefault();
+    const newComment = {
+      text: textComment,
+      ideaCommentaryId: idea.id,
+      userId: user.id,
+    };
+    api
+      .post("/comment", newComment)
+      .then((resp) => {
+        setComment([...comment, resp.data]);
+        setTextComment("");
+      })
+      .catch((err) => console.warn(err));
+  };
 
   return (
     <section className="new-idea-section">
@@ -51,7 +78,10 @@ function IdeaContent() {
         <p className="text-idea">
           {idea.text}
           <br />
-          Date de création : {idea.createDate}
+          Date de création :{" "}
+          {new Date(idea.createDate).toLocaleString("fr-FR", {
+            timeZone: "UTC",
+          })}
         </p>
 
         <div className="like-comment-div">
@@ -84,8 +114,26 @@ function IdeaContent() {
       <section className="comment-section">
         <h3 className="comment-main-title">Commentaires :</h3>
 
-        <div className="comment__list">
-          <Comment />
+        <form onSubmit={handleSubmitNewComment} className="form-newComment">
+          <input
+            type="text"
+            value={textComment}
+            onChange={(e) => setTextComment(e.target.value)}
+            className="text-input"
+          />
+          <button type="submit" className="post-comment-btn">
+            Ajouter un commentaire
+          </button>
+        </form>
+
+        <div className="comment-list">
+          {comment.map((item) => (
+            <Comment
+              key={item.id}
+              text={item.text}
+              createDate={item.createDate}
+            />
+          ))}
         </div>
       </section>
     </section>

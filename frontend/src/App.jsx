@@ -22,8 +22,6 @@ function App() {
     setLoggedIn(true);
   };
 
-  //
-
   return (
     <div className="App">
       <UserProvider>

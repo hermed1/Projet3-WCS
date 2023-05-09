@@ -10,7 +10,7 @@ class IdeaManager extends AbstractManager {
       `insert into ${this.table} (title,
         text,
         companyId,
-        pictureId) VALUES (?, ?, (SELECT id FROM company WHERE id = ?), (SELECT id FROM picturestorage WHERE id = ?))`,
+        pictureId) VALUES (?, ?, ?, ?)`,
       [title, text, companyId, pictureId]
     );
   }

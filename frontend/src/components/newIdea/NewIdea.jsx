@@ -37,7 +37,7 @@ function NewIdea() {
       <form onSubmit={handleSubmitNewIdea} className="form-newIdea">
         <div className="idea-section">
           <label htmlFor="title-edit">
-            Titre :
+            Titre
             <input
               className="title-input"
               type="text"
