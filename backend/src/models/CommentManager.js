@@ -10,7 +10,7 @@ class CommentManager extends AbstractManager {
       `
     SELECT c.*, u.lastname, u.firstname FROM ${this.table} c
     INNER JOIN usercommentary uc 
-    ON c.id = uc.commmentaryId
+    ON c.id = uc.commentarytaryId
     INNER JOIN user u 
     ON uc.userId = u.id
     WHERE ideaCommentaryId = ?
@@ -31,7 +31,7 @@ class CommentManager extends AbstractManager {
   insertUserAutor(userId, idComment) {
     return this.database.query(
       `INSERT INTO usercommentary (
-          postCreator, commmentaryId, userId
+          postCreator, commentarytaryId, userId
         ) VALUES (1, ?, ?)`,
       [idComment, userId]
     );

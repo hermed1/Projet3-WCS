@@ -243,13 +243,13 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`userCommentary` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `like` TINYINT NULL DEFAULT NULL,
   `postCreator` TINYINT NULL DEFAULT NULL,
-  `commmentaryId` INT NOT NULL,
+  `commentarytaryId` INT NOT NULL,
   `userId` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `user_commentary_user_id_idx` (`userId` ASC) VISIBLE,
-  INDEX `user_commentary_commentary_id_idx` (`commmentaryId` ASC) VISIBLE,
+  INDEX `user_commentary_commentary_id_idx` (`commentarytaryId` ASC) VISIBLE,
   CONSTRAINT `userCommentaryCommentaryId`
-    FOREIGN KEY (`commmentaryId`)
+    FOREIGN KEY (`commentarytaryId`)
     REFERENCES `salesforce`.`commentary` (`id`),
   CONSTRAINT `userCommentaryUserId`
     FOREIGN KEY (`userId`)

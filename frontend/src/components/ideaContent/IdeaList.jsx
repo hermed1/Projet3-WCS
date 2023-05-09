@@ -19,18 +19,28 @@ function IdeaList({ ideas, setIdeas, valide }) {
       {showNewIdea ? (
         <NewIdea />
       ) : (
-        <button type="button" onClick={handleClickShowNewIdea}>
+        <button
+          className="new-idea"
+          type="button"
+          onClick={handleClickShowNewIdea}
+        >
           Nouvelle idée
         </button>
       )}
-      {valide &&
-        ideas.map((item) => (
-          <Link to={`/idea/${item.id}`} key={item.id} idea={ideas}>
-            <button type="button" onClick={() => handleClick(item)}>
-              {item.title}
-            </button>
-          </Link>
-        ))}
+      <section className="idea-list-content">
+        {valide &&
+          ideas.map((item) => (
+            <Link to={`/idea/${item.id}`} key={item.id} idea={ideas}>
+              <button
+                className="idea-btn"
+                type="button"
+                onClick={() => handleClick(item)}
+              >
+                {item.title}
+              </button>
+            </Link>
+          ))}
+      </section>
     </div>
   );
 }
