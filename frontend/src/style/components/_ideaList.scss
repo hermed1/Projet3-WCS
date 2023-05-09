@@ -1,24 +1,101 @@
-.new-idea {
+.idea-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn-new-idea {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.5rem;
+  width: 80vw;
+  height: 50px;
+  padding-left: 10px;
+  margin: 25px 0 10px 0;
+  border-radius: 8px;
   background: var(--btn-background-color);
   color: var(--text-color-light);
-  font-size: 1.5rem;
-  padding: 50px;
-  border-radius: 15px;
-  cursor: pointer;
 }
 
 .idea-list-content {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
+  &__link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px 20px;
+  }
+
+  &__btn {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+    font-size: 1.5rem;
+    width: 80vw;
+    height: 50px;
+    padding-left: 10px;
+    border-radius: 8px;
+    background: var(--btn-background-color);
+    color: var(--text-color-light);
+  }
+
+  &__img-idea {
+    display: none;
+  }
 }
 
-.idea-btn {
-  background: var(--btn-background-color);
-  color: var(--text-color-light);
-  font-size: 1.5rem;
-  padding: 50px;
-  border-radius: 15px;
-  cursor: pointer;
-  margin: 20px;
+@media screen and (min-width: 786px) {
+  .btn-new-idea {
+    justify-content: center;
+    width: 35vw;
+  }
+
+  .idea-list-content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 15px;
+
+    &__link {
+      height: 200px;
+      width: 35vw;
+      border-radius: 8px;
+    }
+
+    &__btn {
+      width: 100%;
+      text-align: center;
+      border-radius: 0px 0px 8px 8px;
+    }
+
+    &__img-idea {
+      display: block;
+      background-color: aquamarine;
+      width: 100%;
+      height: 80%;
+      border-radius: 8px 8px 0px 0px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .btn-new-idea {
+    justify-content: center;
+    width: 20vw;
+    margin-top: 50px;
+  }
+
+  .idea-list-content {
+    &__link {
+      width: 20vw;
+    }
+  }
 }

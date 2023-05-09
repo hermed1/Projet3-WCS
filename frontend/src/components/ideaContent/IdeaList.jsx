@@ -15,12 +15,12 @@ function IdeaList({ ideas, setIdeas, valide }) {
   };
 
   return (
-    <div>
+    <div className="idea-list">
       {showNewIdea ? (
         <NewIdea />
       ) : (
         <button
-          className="new-idea"
+          className="btn-new-idea"
           type="button"
           onClick={handleClickShowNewIdea}
         >
@@ -30,9 +30,19 @@ function IdeaList({ ideas, setIdeas, valide }) {
       <section className="idea-list-content">
         {valide &&
           ideas.map((item) => (
-            <Link to={`/idea/${item.id}`} key={item.id} idea={ideas}>
+            <Link
+              className="idea-list-content__link"
+              to={`/idea/${item.id}`}
+              key={item.id}
+              idea={ideas}
+            >
+              <img
+                src=""
+                alt="Illustration"
+                className="idea-list-content__img-idea"
+              />
               <button
-                className="idea-btn"
+                className="idea-list-content__btn"
                 type="button"
                 onClick={() => handleClick(item)}
               >
