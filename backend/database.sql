@@ -230,7 +230,6 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
     FOREIGN KEY (`roleId`)
     REFERENCES `salesforce`.`role` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 31
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
