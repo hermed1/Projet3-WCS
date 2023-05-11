@@ -28,7 +28,6 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  console.warn(req.params.id);
   models.idea
     .find(req.params.id)
     .then(([rows]) => {
