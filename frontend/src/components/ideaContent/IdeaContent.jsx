@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useIdea } from "../../contexts/IdeaContext";
+import { useParams } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
 import likeBtn from "../../assets/like-btn.png";
@@ -10,14 +10,17 @@ import Comment from "./comment/Comment";
 function IdeaContent() {
   const api = useApi();
   const { user } = useUser();
-  const { idea, setIdea, comment, setComment } = useIdea();
+  const { id } = useParams();
+  const [comment, setComment] = useState([]);
+  const [detailsIdea, setDetailsIdea] = useState({});
+  const [refreshComment, setRefreshComment] = useState(false);
   const [textComment, setTextComment] = useState("");
 
   useEffect(() => {
     api
-      .get(`/idea/${idea.id}`)
+      .get(`/idea/${id}`)
       .then((resp) => {
-        setIdea(resp.data);
+        setDetailsIdea(resp.data);
       })
       .catch((err) => {
         console.error(err);
@@ -26,20 +29,20 @@ function IdeaContent() {
 
   useEffect(() => {
     api
-      .get(`/idea/${idea.id}/comment`)
+      .get(`/idea/${id}/comment`)
       .then((resp) => {
         setComment(resp.data);
       })
       .catch((err) => {
         console.error(err);
       });
-  }, [comment]);
+  }, [refreshComment]);
 
   const handleSubmitNewComment = (e) => {
     e.preventDefault();
     const newComment = {
       text: textComment,
-      ideaCommentaryId: idea.id,
+      ideaCommentaryId: detailsIdea.id,
       userId: user.id,
     };
     api
@@ -47,6 +50,7 @@ function IdeaContent() {
       .then((resp) => {
         setComment([...comment, resp.data]);
         setTextComment("");
+        setRefreshComment(true);
       })
       .catch((err) => console.warn(err));
   };
@@ -54,7 +58,7 @@ function IdeaContent() {
   return (
     <section className="new-idea-section">
       <div className="idea-section">
-        <h1 className="idea-title">{idea.title}</h1>
+        <h1 className="idea-title">{detailsIdea.title}</h1>
         <div className="idea-section-btn-div">
           <button type="button" className="idea-section-btn">
             Catégories
@@ -64,7 +68,6 @@ function IdeaContent() {
           </button>
         </div>
       </div>
-
       <div className="idea-container">
         <div className="head-title-content">
           <h4>
@@ -76,10 +79,10 @@ function IdeaContent() {
         </div>
 
         <p className="text-idea">
-          {idea.text}
+          {detailsIdea.text}
           <br />
           Date de création :{" "}
-          {new Date(idea.createDate).toLocaleString("fr-FR", {
+          {new Date(detailsIdea.createDate).toLocaleString("fr-FR", {
             timeZone: "UTC",
           })}
         </p>
@@ -110,7 +113,6 @@ function IdeaContent() {
           </button>
         </div>
       </div>
-
       <section className="comment-section">
         <h3 className="comment-main-title">Commentaires :</h3>
 
@@ -132,6 +134,8 @@ function IdeaContent() {
               key={item.id}
               text={item.text}
               createDate={item.createDate}
+              firstname={item.firstname}
+              lastname={item.lastname}
             />
           ))}
         </div>

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useUser } from "../../contexts/UserContext";
-import { useIdea } from "../../contexts/IdeaContext";
 import fileIcon from "../../assets/file-icon.png";
 import useApi from "../../services/useApi";
 
-function NewIdea() {
+function NewIdea({ setIdea }) {
   const api = useApi();
 
   const [titleIdea, setTitleIdea] = useState("");
   const [textIdea, setTextIdea] = useState("");
   const { user } = useUser();
-  const { setIdea } = useIdea();
   const navigate = useNavigate();
 
   const handleSubmitNewIdea = (e) => {
@@ -80,5 +79,9 @@ function NewIdea() {
     </section>
   );
 }
+
+NewIdea.propTypes = {
+  setIdea: PropTypes.func.isRequired,
+};
 
 export default NewIdea;

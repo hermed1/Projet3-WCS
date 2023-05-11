@@ -1,18 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useUser } from "../../../contexts/UserContext";
 import likeBtn from "../../../assets/like-btn.png";
 import speechBubble from "../../../assets/speech-bubble.png";
 import editBtn from "../../../assets/edit-button.png";
 
-function Comment({ text, createDate }) {
-  const { user } = useUser();
-
+function Comment({ text, createDate, firstname, lastname }) {
   return (
     <div className="comment-container">
       <div className="head-title-content">
         <h4>
-          {user.firstname} {user.lastname}
+          {firstname} {lastname}
         </h4>
         <button className="edit-btn" type="button">
           <img src={editBtn} alt="Logo edit" className="edit-img" />
@@ -54,6 +51,8 @@ function Comment({ text, createDate }) {
 Comment.propTypes = {
   text: PropTypes.string.isRequired,
   createDate: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
 };
 
 export default Comment;
