@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import useApi from "../services/useApi";
 import IdeaList from "../components/ideaContent/IdeaList";
 import HeaderNavbar from "../components/headernav/HeaderNavbar";
-import { useIdea } from "../contexts/IdeaContext";
 
 function Idea() {
-  const { idea, setIdea } = useIdea();
   const api = useApi();
+  const [idea, setIdea] = useState([]);
   const [valide, setValide] = useState(false);
 
   useEffect(() => {
