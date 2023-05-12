@@ -108,6 +108,13 @@ class UserManager extends AbstractManager {
   roleId,
   teamId FROM  ${this.table}`);
   }
+
+  updateRoleId(id, roleId) {
+    return this.database.query(`UPDATE user SET roleId = ? WHERE id = ?`, [
+      roleId,
+      id,
+    ]);
+  }
 }
 
 module.exports = UserManager;

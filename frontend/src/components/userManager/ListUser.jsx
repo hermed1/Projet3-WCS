@@ -1,12 +1,33 @@
-// listuser
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApi from "../../services/useApi";
 
 function ListUser() {
   const [users, setUsers] = useState([]);
+  const [updatedUser, setUpdatedUser] = useState([]);
 
   const api = useApi();
+  const changedRoleId = 4;
+
+  const handleUpdate = (userId) => {
+    const roleToUpdate = {
+      ...updatedUser,
+      roleId: changedRoleId,
+    };
+    api
+      .put(`/user/role/${userId}`, roleToUpdate)
+      .then((res) => {
+        console.warn(res);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
+
+  const selectUserForUpdate = (user) => {
+    setUpdatedUser(user);
+  };
+
   useEffect(() => {
     api
       .get("/user")
@@ -40,7 +61,23 @@ function ListUser() {
                 <div className="listUserCardName">
                   {user.firstname} {user.lastname}
                 </div>
-                <Link to={`/user/${user.id}`}>Modifier</Link>
+                <Link
+                  to={`/user/${user.id}`}
+                  onClick={() => selectUserForUpdate(user)}
+                >
+                  Modifier
+                </Link>
+                {updatedUser !== null && (
+                  <button
+                    className="button"
+                    name="roleId"
+                    type="submit"
+                    value={updatedUser.roleId}
+                    onClick={() => handleUpdate(user.id)}
+                  >
+                    Supprimer
+                  </button>
+                )}
               </div>
             </div>
           ))}

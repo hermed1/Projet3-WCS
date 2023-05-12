@@ -770,6 +770,19 @@ header li a:hover {
   background-color: #0062cc;
 }
 
+.deleteUserButton {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteUserButton:hover {
+  background-color: darkred;
+}
+
 .addUserContainer {
   display: flex;
   height: auto;
