@@ -106,7 +106,7 @@ class UserManager extends AbstractManager {
   profilePicture,
   creationDate,
   roleId,
-  teamId FROM  ${this.table}`);
+  teamId FROM  ${this.table} WHERE roleId != 4`);
   }
 
   updateRoleId(id, roleId) {

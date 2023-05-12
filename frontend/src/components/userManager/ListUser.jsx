@@ -18,6 +18,7 @@ function ListUser() {
       .put(`/user/role/${userId}`, roleToUpdate)
       .then((res) => {
         console.warn(res);
+        setUsers(users.filter((user) => user.id !== userId));
       })
       .catch((err) => {
         console.warn(err);
