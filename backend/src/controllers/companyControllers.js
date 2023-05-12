@@ -101,6 +101,14 @@ const destroy = (req, res) => {
       res.sendStatus(500);
     });
 };
+// addTeam() {
+//   return this.database.query(
+//     INSERT into  `company.id, companyName, nSiret, creationDate, contactPerson,email, phone, companyLogo
+//     FROM company, team
+//     WHERE id = ? and companyId = team.id`,
+//     [email]
+//   );
+// }
 
 module.exports = {
   browse,

@@ -43,7 +43,7 @@ router.delete("/register/:id", companyControllers.destroy);
 
 const teamControllers = require("./controllers/teamControllers");
 
-router.get("/team", teamControllers.browse);
+router.get("/team/:companyId", teamControllers.browse);
 router.get("/team/:id", teamControllers.read);
 router.put("/team/:id", teamControllers.edit);
 router.post("/team", teamControllers.add);

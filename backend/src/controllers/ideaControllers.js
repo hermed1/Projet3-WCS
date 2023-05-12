@@ -8,9 +8,21 @@ const validate = (data, forCreation = true) => {
       id: joi.number().min(0).presence("optional"),
       title: joi.string().max(120).presence(presence),
       text: joi.string().max(4000).presence(presence),
-      creationDate: joi.date().presence("optional").allow(null).allow(""),
-      companyId: joi.number().min(0).presence("optional"),
-      pictureId: joi.number().min(0).presence("optional"),
+      createDate: joi.date().presence("optional").allow(null).allow(""),
+      companyId: joi
+        .number()
+        .integer()
+        .min(0)
+        .allow(null)
+        .allow("")
+        .presence("optional"),
+      pictureId: joi
+        .number()
+        .integer()
+        .min(0)
+        .allow(null)
+        .allow("")
+        .presence("optional"),
     })
     .validate(data, { abortEarly: false }).error;
 };
@@ -71,7 +83,6 @@ const add = (req, res) => {
   const { title, text, companyId, pictureId } = req.body;
   const data = { title, text, companyId, pictureId };
   const error = validate(data);
-
   if (error) {
     res.status(422).send({ error });
     return;

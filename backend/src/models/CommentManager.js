@@ -19,6 +19,15 @@ class CommentManager extends AbstractManager {
     );
   }
 
+  insert(text, ideaCommentId) {
+    return this.database.query(
+      `insert into ${this.table} ( 
+        text,
+        ideaCommentaryId) VALUES (?, ?)`,
+      [text, ideaCommentId]
+    );
+  }
+
   insertUserAutor(userId, idComment) {
     return this.database.query(
       `INSERT INTO usercommentary (

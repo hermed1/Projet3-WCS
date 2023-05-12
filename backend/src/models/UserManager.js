@@ -79,9 +79,23 @@ class UserManager extends AbstractManager {
   }
 
   findByEmail(email) {
-    return this.database.query(`SELECT * FROM ${this.table} WHERE email = ?`, [
+    return this.database.query(
+      `
+      SELECT user.id, firstname,
+      lastname,
       email,
-    ]);
+      dateOfBirth,
+      hashedPassword,
+      liked,
+      profilePicture,
+      creationDate,
+      roleId,
+      teamId,
+      companyId
+      FROM user, team 
+      WHERE email = ? and user.teamId = team.id`,
+      [email]
+    );
   }
 
   findAll() {

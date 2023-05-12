@@ -5,6 +5,13 @@ class TeamManager extends AbstractManager {
     super({ table: "team" });
   }
 
+  findAllTeams(companyId) {
+    return this.database.query(
+      `select * from ${this.table} where companyId = ?`,
+      [companyId]
+    );
+  }
+
   insert(team) {
     return this.database.query(
       `insert into ${this.table} (name, companyId) values (?, ?)`,
@@ -12,6 +19,7 @@ class TeamManager extends AbstractManager {
     );
   }
 
+  // select * from team where companyId = ?
   update(team) {
     return this.database.query(
       `update ${this.table} set name = ? where id = ?`,

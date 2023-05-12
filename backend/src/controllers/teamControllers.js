@@ -1,8 +1,9 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const { companyId } = req.params;
   models.team
-    .findAll()
+    .findAllTeams(companyId)
     .then(([rows]) => {
       res.send(rows);
     })
@@ -67,8 +68,9 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
+  const id = parseInt(req.params.id, 10);
   models.team
-    .delete(req.params.id)
+    .delete(id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

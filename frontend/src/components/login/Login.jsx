@@ -27,7 +27,7 @@ function Login({ handleLogin }) {
         api.defaults.headers.authorization = `Bearer ${token}`;
         setUser(resp.data.user);
         handleLogin();
-        navigate("/");
+        navigate(`/register/${resp.data.user.companyId}`);
       })
       .catch((err) => {
         console.warn(err);

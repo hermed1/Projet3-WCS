@@ -44,7 +44,7 @@ function App() {
           ) : (
             <div>
               <Login handleLogin={handleLogin} />
-              {/* <Entreprise /> */}
+              <Entreprise />
               {/* <AddCompany /> */}
             </div>
           )}
