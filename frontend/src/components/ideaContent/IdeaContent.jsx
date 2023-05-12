@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
-import useApi from "../../services/useApi";
+import Comment from "./comment/Comment";
+import IdeaUpdate from "./IdeaUpdate";
+import editBtn from "../../assets/edit-button.png";
 import likeBtn from "../../assets/like-btn.png";
 import speechBubble from "../../assets/speech-bubble.png";
-import editBtn from "../../assets/edit-button.png";
-import Comment from "./comment/Comment";
+import useApi from "../../services/useApi";
 
 function IdeaContent() {
   const api = useApi();
@@ -13,6 +14,7 @@ function IdeaContent() {
   const { id } = useParams();
   const [comment, setComment] = useState([]);
   const [detailsIdea, setDetailsIdea] = useState({});
+  const [editContent, setEditContent] = useState(false);
   const [refreshComment, setRefreshComment] = useState(false);
   const [textComment, setTextComment] = useState("");
 
@@ -55,6 +57,10 @@ function IdeaContent() {
       .catch((err) => console.warn(err));
   };
 
+  const handleClickEdit = () => {
+    setEditContent(!editContent);
+  };
+
   return (
     <section className="new-idea-section">
       <div className="idea-section">
@@ -68,51 +74,66 @@ function IdeaContent() {
           </button>
         </div>
       </div>
-      <div className="idea-container">
-        <div className="head-title-content">
-          <h4>
-            {user.firstname} {user.lastname}
-          </h4>
-          <button className="edit-btn" type="button">
-            <img src={editBtn} alt="Logo edit" className="edit-img" />
-          </button>
-        </div>
 
-        <p className="text-idea">
-          {detailsIdea.text}
-          <br />
-          Date de création :{" "}
-          {new Date(detailsIdea.createDate).toLocaleString("fr-FR", {
-            timeZone: "UTC",
-          })}
-        </p>
-
-        <div className="like-comment-div">
-          <div className="like-div">
-            <button className="like-btn" type="button">
-              <p className="like-count">12</p>
-              <img src={likeBtn} alt="Cœur" className="heart" />
+      {editContent ? (
+        <IdeaUpdate
+          detailsUser={user}
+          detailsIdea={detailsIdea}
+          setDetailsIdea={setDetailsIdea}
+          handleClickEdit={handleClickEdit}
+        />
+      ) : (
+        <div className="idea-container">
+          <div className="head-title-content">
+            <h4>
+              {user.firstname} {user.lastname}
+            </h4>
+            <button
+              className="edit-btn"
+              type="button"
+              onClick={handleClickEdit}
+            >
+              <img src={editBtn} alt="Logo edit" className="edit-img" />
             </button>
           </div>
-          <div className="add-comment-div">
-            <button className="add-comment-btn" type="button">
-              <p className="comment-count">0</p>
-              <img
-                src={speechBubble}
-                alt="Logo commentaire"
-                className="speech-bubble"
-              />
-              <p className="add-comment">+ Commentaire</p>
+
+          <p className="text-idea">
+            {detailsIdea.text}
+            <br />
+            Date de création :{" "}
+            {new Date(detailsIdea.createDate).toLocaleString("fr-FR", {
+              timeZone: "UTC",
+            })}
+          </p>
+
+          <div className="like-comment-div">
+            <div className="like-div">
+              <button className="like-btn" type="button">
+                <p className="like-count">12</p>
+                <img src={likeBtn} alt="Cœur" className="heart" />
+              </button>
+            </div>
+            <div className="add-comment-div">
+              <button className="add-comment-btn" type="button">
+                <p className="comment-count">0</p>
+                <img
+                  src={speechBubble}
+                  alt="Logo commentaire"
+                  className="speech-bubble"
+                />
+                <p className="add-comment">+ Commentaire</p>
+              </button>
+            </div>
+          </div>
+
+          <div className="archive-idea">
+            <button type="button" className="archive-idea-btn">
+              Archiver l'idée
             </button>
           </div>
         </div>
+      )}
 
-        <div className="archive-idea">
-          <button type="button" className="archive-idea-btn">
-            Archiver l'idée
-          </button>
-        </div>
-      </div>
       <section className="comment-section">
         <h3 className="comment-main-title">Commentaires :</h3>
 

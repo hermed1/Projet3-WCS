@@ -18,7 +18,7 @@ class IdeaManager extends AbstractManager {
   update(id, idee) {
     return this.database.query(
       `UPDATE ${this.table}
-      SET ? WHERE id = ?`,
+      SET text = ? WHERE id = ?`,
       [idee, id]
     );
   }
