@@ -77,6 +77,9 @@ const add = (req, res) => {
     return;
   }
 
+  // Verif erreur 500 comment
+  console.warn(req.body);
+
   models.comment
     .insert(text, ideaCommentaryId)
     .then(([result]) => {

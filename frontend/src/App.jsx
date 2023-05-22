@@ -8,8 +8,6 @@ import Navbar from "./components/navbar/Navbar";
 import UserProvider from "./contexts/UserContext";
 import Login from "./components/login/Login";
 import IdeaContent from "./components/ideaContent/IdeaContent";
-import IdeaProvider from "./contexts/IdeaContext";
-
 import "./App.css";
 import "./style/index.scss";
 import UserEditPage from "./pages/UserEditPage";
@@ -25,26 +23,24 @@ function App() {
   return (
     <div className="App">
       <UserProvider>
-        <IdeaProvider>
-          {loggedIn ? (
-            <div className="App">
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<Entreprise />} />
-                <Route path="/idea" element={<Idea />} />
-                <Route path="/idea/:id" element={<IdeaContent />} />
-                <Route path="/profil" element={<Profile />} />
-                <Route path="/user/:id" element={<UserEditPage />} />
-                <Route path="/user/add" element={<UserAddPage />} />
-                <Route path="/addCompany" element={<AddCompany />} />
-                <Route path="/register" element={<AddCompany />} />
-                <Route path="/register/:id" element={<Entreprise />} />
-              </Routes>
-            </div>
-          ) : (
-            <Login handleLogin={handleLogin} />
-          )}
-        </IdeaProvider>
+        {loggedIn ? (
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Entreprise />} />
+              <Route path="/idea" element={<Idea />} />
+              <Route path="/idea/:id" element={<IdeaContent />} />
+              <Route path="/profil" element={<Profile />} />
+              <Route path="/User/:id" element={<UserEditPage />} />
+              <Route path="/User/Add" element={<UserAddPage />} />
+              <Route path="/addCompany" element={<AddCompany />} />
+              <Route path="/register" element={<AddCompany />} />
+              <Route path="/register/:id" element={<Entreprise />} />
+            </Routes>
+          </div>
+        ) : (
+          <Login handleLogin={handleLogin} />
+        )}
       </UserProvider>
     </div>
   );
