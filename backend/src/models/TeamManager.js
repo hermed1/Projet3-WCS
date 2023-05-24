@@ -19,7 +19,6 @@ class TeamManager extends AbstractManager {
     );
   }
 
-  // select * from team where companyId = ?
   update(team) {
     return this.database.query(
       `update ${this.table} set name = ? where id = ?`,

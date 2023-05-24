@@ -7,6 +7,7 @@ const validate = (data, forCreation = true) => {
     .object({
       name: joi.string().max(45).presence(presence),
       companyId: joi.number().presence(presence),
+      id: joi.number().presence("optional"),
     })
     .validate(data, { abortEarly: false }).error;
 };
@@ -41,13 +42,13 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
+  const errors = validate(req.body, false);
+  if (errors) {
+    return res.sendStatus(422);
+  }
   const team = req.body;
 
-  // TODO validations (length, format...)
-
-  team.id = parseInt(req.params.id, 10);
-
-  models.team
+  return models.team
     .update(team)
     .then(([result]) => {
       if (result.affectedRows === 0) {

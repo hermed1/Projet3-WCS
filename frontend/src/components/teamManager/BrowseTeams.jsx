@@ -11,6 +11,7 @@ function BrowseTeams() {
   const [edit, setEdit] = useState(false);
   const [editTeam, setEditTeam] = useState(null);
   const [isDeleted, setIsdeleted] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
   const { user } = useUser();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ function BrowseTeams() {
         setTeamList(response.data);
       })
       .catch((err) => console.error(err));
-  }, [isDeleted]);
+  }, [isDeleted, isEdited]);
 
   const handleClickSetEdit = (team) => {
     setEdit(true);
@@ -36,7 +37,12 @@ function BrowseTeams() {
     <div>
       {edit && editTeam ? (
         <div>
-          <EditTeam name={editTeam.name} id={editTeam.id} />
+          <EditTeam
+            name={editTeam.name}
+            id={editTeam.id}
+            setIsEdited={setIsEdited}
+            setEdit={setEdit}
+          />
           <button type="button" onClick={handleClickBack}>
             Retour
           </button>
