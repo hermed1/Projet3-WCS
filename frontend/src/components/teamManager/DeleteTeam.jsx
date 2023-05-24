@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import useApi from "../../services/useApi";
 
-function DeleteTeam({ id }) {
+function DeleteTeam({ id, setIsDeleted }) {
   const [isTeamDeleted, setIsTeamDeleted] = useState(false);
-  // récupération de l'id de la team à supprimer
   const teamId = id;
   const api = useApi();
   const handleDeleteTeam = () => {
@@ -13,9 +12,23 @@ function DeleteTeam({ id }) {
       .then((response) => {
         console.warn(response);
         setIsTeamDeleted(true);
+        setIsDeleted(true);
       })
       .catch((err) => console.error(err));
   };
+
+  useEffect(() => {
+    if (isTeamDeleted) {
+      const timer = setTimeout(() => {
+        setIsTeamDeleted(false);
+      }, 1700);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    return undefined;
+  }, [isTeamDeleted]);
+
   return (
     <div>
       <button type="button" onClick={handleDeleteTeam}>
@@ -27,5 +40,6 @@ function DeleteTeam({ id }) {
 }
 DeleteTeam.propTypes = {
   id: PropTypes.number.isRequired,
+  setIsDeleted: PropTypes.func.isRequired,
 };
 export default DeleteTeam;

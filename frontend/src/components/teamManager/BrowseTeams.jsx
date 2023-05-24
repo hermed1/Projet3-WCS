@@ -17,15 +17,11 @@ function BrowseTeams() {
     api
       .get(`/team/${user.companyId}`)
       .then((response) => {
-        console.warn(response.data);
         setTeamList(response.data);
       })
       .catch((err) => console.error(err));
   }, [isDeleted]);
 
-  // const handleClickSetEdit = () => {
-  //   setEdit(!edit);
-  // };
   const handleClickSetEdit = (team) => {
     setEdit(true);
     setEditTeam(team);
@@ -35,30 +31,7 @@ function BrowseTeams() {
     setEdit(false);
     setEditTeam(null);
   };
-  // return (
-  //   <div>
-  //     {edit ? (
-  //       <div>
-  //         <EditTeam />
-  //         <button type="button" onClick={handleClickSetEdit}>
-  //           Retour
-  //         </button>
-  //       </div>
-  //     ) : (
-  //       teamList.map((team) => (
-  //         <div key={team.id}>
-  //           <p>{team.name}</p>
-  //           <button type="button" onClick={handleClickSetEdit}>
-  //             Modifier
-  //           </button>
-  //           <DeleteTeam id={team.id} />
-  //           <EditTeam name={team.name} id={team.id} />
-  //           {/* {edit ? <EditTeam name={team.name} id={team.id} /> : ""} */}
-  //         </div>
-  //       ))
-  //     )}
-  //   </div>
-  // );
+
   return (
     <div>
       {edit && editTeam ? (

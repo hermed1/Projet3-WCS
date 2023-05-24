@@ -1,4 +1,15 @@
+const joi = require("joi");
 const models = require("../models");
+
+const validate = (data, forCreation = true) => {
+  const presence = forCreation ? "required" : "optional";
+  return joi
+    .object({
+      name: joi.string().max(45).presence(presence),
+      companyId: joi.number().presence(presence),
+    })
+    .validate(data, { abortEarly: false }).error;
+};
 
 const browse = (req, res) => {
   const { companyId } = req.params;
@@ -52,11 +63,12 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
+  const errors = validate(req.body);
+  if (errors) {
+    return res.sendStatus(422);
+  }
   const team = req.body;
-
-  // TODO validations (length, format...)
-
-  models.team
+  return models.team
     .insert(team)
     .then(([result]) => {
       res.location(`/items/${result.insertId}`).sendStatus(201);

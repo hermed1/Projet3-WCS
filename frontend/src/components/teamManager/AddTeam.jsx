@@ -45,9 +45,15 @@ function AddTeam() {
 
   return (
     <div>
-      <button type="button" onClick={toggleInput}>
-        Ajouter une équipe
-      </button>
+      {inputVisible ? (
+        <button type="button" onClick={toggleInput}>
+          Fermer
+        </button>
+      ) : (
+        <button type="button" onClick={toggleInput}>
+          Ajouter une équipe
+        </button>
+      )}
       {inputVisible ? (
         <div>
           <label htmlFor="newTeam">Ajouter une nouvelle équipe</label>
