@@ -20,7 +20,7 @@ const ideaControllers = require("./controllers/ideaControllers");
 const commentControllers = require("./controllers/commentControllers");
 
 router.get("/idea", ideaControllers.browse);
-router.get("/idea/:id/", ideaControllers.read);
+router.get("/idea/:id", ideaControllers.read);
 router.put("/idea/:id", ideaControllers.edit);
 router.post("/idea", ideaControllers.add);
 router.delete("/idea/:id", ideaControllers.destroy);
