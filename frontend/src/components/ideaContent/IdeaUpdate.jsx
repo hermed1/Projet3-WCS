@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import useApi from "../../services/useApi";
 
-function IdeaUpdate({
-  //   detailsUser,
-  detailsIdea,
-  setDetailsIdea,
-  handleClickEdit,
-}) {
+function IdeaUpdate({ detailsIdea, setDetailsIdea, handleClickEdit }) {
   const api = useApi();
-  const [updateTextIdea, setUpdateTextIdea] = useState("");
+  const [updateTextIdea, setUpdateTextIdea] = useState(detailsIdea.text);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -23,9 +18,6 @@ function IdeaUpdate({
         console.error(err);
       });
   };
-
-  // console.log("user", detailsUser);
-  // console.log("idea", detailsIdea);
 
   return (
     <section className="new-idea-section">
@@ -51,7 +43,6 @@ function IdeaUpdate({
 }
 
 IdeaUpdate.propTypes = {
-  // detailsUser: PropTypes.func.isRequired,
   detailsIdea: PropTypes.func.isRequired,
   setDetailsIdea: PropTypes.func.isRequired,
   handleClickEdit: PropTypes.func.isRequired,

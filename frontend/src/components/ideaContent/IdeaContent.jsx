@@ -77,7 +77,6 @@ function IdeaContent() {
 
       {editContent ? (
         <IdeaUpdate
-          detailsUser={user}
           detailsIdea={detailsIdea}
           setDetailsIdea={setDetailsIdea}
           handleClickEdit={handleClickEdit}
