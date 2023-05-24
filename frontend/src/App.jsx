@@ -31,8 +31,8 @@ function App() {
               <Route path="/idea" element={<Idea />} />
               <Route path="/idea/:id" element={<IdeaContent />} />
               <Route path="/profil" element={<Profile />} />
-              <Route path="/User/:id" element={<UserEditPage />} />
-              <Route path="/User/Add" element={<UserAddPage />} />
+              <Route path="/user/:id" element={<UserEditPage />} />
+              <Route path="/user/add" element={<UserAddPage />} />
               <Route path="/addCompany" element={<AddCompany />} />
               <Route path="/register" element={<AddCompany />} />
               <Route path="/register/:id" element={<Entreprise />} />
