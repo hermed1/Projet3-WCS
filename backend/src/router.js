@@ -39,4 +39,12 @@ router.put("/register/:id", companyControllers.edit);
 router.post("/register", companyControllers.add);
 router.delete("/register/:id", companyControllers.destroy);
 
+const teamControllers = require("./controllers/teamControllers");
+
+router.get("/team/:companyId", teamControllers.browse);
+router.get("/team/:id", teamControllers.read);
+router.put("/team/:id", teamControllers.edit);
+router.post("/team", teamControllers.add);
+router.delete("/team/:id", teamControllers.destroy);
+
 module.exports = router;
