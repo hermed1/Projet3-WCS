@@ -80,12 +80,7 @@ class UserManager extends AbstractManager {
 
   findByEmail(email) {
     return this.database.query(
-<<<<<<< HEAD
       `SELECT user.id, firstname,
-=======
-      `
-      SELECT user.id, firstname,
->>>>>>> dev
       lastname,
       email,
       dateOfBirth,
