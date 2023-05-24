@@ -55,6 +55,10 @@ const ItemManager = require("./ItemManager");
 models.item = new ItemManager();
 models.item.setDatabase(pool);
 
+const TeamManager = require("./TeamManager");
+
+models.team = new TeamManager();
+models.team.setDatabase(pool);
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 
