@@ -240,7 +240,7 @@ DROP TABLE IF EXISTS `salesforce`.`userCommentary` ;
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`userCommentary` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `like` TINYINT NULL DEFAULT NULL,
+  `liked` TINYINT NULL DEFAULT NULL,
   `postCreator` TINYINT NULL DEFAULT NULL,
   `commentarytaryId` INT NOT NULL,
   `userId` INT NOT NULL,
@@ -265,8 +265,8 @@ DROP TABLE IF EXISTS `salesforce`.`userIdea` ;
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`userIdea` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `like` TINYINT NOT NULL,
-  `postCreator` VARCHAR(100) NOT NULL,
+  `liked` TINYINT NOT NULL,
+  `postCreator` TINYINT NULL DEFAULT NULL,
   `ideaId` INT NOT NULL,
   `userId` INT NOT NULL,
   PRIMARY KEY (`id`),
