@@ -1,31 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
 import { useUser } from "../../contexts/UserContext";
 import fileIcon from "../../assets/file-icon.png";
 import useApi from "../../services/useApi";
 
-function NewIdea({ setIdea }) {
+function NewIdea() {
   const api = useApi();
-
   const [titleIdea, setTitleIdea] = useState("");
   const [textIdea, setTextIdea] = useState("");
   const { user } = useUser();
   const navigate = useNavigate();
 
-  const handleSubmitNewIdea = (e) => {
+  const handleSubmitNewIdea = async (e) => {
     e.preventDefault();
     const newIdea = {
       title: titleIdea,
       text: textIdea,
+      userId: user.id,
     };
-    api
-      .post("/idea", newIdea)
-      .then((resp) => {
-        setIdea({ id: resp.data.id });
-        navigate(`/idea/${resp.data.id}`);
-      })
-      .catch((err) => console.warn(err));
+
+    try {
+      const response = await api.post("/idea", newIdea);
+      const newIdeaId = response.data.id;
+      navigate(`/idea/${newIdeaId}`);
+    } catch (err) {
+      console.warn(err);
+    }
   };
 
   return (
@@ -79,9 +79,5 @@ function NewIdea({ setIdea }) {
     </section>
   );
 }
-
-NewIdea.propTypes = {
-  setIdea: PropTypes.func.isRequired,
-};
 
 export default NewIdea;

@@ -17,7 +17,7 @@ function IdeaList({ ideas, setIdeas, valide }) {
   return (
     <div className="idea-list">
       {showNewIdea ? (
-        <NewIdea setIdea={setIdeas} />
+        <NewIdea />
       ) : (
         <button
           className="btn-new-idea"

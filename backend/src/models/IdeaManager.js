@@ -5,6 +5,20 @@ class IdeaManager extends AbstractManager {
     super({ table: "idea" });
   }
 
+  findByUser(id) {
+    return this.database.query(
+      `SELECT i.*, u.id FROM ${this.table} i
+      INNER JOIN useridea ui
+      ON i.id = ui.ideaId
+      INNER JOIN user u
+      ON ui.userId = u.id
+      WHERE u.id = ?
+      AND ui.postCreator = 1
+      `,
+      [id]
+    );
+  }
+
   insert(title, text, companyId, pictureId) {
     return this.database.query(
       `insert into ${this.table} (title,
@@ -15,10 +29,19 @@ class IdeaManager extends AbstractManager {
     );
   }
 
+  insertUserAutorIdea(ideaId, userId) {
+    return this.database.query(
+      `INSERT INTO useridea (
+          liked, postCreator, ideaId, userId
+        ) VALUES (0, 1, ?, ?)`,
+      [ideaId, userId]
+    );
+  }
+
   update(id, idee) {
     return this.database.query(
       `UPDATE ${this.table}
-      SET ? WHERE id = ?`,
+      SET text = ? WHERE id = ?`,
       [idee, id]
     );
   }
