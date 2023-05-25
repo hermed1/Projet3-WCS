@@ -97,8 +97,9 @@ class UserManager extends AbstractManager {
     );
   }
 
-  findAll() {
-    return this.database.query(`select id, firstname,
+  findAll(companyId) {
+    return this.database.query(
+      `select user.id, firstname,
   lastname,
   email,
   dateOfBirth,
@@ -106,7 +107,10 @@ class UserManager extends AbstractManager {
   profilePicture,
   creationDate,
   roleId,
-  teamId FROM  ${this.table} WHERE roleId != 4`);
+  companyId
+  teamId FROM user, team  WHERE roleId != 4 and user.teamId = team.id and companyId = ?`,
+      [companyId]
+    );
   }
 
   updateRoleId(id, roleId) {

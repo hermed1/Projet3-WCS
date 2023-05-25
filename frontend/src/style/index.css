@@ -924,15 +924,10 @@ header li a:hover {
 .deleteConfirmationButton {
   margin: 0 10px;
   padding: 10px 20px;
-  background-color: #e74c3c;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.deleteConfirmationButton:hover {
-  background-color: #c0392b;
 }
 
 .addUserContainer {

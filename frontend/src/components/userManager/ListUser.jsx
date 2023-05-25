@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApi from "../../services/useApi";
 
-function ListUser() {
+// eslint-disable-next-line react/prop-types
+function ListUser({ companyId }) {
   const [users, setUsers] = useState([]);
   const [updatedUser, setUpdatedUser] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -40,7 +41,7 @@ function ListUser() {
 
   useEffect(() => {
     api
-      .get("/user")
+      .get(`/user/company/${companyId}`)
       .then((res) => {
         console.warn(res);
         setUsers(res.data);
@@ -120,4 +121,5 @@ function ListUser() {
     </div>
   );
 }
+
 export default ListUser;

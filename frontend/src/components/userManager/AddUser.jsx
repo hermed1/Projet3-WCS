@@ -12,6 +12,7 @@ function AddUser() {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [roleId, setRoleId] = useState("");
   const [teamId, setTeamId] = useState("");
+  const [teams, setTeams] = useState([]);
   const [pass1, setPass1] = useState("");
   const [pass2, setPass2] = useState("");
   const [validPwd, setValidPwd] = useState(false);
@@ -48,6 +49,18 @@ function AddUser() {
         console.warn(err);
       });
   };
+
+  useEffect(() => {
+    api
+      .get(`/team/${user.companyId}`)
+      .then((res) => {
+        setTeams(res.data);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }, []);
+  console.warn(user);
 
   return (
     userRole === userRoles.ADMIN && (
@@ -156,9 +169,11 @@ function AddUser() {
                 value={teamId}
                 onChange={(e) => setTeamId(e.target.value)}
               >
-                <option value="">--Choisir une équipe--</option>
-                <option value="1">Dev</option>
-                <option value="2">Compabilité</option>
+                {teams.map((team) => (
+                  <option key={team.id} value={team.id}>
+                    {team.name}
+                  </option>
+                ))}
               </select>
             </label>
             <button type="submit" className="addUserFormButton">
