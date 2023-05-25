@@ -17,6 +17,7 @@ function IdeaContent() {
   const [editContent, setEditContent] = useState(false);
   const [refreshComment, setRefreshComment] = useState(false);
   const [textComment, setTextComment] = useState("");
+  const [totalComments, setTotalComments] = useState(0);
 
   useEffect(() => {
     api
@@ -34,6 +35,7 @@ function IdeaContent() {
       .get(`/idea/${id}/comment`)
       .then((resp) => {
         setComment(resp.data);
+        setTotalComments(resp.data.length);
       })
       .catch((err) => {
         console.error(err);
@@ -52,11 +54,11 @@ function IdeaContent() {
       .then((resp) => {
         setComment([...comment, resp.data]);
         setTextComment("");
-        setRefreshComment(true);
+        setRefreshComment(!refreshComment);
       })
       .catch((err) => console.warn(err));
   };
-
+  // console.log(detailsIdea);
   const handleClickEdit = () => {
     setEditContent(!editContent);
   };
@@ -85,7 +87,7 @@ function IdeaContent() {
         <div className="idea-container">
           <div className="head-title-content">
             <h4>
-              {user.firstname} {user.lastname}
+              {detailsIdea.firstname} {detailsIdea.lastname}
             </h4>
             <button
               className="edit-btn"
@@ -108,19 +110,18 @@ function IdeaContent() {
           <div className="like-comment-div">
             <div className="like-div">
               <button className="like-btn" type="button">
-                <p className="like-count">12</p>
+                <p className="like-count">0</p>
                 <img src={likeBtn} alt="Cœur" className="heart" />
               </button>
             </div>
             <div className="add-comment-div">
               <button className="add-comment-btn" type="button">
-                <p className="comment-count">0</p>
+                <p className="comment-count">{totalComments}</p>
                 <img
                   src={speechBubble}
                   alt="Logo commentaire"
                   className="speech-bubble"
                 />
-                <p className="add-comment">+ Commentaire</p>
               </button>
             </div>
           </div>

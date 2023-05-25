@@ -7,12 +7,12 @@ class IdeaManager extends AbstractManager {
 
   findByUser(id) {
     return this.database.query(
-      `SELECT i.*, u.id FROM ${this.table} i
+      `SELECT i.*, u.id AS userId, u.firstname, u.lastname FROM ${this.table} i
       INNER JOIN useridea ui
       ON i.id = ui.ideaId
       INNER JOIN user u
       ON ui.userId = u.id
-      WHERE u.id = ?
+      WHERE i.id = ?
       AND ui.postCreator = 1
       `,
       [id]

@@ -26,7 +26,6 @@ function IdeaUpdate({ detailsIdea, setDetailsIdea, handleClickEdit }) {
           <textarea
             className="content-idea"
             type="text"
-            placeholder=" Modifier votre idée ici..."
             value={updateTextIdea}
             onChange={(e) => setUpdateTextIdea(e.target.value)}
           />
