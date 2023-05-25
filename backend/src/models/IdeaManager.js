@@ -47,7 +47,11 @@ class IdeaManager extends AbstractManager {
   }
 
   delete(id) {
-    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
+    return this.database.query(
+      `DELETE FROM ${this.table} 
+      WHERE id = ?`,
+      [id]
+    );
   }
 }
 
