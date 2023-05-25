@@ -5,6 +5,8 @@ import useApi from "../../services/useApi";
 function ListUser() {
   const [users, setUsers] = useState([]);
   const [updatedUser, setUpdatedUser] = useState([]);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   const api = useApi();
   const changedRoleId = 4;
@@ -19,6 +21,8 @@ function ListUser() {
       .then((res) => {
         console.warn(res);
         setUsers(users.filter((user) => user.id !== userId));
+        setUserToDelete(null);
+        setShowConfirmation(false);
       })
       .catch((err) => {
         console.warn(err);
@@ -27,6 +31,11 @@ function ListUser() {
 
   const selectUserForUpdate = (user) => {
     setUpdatedUser(user);
+  };
+
+  const confirmDelete = (user) => {
+    setUserToDelete(user);
+    setShowConfirmation(true);
   };
 
   useEffect(() => {
@@ -68,24 +77,47 @@ function ListUser() {
                 >
                   Modifier
                 </Link>
-                {updatedUser !== null && (
-                  <button
-                    className="button"
-                    name="roleId"
-                    type="submit"
-                    value={updatedUser.roleId}
-                    onClick={() => handleUpdate(user.id)}
-                  >
-                    Supprimer
-                  </button>
-                )}
+                <button
+                  className="button"
+                  name="roleId"
+                  type="submit"
+                  onClick={() => confirmDelete(user)}
+                >
+                  Supprimer
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
+      {showConfirmation && (
+        <div className="deleteContainer">
+          <div className="deleteConfirmation">
+            <p>
+              Voulez-vous vraiment supprimer l'utilisateur{" "}
+              {userToDelete.firstname} {userToDelete.lastname} ?
+            </p>
+            <div className="deleteConfirmationButtons">
+              <button
+                type="submit"
+                className="deleteConfirmationButton"
+                value={updatedUser.roleId}
+                onClick={() => handleUpdate(userToDelete.id)}
+              >
+                Oui
+              </button>
+              <button
+                type="submit"
+                className="deleteConfirmationButton"
+                onClick={() => setShowConfirmation(false)}
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
 export default ListUser;
