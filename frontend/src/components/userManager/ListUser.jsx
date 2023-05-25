@@ -2,13 +2,46 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApi from "../../services/useApi";
 
-function ListUser() {
+// eslint-disable-next-line react/prop-types
+function ListUser({ companyId }) {
   const [users, setUsers] = useState([]);
+  const [updatedUser, setUpdatedUser] = useState([]);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   const api = useApi();
+  const changedRoleId = 4;
+
+  const handleUpdate = (userId) => {
+    const roleToUpdate = {
+      ...updatedUser,
+      roleId: changedRoleId,
+    };
+    api
+      .put(`/user/role/${userId}`, roleToUpdate)
+      .then((res) => {
+        console.warn(res);
+        setUsers(users.filter((user) => user.id !== userId));
+        setUserToDelete(null);
+        setShowConfirmation(false);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
+
+  const selectUserForUpdate = (user) => {
+    setUpdatedUser(user);
+  };
+
+  const confirmDelete = (user) => {
+    setUserToDelete(user);
+    setShowConfirmation(true);
+  };
+
   useEffect(() => {
     api
-      .get("/user")
+      .get(`/user/company/${companyId}`)
       .then((res) => {
         console.warn(res);
         setUsers(res.data);
@@ -21,7 +54,7 @@ function ListUser() {
   return (
     <div className="listUserContainer">
       <h2>Liste d'utilisateurs</h2>
-      <Link to="/User/Add" className="addUserButton">
+      <Link to="/user/add" className="addUserButton">
         Ajouter un utilisateur
       </Link>
       <div className="listUserCards">
@@ -39,12 +72,52 @@ function ListUser() {
                 <div className="listUserCardName">
                   {user.firstname} {user.lastname}
                 </div>
-                <Link to={`/User/${user.id}`}>Modifier</Link>
+                <Link
+                  to={`/user/${user.id}`}
+                  onClick={() => selectUserForUpdate(user)}
+                >
+                  Modifier
+                </Link>
+                <button
+                  className="button"
+                  name="roleId"
+                  type="submit"
+                  onClick={() => confirmDelete(user)}
+                >
+                  Supprimer
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
+      {showConfirmation && (
+        <div className="deleteContainer">
+          <div className="deleteConfirmation">
+            <p>
+              Voulez-vous vraiment supprimer l'utilisateur{" "}
+              {userToDelete.firstname} {userToDelete.lastname} ?
+            </p>
+            <div className="deleteConfirmationButtons">
+              <button
+                type="submit"
+                className="deleteConfirmationButton"
+                value={updatedUser.roleId}
+                onClick={() => handleUpdate(userToDelete.id)}
+              >
+                Oui
+              </button>
+              <button
+                type="submit"
+                className="deleteConfirmationButton"
+                onClick={() => setShowConfirmation(false)}
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

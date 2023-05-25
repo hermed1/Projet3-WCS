@@ -100,8 +100,8 @@ function UserEdit() {
               onChange={handleInputChange}
             >
               <option value="">--Choisir un rôle--</option>
-              <option value="1">Administrateur</option>
-              <option value="2">Utilisateur</option>
+              <option value="2">Administrateur</option>
+              <option value="3">Utilisateur</option>
             </select>
           </label>
           <label htmlFor="teamId" className="editFormLabel">

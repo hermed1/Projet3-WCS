@@ -12,6 +12,7 @@ import "./App.css";
 import "./style/index.scss";
 import UserEditPage from "./pages/UserEditPage";
 import UserAddPage from "./pages/UserAddPage";
+import ListUser from "./components/userManager/ListUser";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -28,11 +29,12 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Entreprise />} />
+              <Route path="/user/company/:companyId" element={<ListUser />} />
               <Route path="/idea" element={<Idea />} />
               <Route path="/idea/:id" element={<IdeaContent />} />
               <Route path="/profil" element={<Profile />} />
-              <Route path="/User/:id" element={<UserEditPage />} />
-              <Route path="/User/Add" element={<UserAddPage />} />
+              <Route path="/user/:id" element={<UserEditPage />} />
+              <Route path="/user/add" element={<UserAddPage />} />
               <Route path="/addCompany" element={<AddCompany />} />
               <Route path="/register" element={<AddCompany />} />
               <Route path="/register/:id" element={<Entreprise />} />

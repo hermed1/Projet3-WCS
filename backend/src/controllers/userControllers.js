@@ -25,9 +25,14 @@ const validate = (data, forCreation = true) => {
     .validate(data, { abortEarly: false }).error;
 };
 
+// eslint-disable-next-line consistent-return
 const browse = (req, res) => {
+  const companyId = parseInt(req.params.id, 10);
+  if (companyId === req.payload.sub) {
+    return res.status(201);
+  }
   models.user
-    .findAll()
+    .findAll(companyId)
     .then(([rows]) => {
       res.send(rows);
     })
@@ -169,6 +174,30 @@ const findByEmailToNext = (req, res, next) => {
     });
 };
 
+const roleUpdate = async (req, res) => {
+  const errors = validate(req.body, false);
+  if (errors) {
+    console.warn(errors);
+    res.status(422).send({ errors });
+    return;
+  }
+  const id = parseInt(req.params.id, 10);
+  const { roleId } = req.body;
+  models.user
+    .updateRoleId(id, roleId)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   browse,
   read,
@@ -176,4 +205,5 @@ module.exports = {
   add,
   destroy,
   findByEmailToNext,
+  roleUpdate,
 };
