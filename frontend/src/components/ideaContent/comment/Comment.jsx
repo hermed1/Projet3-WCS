@@ -40,7 +40,6 @@ function Comment({ text, createDate, firstname, lastname }) {
               alt="Logo commentaire"
               className="speech-bubble"
             />
-            <p className="add-comment">+ Commentaire</p>
           </button>
         </div>
       </div>

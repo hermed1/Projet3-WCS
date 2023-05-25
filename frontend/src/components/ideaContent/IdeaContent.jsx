@@ -58,9 +58,12 @@ function IdeaContent() {
       })
       .catch((err) => console.warn(err));
   };
-  // console.log(detailsIdea);
+
   const handleClickEdit = () => {
-    setEditContent(!editContent);
+    // Add restriction admin
+    if (user.id === detailsIdea.userId) {
+      setEditContent(!editContent);
+    }
   };
 
   return (
