@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import Comment from "./comment/Comment";
 import IdeaUpdate from "./IdeaUpdate";
@@ -15,6 +15,7 @@ function IdeaContent() {
   const [comment, setComment] = useState([]);
   const [detailsIdea, setDetailsIdea] = useState({});
   const [editContent, setEditContent] = useState(false);
+  const navigate = useNavigate();
   const [refreshComment, setRefreshComment] = useState(false);
   const [textComment, setTextComment] = useState("");
   const [totalComments, setTotalComments] = useState(0);
@@ -66,6 +67,15 @@ function IdeaContent() {
     }
   };
 
+  const handleClickDeleteIdea = () => {
+    api
+      .delete(`/idea/${id}`)
+      .then(() => {
+        navigate("/idea");
+      })
+      .catch((err) => console.warn(err));
+  };
+
   return (
     <section className="new-idea-section">
       <div className="idea-section">
@@ -76,6 +86,13 @@ function IdeaContent() {
           </button>
           <button type="button" className="idea-section-btn">
             Sous-Catégories
+          </button>
+          <button
+            type="button"
+            className="idea-section-btn"
+            onClick={handleClickDeleteIdea}
+          >
+            Supprimer
           </button>
         </div>
       </div>

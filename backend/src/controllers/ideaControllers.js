@@ -109,7 +109,7 @@ const destroy = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.send("Idea Delete").status(204);
       }
     })
     .catch((err) => {
