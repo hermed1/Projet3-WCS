@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useUser } from "../../contexts/UserContext";
 import useApi from "../../services/useApi";
 import backgroundImage from "../../assets/salesforce.jpeg";
+import logoImage from "../../assets/salesforce-logo.png";
 
 function Login({ handleLogin }) {
   const api = useApi();
@@ -49,7 +50,7 @@ function Login({ handleLogin }) {
         alert(errorMsg);
       });
   };
-  const style = {
+  const containerStyle = {
     backgroundImage: `url(${backgroundImage})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -59,10 +60,21 @@ function Login({ handleLogin }) {
     justifyContent: "center",
     height: "100vh",
     opacity: "0.8",
+    position: "relative",
+  };
+
+  const logoStyle = {
+    position: "absolute",
+    top: "15%",
+    left: "15%",
+    transform: "translate(-50%, -50%)",
+    width: "30vh",
+    height: "auto",
   };
 
   return (
-    <div style={style}>
+    <div style={containerStyle}>
+      <img src={logoImage} alt="Logo" style={logoStyle} />
       <div className="loginFormContainer">
         <p className="loginTitle">Connexion</p>
         <form onSubmit={handleSubmit} className="loginForm">

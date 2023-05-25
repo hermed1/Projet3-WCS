@@ -80,8 +80,7 @@ class UserManager extends AbstractManager {
 
   findByEmail(email) {
     return this.database.query(
-      `
-      SELECT user.id, firstname,
+      `SELECT user.id, firstname,
       lastname,
       email,
       dateOfBirth,
@@ -98,8 +97,9 @@ class UserManager extends AbstractManager {
     );
   }
 
-  findAll() {
-    return this.database.query(`select id, firstname,
+  findAll(companyId) {
+    return this.database.query(
+      `select user.id, firstname,
   lastname,
   email,
   dateOfBirth,
@@ -107,7 +107,17 @@ class UserManager extends AbstractManager {
   profilePicture,
   creationDate,
   roleId,
-  teamId FROM  ${this.table}`);
+  companyId
+  teamId FROM user, team  WHERE roleId != 4 and user.teamId = team.id and companyId = ?`,
+      [companyId]
+    );
+  }
+
+  updateRoleId(id, roleId) {
+    return this.database.query(`UPDATE user SET roleId = ? WHERE id = ?`, [
+      roleId,
+      id,
+    ]);
   }
 }
 

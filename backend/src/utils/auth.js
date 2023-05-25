@@ -64,7 +64,7 @@ const verifyToken = (req, res, next) => {
     next();
   } catch (err) {
     console.warn(err);
-    return res.status(500);
+    return res.status(500).send();
   }
 };
 

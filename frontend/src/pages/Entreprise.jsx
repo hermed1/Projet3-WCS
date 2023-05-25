@@ -226,7 +226,7 @@ function Entreprise() {
           </section>
           <div className="company__users">
             <h2>Employés inscrits</h2>
-            <ListUser />
+            <ListUser companyId={companyId} />
           </div>
           <AddCompany />
           <AddTeam />
