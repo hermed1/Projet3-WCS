@@ -35,7 +35,11 @@ function IdeaContent() {
     api
       .get(`/idea/${id}/comment`)
       .then((resp) => {
-        setComment(resp.data);
+        setComment(
+          resp.data.sort(
+            (a, b) => new Date(a.createDate) - new Date(b.createDate)
+          )
+        );
         setTotalComments(resp.data.length);
       })
       .catch((err) => {
@@ -68,12 +72,17 @@ function IdeaContent() {
   };
 
   const handleClickDeleteIdea = () => {
+    // Add restriction admin
     api
       .delete(`/idea/${id}`)
       .then(() => {
         navigate("/idea");
       })
       .catch((err) => console.warn(err));
+  };
+
+  const handleCommentUpdate = () => {
+    setRefreshComment(!refreshComment);
   };
 
   return (
@@ -87,6 +96,7 @@ function IdeaContent() {
           <button type="button" className="idea-section-btn">
             Sous-Catégories
           </button>
+          {/* Add restriction admin */}
           <button
             type="button"
             className="idea-section-btn"
@@ -175,10 +185,13 @@ function IdeaContent() {
           {comment.map((item) => (
             <Comment
               key={item.id}
+              id={item.id}
               text={item.text}
               createDate={item.createDate}
               firstname={item.firstname}
               lastname={item.lastname}
+              autorId={item.autorId}
+              handleCommentUpdate={handleCommentUpdate}
             />
           ))}
         </div>

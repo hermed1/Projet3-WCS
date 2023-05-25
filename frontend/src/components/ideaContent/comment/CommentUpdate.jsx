@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import useApi from "../../services/useApi";
+import useApi from "../../../services/useApi";
 
-function IdeaUpdate({ detailsIdea, setDetailsIdea, handleClickEdit }) {
+function CommentUpdate({ id, text, handleClickEdit, handleCommentUpdate }) {
   const api = useApi();
-  const [updateTextIdea, setUpdateTextIdea] = useState(detailsIdea.text);
+  const [updateTextComment, setUpdateTextComment] = useState(text);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    let updateText = updateTextIdea;
+    let updateText = updateTextComment;
 
     if (!updateText.includes("(modifié)")) {
       updateText += " (modifié)";
     }
 
     api
-      .put(`/idea/${detailsIdea.id}`, { text: updateText })
+      .put(`/comment/${id}`, { text: updateText })
       .then(() => {
-        setDetailsIdea({ ...detailsIdea, text: updateText });
         handleClickEdit();
+        handleCommentUpdate();
       })
       .catch((err) => {
         console.error(err);
@@ -36,8 +36,8 @@ function IdeaUpdate({ detailsIdea, setDetailsIdea, handleClickEdit }) {
           <textarea
             className="content-idea"
             type="text"
-            value={updateTextIdea}
-            onChange={(e) => setUpdateTextIdea(e.target.value)}
+            value={updateTextComment}
+            onChange={(e) => setUpdateTextComment(e.target.value)}
           />
 
           <div className="archive-idea">
@@ -49,7 +49,7 @@ function IdeaUpdate({ detailsIdea, setDetailsIdea, handleClickEdit }) {
               Annuler
             </button>
             <button type="submit" className="archive-idea-btn">
-              Modifier l'idée
+              Modifier le commentaire
             </button>
           </div>
         </div>
@@ -58,10 +58,11 @@ function IdeaUpdate({ detailsIdea, setDetailsIdea, handleClickEdit }) {
   );
 }
 
-IdeaUpdate.propTypes = {
-  detailsIdea: PropTypes.func.isRequired,
-  setDetailsIdea: PropTypes.func.isRequired,
+CommentUpdate.propTypes = {
+  id: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
   handleClickEdit: PropTypes.func.isRequired,
+  handleCommentUpdate: PropTypes.func.isRequired,
 };
 
-export default IdeaUpdate;
+export default CommentUpdate;

@@ -51,9 +51,10 @@ const edit = (req, res) => {
   }
 
   const id = parseInt(req.params.id, 10);
+  const { text } = req.body;
 
   models.comment
-    .update(id, req.body)
+    .update(id, text)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
