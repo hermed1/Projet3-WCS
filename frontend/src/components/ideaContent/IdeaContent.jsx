@@ -92,13 +92,15 @@ function IdeaContent() {
             <h4>
               {detailsIdea.firstname} {detailsIdea.lastname}
             </h4>
-            <button
-              className="edit-btn"
-              type="button"
-              onClick={handleClickEdit}
-            >
-              <img src={editBtn} alt="Logo edit" className="edit-img" />
-            </button>
+            {user.id === detailsIdea.userId && (
+              <button
+                className="edit-btn"
+                type="button"
+                onClick={handleClickEdit}
+              >
+                <img src={editBtn} alt="Logo edit" className="edit-img" />
+              </button>
+            )}
           </div>
 
           <p className="text-idea">
