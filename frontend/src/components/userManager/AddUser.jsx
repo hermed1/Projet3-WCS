@@ -55,6 +55,7 @@ function AddUser() {
       .get(`/team/${user.companyId}`)
       .then((res) => {
         setTeams(res.data);
+        setTeamId(res.data[0].id);
       })
       .catch((err) => {
         console.warn(err);

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import useApi from "../../../services/useApi";
 import { useUser } from "../../../contexts/UserContext";
 import likeBtn from "../../../assets/like-btn.png";
 import speechBubble from "../../../assets/speech-bubble.png";
 import editBtn from "../../../assets/edit-button.png";
 import CommentUpdate from "./CommentUpdate";
+import userRoles from "../../../utils/userRoles";
 
 function Comment({
   id,
@@ -15,13 +17,22 @@ function Comment({
   autorId,
   handleCommentUpdate,
 }) {
+  const api = useApi();
   const { user } = useUser();
   const [editContentComment, setEditContentComment] = useState(false);
 
   const handleClickEdit = () => {
-    // Add restriction admin
-    if (user.id === autorId) {
+    if (user.id === autorId || user.roleId === 2) {
       setEditContentComment(!editContentComment);
+    }
+  };
+
+  const handleClickDeleteComment = () => {
+    if (user.roleId === userRoles.ADMIN) {
+      api
+        .delete(`/comment/${id}`)
+        .then()
+        .catch((err) => console.warn(err));
     }
   };
 
@@ -40,13 +51,22 @@ function Comment({
             <h4>
               {firstname} {lastname}
             </h4>
-            {user.id === autorId && (
+            {(user.id === autorId || user.roleId === 2) && (
               <button
                 className="edit-btn"
                 type="button"
                 onClick={handleClickEdit}
               >
                 <img src={editBtn} alt="Logo edit" className="edit-img" />
+              </button>
+            )}
+            {user.roleId === userRoles.ADMIN && (
+              <button
+                type="button"
+                className="idea-section-btn"
+                onClick={handleClickDeleteComment}
+              >
+                Supprimer
               </button>
             )}
           </div>

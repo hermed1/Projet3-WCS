@@ -7,6 +7,7 @@ import editBtn from "../../assets/edit-button.png";
 import likeBtn from "../../assets/like-btn.png";
 import speechBubble from "../../assets/speech-bubble.png";
 import useApi from "../../services/useApi";
+import userRoles from "../../utils/userRoles";
 
 function IdeaContent() {
   const api = useApi();
@@ -65,20 +66,20 @@ function IdeaContent() {
   };
 
   const handleClickEdit = () => {
-    // Add restriction admin
-    if (user.id === detailsIdea.userId) {
+    if (user.id === detailsIdea.userId || user.roleId === userRoles.ADMIN) {
       setEditContent(!editContent);
     }
   };
 
   const handleClickDeleteIdea = () => {
-    // Add restriction admin
-    api
-      .delete(`/idea/${id}`)
-      .then(() => {
-        navigate("/idea");
-      })
-      .catch((err) => console.warn(err));
+    if (user.roleId === 2) {
+      api
+        .delete(`/idea/${id}`)
+        .then(() => {
+          navigate("/idea");
+        })
+        .catch((err) => console.warn(err));
+    }
   };
 
   const handleCommentUpdate = () => {
@@ -96,14 +97,15 @@ function IdeaContent() {
           <button type="button" className="idea-section-btn">
             Sous-Catégories
           </button>
-          {/* Add restriction admin */}
-          <button
-            type="button"
-            className="idea-section-btn"
-            onClick={handleClickDeleteIdea}
-          >
-            Supprimer
-          </button>
+          {user.roleId === userRoles.ADMIN && (
+            <button
+              type="button"
+              className="idea-section-btn"
+              onClick={handleClickDeleteIdea}
+            >
+              Supprimer
+            </button>
+          )}
         </div>
       </div>
 
@@ -119,7 +121,8 @@ function IdeaContent() {
             <h4>
               {detailsIdea.firstname} {detailsIdea.lastname}
             </h4>
-            {user.id === detailsIdea.userId && (
+            {(user.id === detailsIdea.userId ||
+              user.roleId === userRoles.ADMIN) && (
               <button
                 className="edit-btn"
                 type="button"
