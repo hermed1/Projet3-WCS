@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`idea` (
   `createDate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `companyId` INT NULL DEFAULT NULL,
   `pictureId` INT NULL DEFAULT NULL,
+  `archived` TINYINT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `picture_id_idx` (`pictureId` ASC) VISIBLE,
   INDEX `company_idea_id_idx` (`companyId` ASC, `pictureId` ASC) VISIBLE,

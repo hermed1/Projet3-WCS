@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { IoMdOpen } from "react-icons/io";
-import AddTeam from "../components/teamManager/AddTeam";
 import ListUser from "../components/userManager/ListUser";
 import AddCompany from "./AddCompany";
 import useApi from "../services/useApi";
@@ -229,7 +228,6 @@ function Entreprise() {
             <ListUser companyId={companyId} />
           </div>
           <AddCompany />
-          <AddTeam />
         </div>
       )}
     </div>

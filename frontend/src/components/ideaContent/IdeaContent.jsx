@@ -71,6 +71,24 @@ function IdeaContent() {
     }
   };
 
+  const handleClickArchiveIdea = () => {
+    // if (user.id === detailsIdea.userId || user.roleId === userRoles.ADMIN) {
+    const updatedIdea = {
+      ...detailsIdea,
+      archived: !detailsIdea.archived,
+      text: detailsIdea.text,
+    };
+
+    api
+      .put(`/idea/${id}`, updatedIdea)
+      .then(() => {
+        setDetailsIdea(updatedIdea);
+        // console.log(updatedIdea);
+      })
+      .catch((err) => console.warn(err));
+    // }
+  };
+
   const handleClickDeleteIdea = () => {
     if (user.roleId === 2) {
       api
@@ -94,9 +112,7 @@ function IdeaContent() {
           <button type="button" className="idea-section-btn">
             Catégories
           </button>
-          <button type="button" className="idea-section-btn">
-            Sous-Catégories
-          </button>
+
           {user.roleId === userRoles.ADMIN && (
             <button
               type="button"
@@ -162,7 +178,11 @@ function IdeaContent() {
           </div>
 
           <div className="archive-idea">
-            <button type="button" className="archive-idea-btn">
+            <button
+              type="button"
+              className="archive-idea-btn"
+              onClick={handleClickArchiveIdea}
+            >
               Archiver l'idée
             </button>
           </div>

@@ -17,6 +17,7 @@ function NewIdea() {
       title: titleIdea,
       text: textIdea,
       userId: user.id,
+      archived: 0,
     };
 
     try {

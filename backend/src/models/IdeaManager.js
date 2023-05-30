@@ -19,13 +19,13 @@ class IdeaManager extends AbstractManager {
     );
   }
 
-  insert(title, text, companyId, pictureId) {
+  insert(title, text, companyId, pictureId, archived) {
     return this.database.query(
       `insert into ${this.table} (title,
         text,
         companyId,
-        pictureId) VALUES (?, ?, ?, ?)`,
-      [title, text, companyId, pictureId]
+        pictureId, archived) VALUES (?, ?, ?, ?, ?)`,
+      [title, text, companyId, pictureId, archived]
     );
   }
 

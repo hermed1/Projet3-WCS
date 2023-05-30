@@ -11,6 +11,7 @@ const validate = (data, forCreation = true) => {
       createDate: joi.date().presence("optional").allow(null).allow(""),
       companyId: joi.number().min(0).presence("optional"),
       pictureId: joi.number().min(0).presence("optional"),
+      archived: joi.boolean().truthy(1).falsy(0).presence(presence),
       ideaId: joi.number().min(0).presence("optional"),
       userId: joi.number().min(0).presence("optional"),
     })
@@ -71,8 +72,8 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const { title, text, companyId, pictureId, userId } = req.body;
-  const data = { title, text, companyId, pictureId };
+  const { title, text, companyId, pictureId, archived, userId } = req.body;
+  const data = { title, text, companyId, pictureId, archived };
   const error = validate(data);
   if (error) {
     res.status(422).send({ error });
@@ -80,7 +81,7 @@ const add = (req, res) => {
   }
 
   models.idea
-    .insert(title, text, companyId, pictureId)
+    .insert(title, text, companyId, pictureId, archived)
     .then(([result]) => {
       const newIdeaId = result.insertId;
 
@@ -91,12 +92,12 @@ const add = (req, res) => {
         })
         .catch((err) => {
           console.error(err);
-          res.sendStatus(500);
+          res.send("Error autor").status(500);
         });
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.send("Error content").status(500);
     });
 };
 
