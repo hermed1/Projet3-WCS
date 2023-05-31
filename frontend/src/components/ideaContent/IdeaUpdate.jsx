@@ -9,13 +9,14 @@ function IdeaUpdate({ detailsIdea, setDetailsIdea, handleClickEdit }) {
   const handleUpdate = (e) => {
     e.preventDefault();
     let updateText = updateTextIdea;
+    const updateActionIdea = { text: updateText, action: "update" };
 
     if (!updateText.includes("(modifié)")) {
       updateText += " (modifié)";
     }
 
     api
-      .put(`/idea/${detailsIdea.id}`, { text: updateText })
+      .put(`/idea/${detailsIdea.id}`, updateActionIdea)
       .then(() => {
         setDetailsIdea({ ...detailsIdea, text: updateText });
         handleClickEdit();

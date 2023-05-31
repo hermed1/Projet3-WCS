@@ -46,6 +46,14 @@ class IdeaManager extends AbstractManager {
     );
   }
 
+  archive(id, archived) {
+    return this.database.query(
+      `UPDATE ${this.table}
+      SET archived = ? WHERE id = ?`,
+      [archived, id]
+    );
+  }
+
   delete(id) {
     return this.database.query(
       `DELETE FROM ${this.table} 

@@ -20,6 +20,7 @@ function IdeaContent() {
   const [refreshComment, setRefreshComment] = useState(false);
   const [textComment, setTextComment] = useState("");
   const [totalComments, setTotalComments] = useState(0);
+  const [refreshArchive, setRefreshArchive] = useState(false);
 
   useEffect(() => {
     api
@@ -30,7 +31,7 @@ function IdeaContent() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [refreshArchive]);
 
   useEffect(() => {
     api
@@ -72,21 +73,21 @@ function IdeaContent() {
   };
 
   const handleClickArchiveIdea = () => {
-    // if (user.id === detailsIdea.userId || user.roleId === userRoles.ADMIN) {
-    const updatedIdea = {
+    const updateArchiveIdea = {
       ...detailsIdea,
-      archived: !detailsIdea.archived,
-      text: detailsIdea.text,
+      archived: 1,
+      action: "archive",
     };
 
     api
-      .put(`/idea/${id}`, updatedIdea)
-      .then(() => {
-        setDetailsIdea(updatedIdea);
-        // console.log(updatedIdea);
+      .put(`/idea/${id}`, updateArchiveIdea)
+      .then((resp) => {
+        setDetailsIdea(resp.data);
+        setRefreshArchive(true);
       })
-      .catch((err) => console.warn(err));
-    // }
+      .catch((err) => {
+        console.warn(err);
+      });
   };
 
   const handleClickDeleteIdea = () => {
