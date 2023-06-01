@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { IoMdOpen } from "react-icons/io";
 import ListUser from "../components/userManager/ListUser";
@@ -218,9 +218,11 @@ function Entreprise() {
               <button type="button" className="buttons-container-item">
                 Ajouter un collaborateur
               </button>
-              <button type="button" className="buttons-container-item">
-                Idées archivées
-              </button>
+              <Link to="/idea" state={{ showArchivedIdeas: true }}>
+                <button type="button" className="buttons-container-item">
+                  Idées archivées
+                </button>
+              </Link>
             </div>
           </section>
           <div className="company__users">

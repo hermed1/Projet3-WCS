@@ -23,7 +23,12 @@ function Idea() {
   return (
     <div>
       <HeaderNavbar />
-      <IdeaList ideas={idea} setIdeas={setIdea} valide={valide} />
+      <IdeaList
+        ideas={idea}
+        setIdeas={setIdea}
+        valide={valide}
+        state={{ showArchivedIdeas: false }}
+      />
     </div>
   );
 }

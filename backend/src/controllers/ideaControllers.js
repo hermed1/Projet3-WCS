@@ -12,7 +12,7 @@ const validate = (data, forCreation = true) => {
       companyId: joi.number().min(0).presence("optional").allow(null).allow(""),
       pictureId: joi.number().min(0).presence("optional").allow(null).allow(""),
       archived: joi.boolean().truthy(1).falsy(0).presence(presence),
-      action: joi.string().max(20).presence(presence),
+      action: joi.string().max(20).presence("optional"),
       ideaId: joi.number().min(0).presence("optional"),
       userId: joi.number().min(0).presence("optional"),
       firstname: joi.string().max(255).presence("optional"),

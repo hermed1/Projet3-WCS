@@ -17,10 +17,10 @@ function IdeaContent() {
   const [detailsIdea, setDetailsIdea] = useState({});
   const [editContent, setEditContent] = useState(false);
   const navigate = useNavigate();
+  const [refreshAfterArchive, setRefreshAfterArchive] = useState(false);
   const [refreshComment, setRefreshComment] = useState(false);
   const [textComment, setTextComment] = useState("");
   const [totalComments, setTotalComments] = useState(0);
-  const [refreshArchive, setRefreshArchive] = useState(false);
 
   useEffect(() => {
     api
@@ -31,7 +31,7 @@ function IdeaContent() {
       .catch((err) => {
         console.error(err);
       });
-  }, [refreshArchive]);
+  }, [refreshAfterArchive]);
 
   useEffect(() => {
     api
@@ -83,7 +83,7 @@ function IdeaContent() {
       .put(`/idea/${id}`, updateArchiveIdea)
       .then((resp) => {
         setDetailsIdea(resp.data);
-        setRefreshArchive(true);
+        setRefreshAfterArchive(true);
       })
       .catch((err) => {
         console.warn(err);

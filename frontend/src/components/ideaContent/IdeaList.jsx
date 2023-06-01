@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import NewIdea from "../newIdea/NewIdea";
 
 function IdeaList({ ideas, setIdeas, valide }) {
   const [showNewIdea, setShowNewIdea] = useState(false);
+  const { state } = useLocation();
 
   const handleClickShowNewIdea = () => {
     setShowNewIdea(true);
@@ -14,23 +15,32 @@ function IdeaList({ ideas, setIdeas, valide }) {
     setIdeas(idea);
   };
 
+  const showArchivedIdeas = state ? state.showArchivedIdeas : false;
+  const isArchived = showArchivedIdeas
+    ? ideas.filter((item) => item.archived === 1)
+    : ideas.filter((item) => item.archived === 0);
+
   return (
     <div className="idea-list">
-      {showNewIdea ? (
-        <NewIdea />
-      ) : (
-        <button
-          className="btn-new-idea"
-          type="button"
-          onClick={handleClickShowNewIdea}
-        >
-          Nouvelle idée
-        </button>
+      {!showArchivedIdeas && (
+        <div>
+          {showNewIdea ? (
+            <NewIdea />
+          ) : (
+            <button
+              className="btn-new-idea"
+              type="button"
+              onClick={handleClickShowNewIdea}
+            >
+              Nouvelle idée
+            </button>
+          )}
+        </div>
       )}
 
       <section className="idea-list-content">
         {valide &&
-          ideas.map((item) => (
+          isArchived.map((item) => (
             <Link className="idea-list-content__link" to={`/idea/${item.id}`}>
               <img
                 src=""
