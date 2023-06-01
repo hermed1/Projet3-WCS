@@ -73,25 +73,27 @@ function IdeaContent() {
   };
 
   const handleClickArchiveIdea = () => {
-    const updateArchiveIdea = {
-      ...detailsIdea,
-      archived: 1,
-      action: "archive",
-    };
+    if (user.id === detailsIdea.userId || user.roleId === userRoles.ADMIN) {
+      const updateArchiveIdea = {
+        ...detailsIdea,
+        archived: 1,
+        action: "archive",
+      };
 
-    api
-      .put(`/idea/${id}`, updateArchiveIdea)
-      .then((resp) => {
-        setDetailsIdea(resp.data);
-        setRefreshAfterArchive(true);
-      })
-      .catch((err) => {
-        console.warn(err);
-      });
+      api
+        .put(`/idea/${id}`, updateArchiveIdea)
+        .then((resp) => {
+          setDetailsIdea(resp.data);
+          setRefreshAfterArchive(true);
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
+    }
   };
 
   const handleClickDeleteIdea = () => {
-    if (user.roleId === 2) {
+    if (user.roleId === userRoles.ADMIN) {
       api
         .delete(`/idea/${id}`)
         .then(() => {
@@ -108,7 +110,14 @@ function IdeaContent() {
   return (
     <section className="new-idea-section">
       <div className="idea-section">
-        <h1 className="idea-title">{detailsIdea.title}</h1>
+        <h1 className="idea-title">
+          {detailsIdea.title}
+          {detailsIdea.archived === 1 && (
+            <span className="archived-text">
+              <h6> Idée archivée</h6>
+            </span>
+          )}
+        </h1>
         <div className="idea-section-btn-div">
           <button type="button" className="idea-section-btn">
             Catégories
@@ -179,13 +188,17 @@ function IdeaContent() {
           </div>
 
           <div className="archive-idea">
-            <button
-              type="button"
-              className="archive-idea-btn"
-              onClick={handleClickArchiveIdea}
-            >
-              Archiver l'idée
-            </button>
+            {(user.id === detailsIdea.userId ||
+              user.roleId === userRoles.ADMIN) &&
+              detailsIdea.archived !== 1 && (
+                <button
+                  type="button"
+                  className="archive-idea-btn"
+                  onClick={handleClickArchiveIdea}
+                >
+                  Archiver l'idée
+                </button>
+              )}
           </div>
         </div>
       )}
