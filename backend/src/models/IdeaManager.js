@@ -7,25 +7,25 @@ class IdeaManager extends AbstractManager {
 
   findByUser(id) {
     return this.database.query(
-      `SELECT i.*, u.id FROM ${this.table} i
+      `SELECT i.*, u.id AS userId, u.firstname, u.lastname FROM ${this.table} i
       INNER JOIN useridea ui
       ON i.id = ui.ideaId
       INNER JOIN user u
       ON ui.userId = u.id
-      WHERE u.id = ?
+      WHERE i.id = ?
       AND ui.postCreator = 1
       `,
       [id]
     );
   }
 
-  insert(title, text, companyId, pictureId) {
+  insert(title, text, companyId, pictureId, archived) {
     return this.database.query(
       `insert into ${this.table} (title,
         text,
         companyId,
-        pictureId) VALUES (?, ?, ?, ?)`,
-      [title, text, companyId, pictureId]
+        pictureId, archived) VALUES (?, ?, ?, ?, ?)`,
+      [title, text, companyId, pictureId, archived]
     );
   }
 
@@ -46,8 +46,20 @@ class IdeaManager extends AbstractManager {
     );
   }
 
+  archive(id, archived) {
+    return this.database.query(
+      `UPDATE ${this.table}
+      SET archived = ? WHERE id = ?`,
+      [archived, id]
+    );
+  }
+
   delete(id) {
-    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
+    return this.database.query(
+      `DELETE FROM ${this.table} 
+      WHERE id = ?`,
+      [id]
+    );
   }
 }
 

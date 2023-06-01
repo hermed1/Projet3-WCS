@@ -22,23 +22,20 @@ USE `salesforce` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `salesforce`.`company` ;
 
-
 CREATE TABLE IF NOT EXISTS `salesforce`.`company` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `companyName` VARCHAR(150) NOT NULL,
   `nSiret` VARCHAR(45) NOT NULL,
-  `creationDate` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `creationDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `contactPerson` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(45) NULL DEFAULT NULL,
-  `companyLogo` VARCHAR(255) DEFAULT NULL,
-  
+  `companyLogo` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 
 -- -----------------------------------------------------
@@ -61,11 +58,11 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `salesforce`.`pictureStorage`
+-- Table `salesforce`.`picturestorage`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `salesforce`.`pictureStorage` ;
+DROP TABLE IF EXISTS `salesforce`.`picturestorage` ;
 
-CREATE TABLE IF NOT EXISTS `salesforce`.`pictureStorage` (
+CREATE TABLE IF NOT EXISTS `salesforce`.`picturestorage` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `picture` VARCHAR(255) NOT NULL,
   `companyId` INT NOT NULL,
@@ -88,16 +85,18 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`idea` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(120) NOT NULL,
   `text` VARCHAR(4000) NOT NULL,
-  `createDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `companyId` INT,
-  `pictureId` INT,
+  `createDate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `companyId` INT NULL DEFAULT NULL,
+  `pictureId` INT NULL DEFAULT NULL,
+  `archived` TINYINT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `picture_id_idx` (`pictureId` ASC) VISIBLE,
   INDEX `company_idea_id_idx` (`companyId` ASC, `pictureId` ASC) VISIBLE,
   CONSTRAINT `pictureid`
     FOREIGN KEY (`pictureId`)
-    REFERENCES `salesforce`.`pictureStorage` (`id`))
+    REFERENCES `salesforce`.`picturestorage` (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -110,14 +109,16 @@ DROP TABLE IF EXISTS `salesforce`.`commentary` ;
 CREATE TABLE IF NOT EXISTS `salesforce`.`commentary` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `text` VARCHAR(2000) NOT NULL,
-  `createDate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `createDate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `ideaCommentaryId` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `idea_commentary_id_idx` (`ideaCommentaryId` ASC) VISIBLE,
   CONSTRAINT `ideaCommentaryId`
     FOREIGN KEY (`ideaCommentaryId`)
-    REFERENCES `salesforce`.`idea` (`id`))
+    REFERENCES `salesforce`.`idea` (`id`)
+    ON DELETE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -132,17 +133,17 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`role` (
   `name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `salesforce`.`subCategory`
+-- Table `salesforce`.`subcategory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `salesforce`.`subCategory` ;
+DROP TABLE IF EXISTS `salesforce`.`subcategory` ;
 
-CREATE TABLE IF NOT EXISTS `salesforce`.`subCategory` (
+CREATE TABLE IF NOT EXISTS `salesforce`.`subcategory` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `categoryId` INT NOT NULL,
@@ -155,18 +156,18 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`subCategory` (
     REFERENCES `salesforce`.`category` (`id`),
   CONSTRAINT `subcategoryPictureId`
     FOREIGN KEY (`pictureId`)
-    REFERENCES `salesforce`.`pictureStorage` (`id`))
+    REFERENCES `salesforce`.`picturestorage` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `salesforce`.`subCommentary`
+-- Table `salesforce`.`subcommentary`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `salesforce`.`subCommentary` ;
+DROP TABLE IF EXISTS `salesforce`.`subcommentary` ;
 
-CREATE TABLE IF NOT EXISTS `salesforce`.`subCommentary` (
+CREATE TABLE IF NOT EXISTS `salesforce`.`subcommentary` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `text` VARCHAR(2000) NULL DEFAULT NULL,
   `createDate` DATE NULL DEFAULT NULL,
@@ -196,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`team` (
     FOREIGN KEY (`companyId`)
     REFERENCES `salesforce`.`company` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -205,7 +206,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `salesforce`.`user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `salesforce`.`user` ;
-
 
 CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -230,16 +230,17 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`user` (
     FOREIGN KEY (`roleId`)
     REFERENCES `salesforce`.`role` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 33
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
--- -----------------------------------------------------
--- Table `salesforce`.`userCommentary`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `salesforce`.`userCommentary` ;
 
-CREATE TABLE IF NOT EXISTS `salesforce`.`userCommentary` (
+-- -----------------------------------------------------
+-- Table `salesforce`.`usercommentary`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `salesforce`.`usercommentary` ;
+
+CREATE TABLE IF NOT EXISTS `salesforce`.`usercommentary` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `liked` TINYINT NULL DEFAULT NULL,
   `postCreator` TINYINT NULL DEFAULT NULL,
@@ -250,21 +251,23 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`userCommentary` (
   INDEX `user_commentary_commentary_id_idx` (`commentarytaryId` ASC) VISIBLE,
   CONSTRAINT `userCommentaryCommentaryId`
     FOREIGN KEY (`commentarytaryId`)
-    REFERENCES `salesforce`.`commentary` (`id`),
+    REFERENCES `salesforce`.`commentary` (`id`)
+    ON DELETE CASCADE,
   CONSTRAINT `userCommentaryUserId`
     FOREIGN KEY (`userId`)
     REFERENCES `salesforce`.`user` (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `salesforce`.`userIdea`
+-- Table `salesforce`.`useridea`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `salesforce`.`userIdea` ;
+DROP TABLE IF EXISTS `salesforce`.`useridea` ;
 
-CREATE TABLE IF NOT EXISTS `salesforce`.`userIdea` (
+CREATE TABLE IF NOT EXISTS `salesforce`.`useridea` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `liked` TINYINT NOT NULL,
   `postCreator` TINYINT NULL DEFAULT NULL,
@@ -275,11 +278,13 @@ CREATE TABLE IF NOT EXISTS `salesforce`.`userIdea` (
   INDEX `user_idea_id_idx` (`userId` ASC) VISIBLE,
   CONSTRAINT `ideaUserId`
     FOREIGN KEY (`ideaId`)
-    REFERENCES `salesforce`.`idea` (`id`),
+    REFERENCES `salesforce`.`idea` (`id`)
+    ON DELETE CASCADE,
   CONSTRAINT `userIdeaId`
     FOREIGN KEY (`userId`)
     REFERENCES `salesforce`.`user` (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -287,6 +292,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 
 INSERT INTO role (name)

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import Comment from "./comment/Comment";
 import IdeaUpdate from "./IdeaUpdate";
@@ -7,6 +7,7 @@ import editBtn from "../../assets/edit-button.png";
 import likeBtn from "../../assets/like-btn.png";
 import speechBubble from "../../assets/speech-bubble.png";
 import useApi from "../../services/useApi";
+import userRoles from "../../utils/userRoles";
 
 function IdeaContent() {
   const api = useApi();
@@ -15,8 +16,11 @@ function IdeaContent() {
   const [comment, setComment] = useState([]);
   const [detailsIdea, setDetailsIdea] = useState({});
   const [editContent, setEditContent] = useState(false);
+  const navigate = useNavigate();
+  const [refreshAfterArchive, setRefreshAfterArchive] = useState(false);
   const [refreshComment, setRefreshComment] = useState(false);
   const [textComment, setTextComment] = useState("");
+  const [totalComments, setTotalComments] = useState(0);
 
   useEffect(() => {
     api
@@ -27,13 +31,18 @@ function IdeaContent() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [refreshAfterArchive]);
 
   useEffect(() => {
     api
       .get(`/idea/${id}/comment`)
       .then((resp) => {
-        setComment(resp.data);
+        setComment(
+          resp.data.sort(
+            (a, b) => new Date(a.createDate) - new Date(b.createDate)
+          )
+        );
+        setTotalComments(resp.data.length);
       })
       .catch((err) => {
         console.error(err);
@@ -52,26 +61,77 @@ function IdeaContent() {
       .then((resp) => {
         setComment([...comment, resp.data]);
         setTextComment("");
-        setRefreshComment(true);
+        setRefreshComment(!refreshComment);
       })
       .catch((err) => console.warn(err));
   };
 
   const handleClickEdit = () => {
-    setEditContent(!editContent);
+    if (user.id === detailsIdea.userId || user.roleId === userRoles.ADMIN) {
+      setEditContent(!editContent);
+    }
+  };
+
+  const handleClickArchiveIdea = () => {
+    if (user.id === detailsIdea.userId || user.roleId === userRoles.ADMIN) {
+      const updateArchiveIdea = {
+        ...detailsIdea,
+        archived: 1,
+        action: "archive",
+      };
+
+      api
+        .put(`/idea/${id}`, updateArchiveIdea)
+        .then((resp) => {
+          setDetailsIdea(resp.data);
+          setRefreshAfterArchive(true);
+        })
+        .catch((err) => {
+          console.warn(err);
+        });
+    }
+  };
+
+  const handleClickDeleteIdea = () => {
+    if (user.roleId === userRoles.ADMIN) {
+      api
+        .delete(`/idea/${id}`)
+        .then(() => {
+          navigate("/idea");
+        })
+        .catch((err) => console.warn(err));
+    }
+  };
+
+  const handleCommentUpdate = () => {
+    setRefreshComment(!refreshComment);
   };
 
   return (
     <section className="new-idea-section">
       <div className="idea-section">
-        <h1 className="idea-title">{detailsIdea.title}</h1>
+        <h1 className="idea-title">
+          {detailsIdea.title}
+          {detailsIdea.archived === 1 && (
+            <span className="archived-text">
+              <h6> Idée archivée</h6>
+            </span>
+          )}
+        </h1>
         <div className="idea-section-btn-div">
           <button type="button" className="idea-section-btn">
             Catégories
           </button>
-          <button type="button" className="idea-section-btn">
-            Sous-Catégories
-          </button>
+
+          {user.roleId === userRoles.ADMIN && (
+            <button
+              type="button"
+              className="idea-section-btn"
+              onClick={handleClickDeleteIdea}
+            >
+              Supprimer
+            </button>
+          )}
         </div>
       </div>
 
@@ -85,15 +145,18 @@ function IdeaContent() {
         <div className="idea-container">
           <div className="head-title-content">
             <h4>
-              {user.firstname} {user.lastname}
+              {detailsIdea.firstname} {detailsIdea.lastname}
             </h4>
-            <button
-              className="edit-btn"
-              type="button"
-              onClick={handleClickEdit}
-            >
-              <img src={editBtn} alt="Logo edit" className="edit-img" />
-            </button>
+            {(user.id === detailsIdea.userId ||
+              user.roleId === userRoles.ADMIN) && (
+              <button
+                className="edit-btn"
+                type="button"
+                onClick={handleClickEdit}
+              >
+                <img src={editBtn} alt="Logo edit" className="edit-img" />
+              </button>
+            )}
           </div>
 
           <p className="text-idea">
@@ -108,27 +171,34 @@ function IdeaContent() {
           <div className="like-comment-div">
             <div className="like-div">
               <button className="like-btn" type="button">
-                <p className="like-count">12</p>
+                <p className="like-count">0</p>
                 <img src={likeBtn} alt="Cœur" className="heart" />
               </button>
             </div>
             <div className="add-comment-div">
               <button className="add-comment-btn" type="button">
-                <p className="comment-count">0</p>
+                <p className="comment-count">{totalComments}</p>
                 <img
                   src={speechBubble}
                   alt="Logo commentaire"
                   className="speech-bubble"
                 />
-                <p className="add-comment">+ Commentaire</p>
               </button>
             </div>
           </div>
 
           <div className="archive-idea">
-            <button type="button" className="archive-idea-btn">
-              Archiver l'idée
-            </button>
+            {(user.id === detailsIdea.userId ||
+              user.roleId === userRoles.ADMIN) &&
+              detailsIdea.archived !== 1 && (
+                <button
+                  type="button"
+                  className="archive-idea-btn"
+                  onClick={handleClickArchiveIdea}
+                >
+                  Archiver l'idée
+                </button>
+              )}
           </div>
         </div>
       )}
@@ -152,10 +222,13 @@ function IdeaContent() {
           {comment.map((item) => (
             <Comment
               key={item.id}
+              id={item.id}
               text={item.text}
               createDate={item.createDate}
               firstname={item.firstname}
               lastname={item.lastname}
+              autorId={item.autorId}
+              handleCommentUpdate={handleCommentUpdate}
             />
           ))}
         </div>

@@ -24,8 +24,6 @@ router.post("/idea", ideaControllers.add);
 router.delete("/idea/:id", ideaControllers.destroy);
 
 router.get("/idea/:id/comment/", commentControllers.browse);
-
-router.get("/comment", commentControllers.browse);
 router.get("/comment/:id", commentControllers.read);
 router.put("/comment/:id", commentControllers.edit);
 router.post("/comment", commentControllers.add);

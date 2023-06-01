@@ -8,7 +8,7 @@ class CommentManager extends AbstractManager {
   findAllbyIdea(id) {
     return this.database.query(
       `
-    SELECT c.*, u.lastname, u.firstname FROM ${this.table} c
+    SELECT c.*, u.id AS autorId, u.lastname, u.firstname FROM ${this.table} c
     INNER JOIN usercommentary uc 
     ON c.id = uc.commentarytaryId
     INNER JOIN user u 
@@ -40,7 +40,7 @@ class CommentManager extends AbstractManager {
   update(id, comment) {
     return this.database.query(
       `UPDATE ${this.table}
-          SET ? WHERE id = ?`,
+          SET text = ? WHERE id = ?`,
       [comment, id]
     );
   }

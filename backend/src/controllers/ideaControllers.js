@@ -9,10 +9,14 @@ const validate = (data, forCreation = true) => {
       title: joi.string().max(120).presence(presence),
       text: joi.string().max(4000).presence(presence),
       createDate: joi.date().presence("optional").allow(null).allow(""),
-      companyId: joi.number().min(0).presence("optional"),
-      pictureId: joi.number().min(0).presence("optional"),
+      companyId: joi.number().min(0).presence("optional").allow(null).allow(""),
+      pictureId: joi.number().min(0).presence("optional").allow(null).allow(""),
+      archived: joi.boolean().truthy(1).falsy(0).presence(presence),
+      action: joi.string().max(20).presence("optional"),
       ideaId: joi.number().min(0).presence("optional"),
       userId: joi.number().min(0).presence("optional"),
+      firstname: joi.string().max(255).presence("optional"),
+      lastname: joi.string().max(255).presence("optional"),
     })
     .validate(data, { abortEarly: false }).error;
 };
@@ -31,7 +35,7 @@ const browse = (req, res) => {
 
 const read = (req, res) => {
   models.idea
-    .find(req.params.id)
+    .findByUser(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -53,26 +57,45 @@ const edit = (req, res) => {
   }
 
   const id = parseInt(req.params.id, 10);
-  const { text } = req.body;
 
-  models.idea
-    .update(id, text)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.body.action === "update") {
+    const { text } = req.body;
+
+    models.idea
+      .update(id, text)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else if (req.body.action === "archive") {
+    const { archived } = req.body;
+
+    models.idea
+      .archive(id, archived)
+      .then(([result]) => {
+        if (result.affectedRows === 0) {
+          res.sendStatus(404);
+        } else {
+          res.sendStatus(204);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
 };
 
 const add = (req, res) => {
-  const { title, text, companyId, pictureId, userId } = req.body;
-  const data = { title, text, companyId, pictureId };
+  const { title, text, companyId, pictureId, archived, userId } = req.body;
+  const data = { title, text, companyId, pictureId, archived };
   const error = validate(data);
   if (error) {
     res.status(422).send({ error });
@@ -80,7 +103,7 @@ const add = (req, res) => {
   }
 
   models.idea
-    .insert(title, text, companyId, pictureId)
+    .insert(title, text, companyId, pictureId, archived)
     .then(([result]) => {
       const newIdeaId = result.insertId;
 
@@ -91,12 +114,12 @@ const add = (req, res) => {
         })
         .catch((err) => {
           console.error(err);
-          res.sendStatus(500);
+          res.send("Error autor").status(500);
         });
     })
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.send("Error content").status(500);
     });
 };
 
@@ -109,7 +132,7 @@ const destroy = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.send("Idea Delete").status(204);
       }
     })
     .catch((err) => {

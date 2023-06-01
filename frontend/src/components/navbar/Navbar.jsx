@@ -2,10 +2,13 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "../../App.css";
+import { useUser } from "../../contexts/UserContext";
 import Logout from "../logout/Logout";
 
 function Navbar() {
   const navRef = useRef();
+  const user = useUser();
+  const { companyId } = user.user;
 
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
@@ -15,7 +18,7 @@ function Navbar() {
     <header>
       <nav ref={navRef}>
         <li>
-          <Link to="/">ENTREPRISE</Link>
+          <Link to={`/register/${companyId}`}>ENTREPRISE</Link>
         </li>
         <li>
           <Link to="/Idea">IDEE</Link>
